@@ -1,0 +1,16 @@
+Copyright (c) 2026 the If I Disappear team. All rights reserved.
+
+The source code in this repository is published so that the judges of the
+Google Cloud AI Builder Cup 2026 and anyone else can read, run and evaluate it.
+No licence to copy, modify or redistribute it is granted at this time.
+
+Why not an open-source licence yet: the competition rules give the organiser a
+right of first refusal on an exclusive licence after the event. An open-source
+licence can't be taken back, so the team will choose one after reading those
+terms. The Apache License 2.0 text is ready in docs/legal/apache-2.0.txt if the
+team decides to use it (replace this file with it).
+
+Third-party packages keep their own licences (see apps/web/package-lock.json and
+services/api/requirements.txt). Fonts are under the SIL Open Font License.
+All households, people, phone numbers and documents in this repository are
+fictional sample data.
