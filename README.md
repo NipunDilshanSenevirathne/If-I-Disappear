@@ -389,6 +389,7 @@ docs/                   architecture, free tier, evaluation, privacy, judge guid
 ## Team Z Neurons
 
 **Team leader:** G M Nipun Dilshan Senevirathne, Sri Lanka.
+**Team Members:** Dinuja Karunarathne , Sachith iroshan , Lashan Panawanna
 
 We built this because we know families like the Pereras. Somewhere tonight, someone is packing
 a suitcase. We want the people they leave behind to be ready.
