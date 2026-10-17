@@ -1,0 +1,15 @@
+# Runtime dependencies for the API (pinned; Python 3.12+ — tested on 3.13).
+fastapi==0.141.1
+starlette==1.7.0
+uvicorn[standard]==0.54.0
+pydantic==2.14.0
+python-multipart==0.0.32
+PyYAML==6.0.3
+python-dateutil==2.9.0.post0
+httpx==0.28.1
+# Google
+google-genai==2.29.0
+google-adk==2.11.0
+google-cloud-firestore==2.34.1
+google-cloud-storage==3.17.0
+firebase-admin==7.7.0

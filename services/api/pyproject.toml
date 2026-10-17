@@ -1,0 +1,23 @@
+[project]
+name = "if-i-disappear-api"
+version = "2.1.0"
+description = "If I Disappear: departure handover for households — API, AI layer and deterministic engine"
+requires-python = ">=3.12"
+readme = "../../README.md"
+license = { text = "All rights reserved (see LICENSE)" }
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+  "live: needs GEMINI_API_KEY and network (skipped by default)",
+]
+
+[tool.ruff]
+line-length = 140
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501", "B008", "B904", "UP042"]
