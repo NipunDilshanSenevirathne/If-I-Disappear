@@ -200,7 +200,7 @@ engine without touching the expected answers ([details](docs/EVALUATION.md)).
 
 ## Try it
 
-**On the web:** open the [live app](https://if-i-disappear-4bxcm67cia-el.a.run.app) and choose
+**On the web:** open the [live app]() and choose
 **See a family's plan**. A short tour starts by itself. Every visitor gets a private copy of the
 sample family, and **Reset** puts it back. Then try **Jump a week ahead**: 1 of 7 becomes 6 of 7,
 as the plan predicted.
