@@ -4,7 +4,7 @@
 
 ![If I Disappear: leaving home for months? Find what stops before you go.](apps/web/public/og.png)
 
-> **📦 Full project download.** If anything in this repository doesn't work or looks
+> ** Full project download.** If anything in this repository doesn't work or looks
 > incomplete,
 > download **[Full Project.zip]Full Project.zip)** from this
 > repository. It contains the complete project, every file including the hidden ones, the same
