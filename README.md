@@ -1,6 +1,6 @@
 # If I Disappear
 
-**Leaving home for months? Find what stops before you go.**
+**Leaving Home For months? Find what stops before you go.**
 
 ![If I Disappear: leaving home for months? Find what stops before you go.](apps/web/public/og.png)
 
