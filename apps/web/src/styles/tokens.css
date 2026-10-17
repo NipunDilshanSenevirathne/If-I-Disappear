@@ -1,0 +1,162 @@
+/* If I Disappear — design tokens.
+   Two themes: Day (light, default) and Night (dark). The app picks the system
+   setting unless the person chooses one (stored on this device only).
+   Colour never carries meaning alone: every state also has an icon and a word. */
+
+:root {
+  color-scheme: light;
+
+  /* type */
+  --font-display: "Bricolage Grotesque Variable", "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --t-xs: 0.78rem;
+  --t-sm: 0.875rem;
+  --t-md: 1rem;
+  --t-lg: 1.125rem;
+  --t-xl: 1.375rem;
+  --t-2xl: 1.75rem;
+  --t-3xl: clamp(2rem, 1.4rem + 2.2vw, 2.75rem);
+  --t-hero: clamp(2.7rem, 1.5rem + 4.4vw, 5.4rem);
+
+  /* space and shape */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --sidebar: 268px;
+
+  /* Day palette: cool mist, lagoon teal for structure, lamp marigold for action */
+  --bg: #eef2f3;
+  --bg-wash-1: rgba(87, 183, 196, 0.22);
+  --bg-wash-2: rgba(245, 176, 66, 0.2);
+  --bg-wash-3: rgba(150, 140, 230, 0.16);
+  --surface: #ffffff;
+  --surface-2: #f5f8f9;
+  --surface-3: #e9eff1;
+  --glass: rgba(255, 255, 255, 0.68);
+  --glass-strong: rgba(255, 255, 255, 0.86);
+  --glass-pop: rgba(255, 255, 255, 0.96);
+  --glass-edge: rgba(255, 255, 255, 0.85);
+  --line: rgba(14, 42, 51, 0.1);
+  --line-strong: rgba(14, 42, 51, 0.18);
+  --ink: #0e2a33;
+  --ink-2: #3c565e;
+  --ink-3: #5a7178;
+  --ink-dim: #73868b; /* large two-tone headlines only (3.4:1 on the background) */
+  --ink-inverse: #f4fafb;
+
+  --brand: #0f6c7a;
+  --brand-strong: #0a5260;
+  --brand-ink: #ffffff;
+  --brand-soft: #dbeff2;
+  --accent: #f3a712;
+  --accent-strong: #d98f00;
+  --accent-text: #8a5a00;
+  --accent-ink: #1d1400;
+  --accent-soft: #fff0d2;
+
+  /* the five readiness states */
+  --st-prepared: #0a7347;
+  --st-prepared-fill: #1fae74;
+  --st-prepared-soft: #dcf3e8;
+  --st-handover: #4f4fc8;
+  --st-handover-fill: #6464dc;
+  --st-handover-soft: #e6e6fa;
+  --st-confirm: #8f5600;
+  --st-confirm-fill: #f2ae32;
+  --st-confirm-soft: #fdefd3;
+  --st-blocked: #b5283e;
+  --st-blocked-fill: #e9485f;
+  --st-blocked-soft: #fbe2e6;
+  --st-notdue: #52666c;
+  --st-notdue-fill: #a9b8bd;
+  --st-notdue-soft: #e9eff1;
+
+  --shadow-1: 0 1px 2px rgba(14, 42, 51, 0.06), 0 4px 14px rgba(14, 42, 51, 0.05);
+  --shadow-2: 0 2px 6px rgba(14, 42, 51, 0.06), 0 18px 44px rgba(14, 42, 51, 0.1);
+  --shadow-pop: 0 18px 60px rgba(9, 30, 37, 0.22);
+  --focus: 0 0 0 3px var(--surface), 0 0 0 5px var(--brand);
+
+  --pass-paper: #fff7ea;
+  --pass-paper-2: #ffe8c4;
+  --pass-ink: #2a1c05;
+  --pass-line: rgba(42, 28, 5, 0.2);
+  --chart-grid: rgba(14, 42, 51, 0.08);
+  --tooltip-bg: #0e2a33;
+  --tooltip-ink: #f4fafb;
+  --tooltip-bad: #ff8496;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #08151a;
+  --bg-wash-1: rgba(32, 140, 156, 0.22);
+  --bg-wash-2: rgba(232, 160, 40, 0.11);
+  --bg-wash-3: rgba(120, 110, 220, 0.12);
+  --surface: #0f2329;
+  --surface-2: #132c33;
+  --surface-3: #18363e;
+  --glass: rgba(15, 35, 41, 0.62);
+  --glass-strong: rgba(15, 35, 41, 0.86);
+  --glass-pop: rgba(15, 35, 41, 0.97);
+  --glass-edge: rgba(255, 255, 255, 0.08);
+  --line: rgba(220, 240, 244, 0.1);
+  --line-strong: rgba(220, 240, 244, 0.18);
+  --ink: #eaf4f5;
+  --ink-2: #b5c9ce;
+  --ink-3: #91a9af;
+  --ink-dim: #7f969c;
+  --ink-inverse: #0b1c21;
+
+  --brand: #56c6d4;
+  --brand-strong: #7fd8e3;
+  --brand-ink: #04191e;
+  --brand-soft: rgba(86, 198, 212, 0.14);
+  --accent: #f6b73a;
+  --accent-strong: #ffc85c;
+  --accent-text: #ffc85c;
+  --accent-ink: #1d1400;
+  --accent-soft: rgba(246, 183, 58, 0.14);
+
+  --st-prepared: #4fd69a;
+  --st-prepared-fill: #36c487;
+  --st-prepared-soft: rgba(54, 196, 135, 0.15);
+  --st-handover: #a3a3ff;
+  --st-handover-fill: #8484f2;
+  --st-handover-soft: rgba(132, 132, 242, 0.16);
+  --st-confirm: #f6c35b;
+  --st-confirm-fill: #f0ad33;
+  --st-confirm-soft: rgba(240, 173, 51, 0.15);
+  --st-blocked: #ff8496;
+  --st-blocked-fill: #f15d72;
+  --st-blocked-soft: rgba(241, 93, 114, 0.15);
+  --st-notdue: #9fb3b9;
+  --st-notdue-fill: #5d747b;
+  --st-notdue-soft: rgba(159, 179, 185, 0.12);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.35), 0 22px 50px rgba(0, 0, 0, 0.4);
+  --shadow-pop: 0 22px 70px rgba(0, 0, 0, 0.6);
+  --focus: 0 0 0 3px var(--bg), 0 0 0 5px var(--brand);
+
+  --pass-paper: #24210f;
+  --pass-paper-2: #3a2c0c;
+  --pass-ink: #fdf0d2;
+  --pass-line: rgba(253, 240, 210, 0.22);
+  --chart-grid: rgba(220, 240, 244, 0.08);
+  --tooltip-bg: #eaf4f5;
+  --tooltip-ink: #0b1c21;
+  --tooltip-bad: #b5283e;
+}

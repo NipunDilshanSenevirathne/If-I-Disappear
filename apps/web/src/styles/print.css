@@ -1,0 +1,79 @@
+/* Printing: the Continuity Card on A4, black on white, with nothing else on the page. */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000;
+  }
+
+  .sidebar,
+  .topbar,
+  .mobile-nav,
+  .demo-bar,
+  .drawer-wrap,
+  .toasts,
+  .tour,
+  .page-header,
+  .handover-top,
+  .handover-hero .btn,
+  .handover-practice,
+  .skip-link,
+  .pub-nav {
+    display: none !important;
+  }
+
+  .shell {
+    display: block;
+  }
+
+  .main,
+  .handover-main {
+    max-width: none;
+    width: auto;
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  .handover-hero h1 {
+    font-size: 20pt;
+  }
+
+  .ccard {
+    max-width: none;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff !important;
+    color: #000;
+  }
+
+  .ccard-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ccard-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .state-badge {
+    border: 1px solid currentColor;
+    background: transparent !important;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
