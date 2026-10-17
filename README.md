@@ -4,11 +4,13 @@
 
 ![If I Disappear: leaving home for months? Find what stops before you go.](apps/web/public/og.png)
 
-[**Live app**](https://if-i-disappear-4bxcm67cia-el.a.run.app) ·
-**Demo video:** `<add the video link>` ·
-[**Judge guide**](docs/JUDGE_GUIDE.md) ·
-[**Submission answers**](SUBMISSION_ANSWERS.md) ·
-[**Evaluation report**](evals/reports/latest.md)
+> **📦 Full project download.** If anything in this repository doesn't work or looks
+> incomplete (the GitHub website can't upload hidden files such as `.gitignore` and `.github/`),
+> download **[if-i-disappear-full-project.zip](if-i-disappear-full-project.zip)** from this
+> repository. It contains the complete project, every file including the hidden ones, the same
+> code that runs on the live app. Unzip it and follow [HOW_TO_RUN.md](HOW_TO_RUN.md) to run it, or
+> [DEPLOY_SIMPLE.md](DEPLOY_SIMPLE.md) to deploy it. The submission deck is in
+> [docs/](docs/ZNeurons_IfIDisappear_AIBuilderCup.pdf).
 
 Built by **Team Z Neurons** (Sri Lanka) for the **Google Cloud AI Builder Cup 2026**,
 theme *Sustainability and Social Impact*, with Gemini, Gemma, Gemini Live, the Agent
