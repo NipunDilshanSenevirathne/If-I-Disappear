@@ -1,0 +1,73 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#ffffff", "primaryBorderColor": "#9fb3b8", "primaryTextColor": "#0e2a33", "lineColor": "#6f8489", "clusterBkg": "#f7fafb", "clusterBorder": "#b9c9cd", "edgeLabelBackground": "#ffffff"}, "flowchart": {"curve": "basis", "nodeSpacing": 26, "rankSpacing": 44, "padding": 12}}}%%
+flowchart TB
+  subgraph P1["1 · Capture: the family says what it knows"]
+    direction LR
+    a1["Talk (voice note), photograph a bill or notice,<br/>upload a PDF, type a note, or fill a short form"]:::person
+    a2["Voice becomes 16 kHz mono WAV<br/>in the browser"]:::code
+    a3["PINs, passwords, codes and card numbers removed;<br/>phone numbers cut to the last 4 digits"]:::guard
+    a1 --> a2 --> a3
+  end
+  subgraph P2["2 · Read: Gemini turns it into small facts"]
+    direction LR
+    b1{{"Free-tier router picks a model:<br/>can it read this? allowance left?<br/>a slot free this minute?"}}:::router
+    b2["Gemini listens or reads<br/>(transcript or reading)"]:::ai
+    b3["Gemini extracts facts,<br/>each with the exact words it came from"]:::ai
+    b1 --> b2 --> b3
+  end
+  subgraph P3["3 · Check: nothing is used until people say so"]
+    direction LR
+    c1{"Quote found<br/>word for word?"}:::decision
+    c2["Rejected, shown next to the<br/>passage it probably meant"]:::guard
+    c3["The family accepts, edits,<br/>rejects or disputes each fact"]:::person
+    c1 -- "no" --> c2
+    c1 -- "yes" --> c3
+  end
+  subgraph P4["4 · Understand: code decides"]
+    direction LR
+    d1["Compile accepted facts into<br/>a model of the household"]:::code
+    d2["Simulate every day of the absence<br/>true · false · unknown"]:::code
+    d3["Find what nobody said, and set<br/>false alarms aside (knockout)"]:::code
+    d4["Gemini reviewer: uphold,<br/>narrow or ask (checked by code)"]:::ai
+    d1 --> d2 --> d3 --> d4
+  end
+  subgraph P5["5 · Decide: what stops, and the smallest fix"]
+    direction LR
+    e1["Overview: X of Y ready, week chart,<br/>calendar, what stops on which date"]:::output
+    e2["Explore what if: someone else away,<br/>a phone missing, a longer absence"]:::code
+    e3["Plan: exhaustive search for the fewest<br/>steps that fit the time left"]:::code
+    e1 --> e2 --> e3
+  end
+  subgraph P6["6 · Hand over: do it, prove it, practise it"]
+    direction LR
+    f1["Do each step and record how<br/>you know (agreement, photo, practice)"]:::person
+    f2["The person staying explains it back,<br/>by voice (Gemini Live) or typing"]:::person
+    f3["Gemini marks the steps they said;<br/>code decides the grade"]:::ai
+    f4["Continuity Card for the fridge,<br/>and a private link for each person"]:::output
+    f5["Every recorded change: the engine<br/>recomputes in milliseconds, and open<br/>screens update within 6 s"]:::code
+    f1 --> f2 --> f3 --> f4 --> f5
+  end
+  P1 --> P2 --> P3 --> P4 --> P5 --> P6
+
+  subgraph KEY["Key"]
+    direction LR
+    k1["Person"]:::person
+    k2["Gemini"]:::ai
+    k3["Code decides"]:::code
+    k4["Guard"]:::guard
+    k5["What you get"]:::output
+  end
+
+  classDef person fill:#dbeff2,stroke:#0f6c7a,stroke-width:1.5px,color:#0e2a33
+  classDef code fill:#dcf3e8,stroke:#0a7347,stroke-width:1.5px,color:#0b3d27
+  classDef ai fill:#e6e6fa,stroke:#4f4fc8,stroke-width:1.5px,color:#1d1d5c
+  classDef output fill:#fff0d2,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  classDef guard fill:#fbe2e6,stroke:#b5283e,stroke-width:1.5px,color:#5d1824
+  classDef router fill:#fff7e6,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  classDef decision fill:#fff7e6,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  style P1 fill:#f1f8f9,stroke:#9fc9cf,color:#0e2a33
+  style P2 fill:#f5f5fd,stroke:#c3c3ef,color:#1d1d5c
+  style P3 fill:#fdf4f5,stroke:#ecbcc4,color:#5d1824
+  style P4 fill:#f3faf6,stroke:#a9dcc2,color:#0b3d27
+  style P5 fill:#fffaf0,stroke:#efcf8f,color:#3a2600
+  style P6 fill:#f1f8f9,stroke:#9fc9cf,color:#0e2a33
+  style KEY fill:#ffffff,stroke:#d5dfe1,color:#52666c

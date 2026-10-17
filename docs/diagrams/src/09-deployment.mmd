@@ -1,0 +1,48 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#ffffff", "primaryBorderColor": "#9fb3b8", "primaryTextColor": "#0e2a33", "lineColor": "#6f8489", "clusterBkg": "#f7fafb", "clusterBorder": "#b9c9cd", "edgeLabelBackground": "#ffffff"}, "flowchart": {"wrappingWidth": 330, "curve": "basis", "nodeSpacing": 26, "rankSpacing": 56, "padding": 14}}}%%
+flowchart LR
+  subgraph BUILD["Build and check"]
+    direction TB
+    GH["GitHub repository"]:::ops
+    CI["GitHub Actions on every push<br/>ruff · 98 API tests · TypeScript ·<br/>evaluation report · web build ·<br/>container build · 22 browser flows ·<br/>accessibility of 64 screens"]:::ops
+    GH --> CI
+  end
+  subgraph GCP["Google Cloud project (region asia-south1, Mumbai)"]
+    direction TB
+    CB["Cloud Build<br/>builds the one image:<br/>web app + API"]:::gcp
+    AR[("Artifact Registry<br/>container images")]:::data
+    subgraph CR["Cloud Run service"]
+      direction TB
+      SVC["if-i-disappear<br/>1 vCPU · 1 GiB · concurrency 40<br/>min 1 · max 1 instance · CPU always on<br/>gen2 · HTTPS with managed TLS"]:::run
+    end
+    SA["Runtime service account<br/>datastore.user · objectAdmin on one bucket ·<br/>secretAccessor on two secrets"]:::guard
+    SM["Secret Manager<br/>gemini-api-key · session-secret"]:::data
+    FS[("Firestore, Native mode<br/>households/{id} · jobs/{id} · meta/quota<br/>client access denied by rules")]:::data
+    GCS[("Cloud Storage bucket<br/>uniform access · public access prevention ·<br/>deleted after 30 days")]:::data
+    LOG["Cloud Logging<br/>no keys, no note text"]:::ops
+  end
+  GEM["Gemini API<br/>generativelanguage.googleapis.com"]:::gem
+  USERS["Browsers"]:::person
+  DEV["You, in Cloud Shell:<br/>bash infra/setup.sh<br/>bash infra/deploy.sh"]:::person
+
+  DEV --> CB
+  GH -. "source" .-> CB
+  CB --> AR --> SVC
+  SA -. "runs as" .-> SVC
+  SM -. "mounted as env" .-> SVC
+  SVC --> FS
+  SVC --> GCS
+  SVC --> LOG
+  SVC --> GEM
+  USERS -- "one URL" --> SVC
+  USERS -. "Gemini Live WebSocket (single-use token)" .-> GEM
+
+  classDef person fill:#0f6c7a,stroke:#0a5260,color:#ffffff
+  classDef ops fill:#eef2f3,stroke:#52666c,stroke-width:1.5px,color:#0e2a33
+  classDef gcp fill:#dbeff2,stroke:#0f6c7a,stroke-width:1.5px,color:#0e2a33
+  classDef run fill:#dcf3e8,stroke:#0a7347,stroke-width:2px,color:#0b3d27
+  classDef data fill:#fff0d2,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  classDef guard fill:#fbe2e6,stroke:#b5283e,stroke-width:1.5px,color:#5d1824
+  classDef gem fill:#4f4fc8,stroke:#33338f,color:#ffffff
+  style GCP fill:#fbfdfd,stroke:#0f6c7a,stroke-width:2px
+  style CR fill:#f3faf6,stroke:#0a7347
+  style BUILD fill:#ffffff,stroke:#d5dfe1

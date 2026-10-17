@@ -1,0 +1,38 @@
+/* Shared styles for the HTML diagrams (07-screen-map.html, 14-security.html). The palette is the
+   app's own: teal for the product, the readiness colours where they carry meaning, indigo for
+   Google models, amber for data, red for guards, green for deterministic code. */
+:root {
+  --ink: #0e2a33; --ink2: #3c565e; --ink3: #5a7178; --line: #c9d6d9;
+  --teal: #0f6c7a; --teal-soft: #dbeff2; --indigo: #4f4fc8; --indigo-soft: #e6e6fa;
+  --green: #0a7347; --green-soft: #dcf3e8; --amber: #d98f00; --amber-soft: #fff0d2;
+  --red: #b5283e; --red-soft: #fbe2e6; --slate: #52666c; --slate-soft: #eef2f3;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #ffffff; font-family: Figtree, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); }
+.poster { position: relative; padding: 36px 40px 34px; background: #fbfdfd; display: inline-block; }
+.poster h1 { margin: 0; font-family: "Bricolage Grotesque", Figtree, sans-serif; font-size: 34px; letter-spacing: -0.02em; font-weight: 700; }
+.poster .sub { margin: 6px 0 28px; color: var(--ink2); font-size: 17px; max-width: 1180px; line-height: 1.45; }
+.zone { position: relative; z-index: 1; border-radius: 18px; padding: 14px 16px 16px; border: 1.5px solid var(--line); background: #fff; }
+.zone > h2 { margin: 0 0 10px; font-size: 15px; font-weight: 750; }
+.zone > h2 small { font-weight: 500; color: var(--ink3); font-size: 13.5px; margin-left: 8px; }
+.box { position: relative; z-index: 1; border-radius: 12px; padding: 10px 12px; font-size: 13.5px; line-height: 1.38; border: 1.5px solid; background: #fff; }
+.box strong { display: block; font-size: 14.5px; margin-bottom: 2px; }
+.box .path { display: inline-block; margin-top: 5px; font-size: 11.5px; padding: 1px 7px; border-radius: 999px; background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(14, 42, 51, 0.14); color: var(--ink2); }
+.solid-teal { background: var(--teal); border-color: #0a5260; color: #fff; }
+.solid-teal .path { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.4); color: #eaf6f7; }
+.solid-indigo { background: var(--indigo); border-color: #33338f; color: #fff; }
+.solid-indigo .path { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.4); color: #eeeefe; }
+.soft-teal { background: var(--teal-soft); border-color: var(--teal); }
+.soft-green { background: var(--green-soft); border-color: var(--green); color: #0b3d27; }
+.soft-amber { background: var(--amber-soft); border-color: var(--amber); color: #3a2600; }
+.soft-indigo { background: var(--indigo-soft); border-color: var(--indigo); color: #1d1d5c; }
+.soft-red { background: var(--red-soft); border-color: var(--red); color: #5d1824; }
+.soft-slate { background: var(--slate-soft); border-color: var(--slate); }
+.pill-note { display: inline-block; border-radius: 999px; padding: 7px 14px; font-size: 13px; border: 1.5px dashed var(--amber); background: #fff; color: #3a2600; }
+.tag { position: absolute; z-index: 3; transform: translate(-50%, -50%); background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 3px 9px; font-size: 12px; line-height: 1.3; color: var(--ink2); white-space: pre; text-align: center; }
+svg.wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; overflow: visible; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 22px; font-size: 13px; color: var(--ink2); position: relative; z-index: 1; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 16px; height: 12px; border-radius: 3px; border: 1.5px solid; display: inline-block; }
+.rule { margin-top: 18px; padding: 10px 14px; border-radius: 12px; background: #0e2a33; color: #eaf4f5; font-size: 14.5px; display: inline-block; position: relative; z-index: 1; line-height: 1.45; }
+.rule b { color: #f3a712; }

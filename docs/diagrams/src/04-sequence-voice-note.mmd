@@ -1,0 +1,48 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "14px", "actorBkg": "#dbeff2", "actorBorder": "#0f6c7a", "actorTextColor": "#0e2a33", "actorLineColor": "#9fb3b8", "signalColor": "#3c565e", "signalTextColor": "#0e2a33", "labelBoxBkgColor": "#fff0d2", "labelBoxBorderColor": "#d98f00", "labelTextColor": "#3a2600", "loopTextColor": "#3a2600", "noteBkgColor": "#fff7e6", "noteBorderColor": "#d98f00", "noteTextColor": "#3a2600", "activationBkgColor": "#dbeff2", "activationBorderColor": "#0f6c7a", "sequenceNumberColor": "#ffffff", "sequenceNumberBkg": "#0f6c7a"}, "sequence": {"mirrorActors": false, "showSequenceNumbers": true}}}%%
+sequenceDiagram
+  autonumber
+  box rgb(219, 239, 242) On the phone
+    actor N as Nirmala
+    participant W as Web app
+  end
+  box rgb(220, 243, 232) Cloud Run, one container
+    participant A as API
+    participant J as Background job
+    participant I as ADK ingest workflow
+    participant R as Model router
+    participant V as Code checks
+  end
+  box rgb(230, 230, 250) Google AI
+    participant G as Gemini (Flash, then Flash-Lite)
+  end
+  box rgb(238, 242, 243) Storage
+    participant D as Firestore and Cloud Storage
+  end
+  N->>W: Ticks consent, records a voice note
+  W->>W: Level meter while recording, then 16 kHz mono WAV
+  W->>A: POST /sources (the file, consent)
+  A->>D: Store the file privately (deleted after 30 days)
+  A->>J: Start an ingest job
+  A-->>W: job id
+  loop every 0.5 to 1.6 s
+    W->>A: GET /jobs/{id}
+    A-->>W: steps so far, with the model that answered each
+  end
+  J->>I: route_source: a voice note goes to the listener
+  I->>R: listener request (audio)
+  R->>R: Skip models that can't hear audio, then check floors, per-minute and daily allowance
+  R->>G: generateContent (JSON schema: Transcript)
+  G-->>R: transcript
+  I->>V: Remove secrets from the transcript
+  I->>R: extractor request (text, schema: Extraction)
+  R->>G: generateContent
+  G-->>R: entities, facts, exact quotes, questions
+  R->>R: Validate against the schema, cache, record use
+  I->>V: Verify every quote, match people and things, apply the review gate
+  J->>D: Save in a transaction (revision + 1)
+  W->>A: GET /jobs/{id}
+  A-->>W: done: N new facts to check
+  N->>W: Review facts: accept, edit or reject
+  W->>A: POST /claims/{id}
+  A->>A: The engine recomputes everything (no AI, milliseconds)
+  A-->>W: New readiness, then every open screen updates within 6 s

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Architecture</title>
+<link rel="stylesheet" href="poster.css">
+<style>
+  :root {
+    --ink: #0e2a33; --ink2: #3c565e; --ink3: #5a7178; --line: #c9d6d9;
+    --teal: #0f6c7a; --teal-soft: #dbeff2; --indigo: #4f4fc8; --indigo-soft: #e6e6fa;
+    --green: #0a7347; --green-soft: #dcf3e8; --amber: #d98f00; --amber-soft: #fff0d2;
+    --red: #b5283e; --red-soft: #fbe2e6; --slate: #52666c; --slate-soft: #eef2f3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #ffffff; font-family: Figtree, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); }
+  #poster { position: relative; width: 1680px; padding: 36px 40px 32px; background: #fbfdfd; }
+  h1 { margin: 0; font-family: "Bricolage Grotesque", Figtree, sans-serif; font-size: 34px; letter-spacing: -0.02em; font-weight: 700; }
+  .sub { margin: 6px 0 26px; color: var(--ink2); font-size: 17px; }
+  .grid { display: grid; grid-template-columns: 200px 245px 1fr 290px; gap: 30px 78px; align-items: start; position: relative; z-index: 1; }
+  .col-title { font-size: 13px; font-weight: 700; color: var(--ink3); margin: 0 0 10px 2px; }
+  .zone { border-radius: 18px; padding: 14px; border: 1.5px solid var(--line); background: #fff; }
+  .zone h2 { margin: 0 0 10px; font-size: 15px; font-weight: 750; }
+  .box { border-radius: 12px; padding: 10px 12px; font-size: 13.5px; line-height: 1.35; border: 1.5px solid; background: #fff; }
+  .box strong { display: block; font-size: 14.5px; margin-bottom: 2px; }
+  .stack { display: grid; gap: 10px; }
+  .person { background: var(--teal); border-color: #0a5260; color: #fff; }
+  .web { background: var(--teal-soft); border-color: var(--teal); }
+  .api { background: #ffffff; border-color: var(--teal); }
+  .adk { background: var(--indigo-soft); border-color: var(--indigo); color: #1d1d5c; }
+  .router { background: var(--amber-soft); border-color: var(--amber); color: #3a2600; }
+  .guard { background: var(--red-soft); border-color: var(--red); color: #5d1824; }
+  .code { background: var(--green-soft); border-color: var(--green); color: #0b3d27; }
+  .gem { background: var(--indigo); border-color: #33338f; color: #fff; }
+  .gemma { background: #8484f2; border-color: var(--indigo); color: #fff; }
+  .data { background: var(--amber-soft); border-color: var(--amber); color: #3a2600; }
+  .ops { background: var(--slate-soft); border-color: var(--slate); }
+  .run-zone { border: 2px solid var(--green); background: #f3faf6; }
+  .run-zone > h2 { color: var(--green); }
+  .lanes { display: grid; gap: 14px; }
+  .lane { border-radius: 14px; padding: 12px; border: 1.5px dashed var(--line); background: rgba(255,255,255,0.7); }
+  .lane h3 { margin: 0 0 8px; font-size: 13px; font-weight: 750; color: var(--ink2); }
+  .row { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; }
+  .gai-zone { border: 2px solid var(--indigo); background: #f7f7fe; }
+  .gai-zone > h2 { color: var(--indigo); }
+  .model .q { display: block; margin-top: 3px; font-size: 12px; opacity: 0.85; }
+  .bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; margin-top: 74px; position: relative; z-index: 1; }
+  .data-zone { border: 2px solid var(--amber); background: #fffaf0; }
+  .data-zone > h2 { color: #8a5a00; }
+  .ops-zone { border: 2px solid var(--slate); background: #f5f8f9; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; font-size: 13px; color: var(--ink2); position: relative; z-index: 1; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 16px; height: 12px; border-radius: 3px; border: 1.5px solid; display: inline-block; }
+  svg#wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; overflow: visible; }
+  .tag { position: absolute; z-index: 3; transform: translate(-50%, -50%); background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 3px 9px; font-size: 12px; line-height: 1.3; color: var(--ink2); white-space: pre; text-align: center; }
+  .rule { margin-top: 16px; padding: 10px 14px; border-radius: 12px; background: #0e2a33; color: #eaf4f5; font-size: 14.5px; display: inline-block; position: relative; z-index: 1; }
+  .rule b { color: #f3a712; }
+</style>
+</head>
+<body>
+<div id="poster" data-shot>
+  <h1>If I Disappear: architecture</h1>
+  <p class="sub">One Cloud Run container on the free Gemini tier. The AI reads, code decides, and every model call goes through a router that keeps each model inside its own limits.</p>
+
+  <div class="grid">
+    <div>
+      <p class="col-title">People</p>
+      <div class="stack">
+        <div class="box person" id="p1"><strong>Person leaving</strong>phone or laptop</div>
+        <div class="box person" id="p2"><strong>Person staying</strong>own phone, private link</div>
+        <div class="box person" id="p3"><strong>Visitor or judge</strong>a private sample copy</div>
+      </div>
+    </div>
+
+    <div>
+      <p class="col-title">In the browser</p>
+      <div class="zone" id="web" style="border-color: var(--teal); background:#f1f8f9">
+        <h2 style="color:var(--teal)">React 19 web app</h2>
+        <div class="stack">
+          <div class="box web" id="w1"><strong>16 screens</strong>overview, findings, explore, calendar, plan, practise, card, capture, review, share, trace, evaluation, handover and more</div>
+          <div class="box web" id="w2"><strong>Live dashboard</strong>SVG charts refresh by themselves; 12-step tour; light and dark</div>
+          <div class="box web" id="w3"><strong>Voice notes</strong>recorder with a level meter; 16 kHz mono WAV</div>
+          <div class="box web" id="w4"><strong>Gemini Live client</strong>audio worklet, 16 kHz PCM in, 24 kHz out</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="col-title">Google Cloud Run: one container, one URL</p>
+      <div class="zone run-zone" id="run">
+        <h2>The service (Python 3.13, FastAPI)</h2>
+        <div class="lanes">
+          <div class="lane" id="lane-api">
+            <h3>API</h3>
+            <div class="row">
+              <div class="box api" id="r1"><strong>REST API + web app</strong>strict CSP, rate limits, /api/docs</div>
+              <div class="box api" id="r2"><strong>Who is calling</strong>signed visitor sessions; share tokens kept as SHA-256</div>
+              <div class="box api" id="r3"><strong>Background jobs</strong>reading a source, the full check; the browser polls</div>
+            </div>
+          </div>
+          <div class="lane" id="lane-ai">
+            <h3>AI layer: Google Agent Development Kit</h3>
+            <div class="row">
+              <div class="box guard" id="a3"><strong>Guards</strong>redaction · exact-quote check · schema validation · review gate</div>
+              <div class="box adk" id="a1"><strong>ADK workflows</strong>ingest · analysis · grade: code nodes and agent nodes with output schemas</div>
+              <div class="box router" id="a2"><strong>Free-tier model router</strong>ledger per model · floors per role · can it read this? · fallback · cache · per-visitor share</div>
+            </div>
+          </div>
+          <div class="lane" id="lane-eng">
+            <h3>Deterministic engine: every number a person sees, from accepted facts only</h3>
+            <div class="row">
+              <div class="box code" id="e1"><strong>Simulate</strong>compile → evaluate every due date in true / false / unknown</div>
+              <div class="box code" id="e2"><strong>Discover</strong>what nobody said, with a knockout that sets false alarms aside</div>
+              <div class="box code" id="e3"><strong>Plan and explore</strong>exhaustive plan search; what-ifs on a copy, no AI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="col-title">Google AI: Gemini API, one free key</p>
+      <div class="zone gai-zone" id="gai">
+        <h2>Models in the router's lines</h2>
+        <div class="stack">
+          <div class="box gem model" id="g1"><strong>Gemini 3.8 Flash</strong>hardest steps, used sparingly<span class="q">free: 5 a minute, 20 a day</span></div>
+          <div class="box gem model" id="g2"><strong>Gemini 3.5 Flash-Lite</strong>the everyday workhorse<span class="q">free: 15 a minute, 500 a day</span></div>
+          <div class="box gem model" id="g3"><strong>Gemini 3.1 Flash-Lite</strong>a second workhorse<span class="q">free: 15 a minute, 500 a day</span></div>
+          <div class="box gemma model" id="g4"><strong>Gemma 4</strong>text and image fallback<span class="q">free: 30 a minute, 14,400 a day</span></div>
+          <div class="box gem model" id="g5"><strong>Gemini 3.8 Live</strong>the spoken practice partner<span class="q">single-use tokens</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="zone data-zone" id="data">
+      <h2>Google Cloud: data and secrets (private)</h2>
+      <div class="row">
+        <div class="box data" id="d1"><strong>Firestore</strong>one document per household, written in transactions; jobs; the quota ledger. Clients denied by rules</div>
+        <div class="box data" id="d2"><strong>Cloud Storage</strong>private uploads; no public access; deleted after 30 days</div>
+        <div class="box data" id="d3"><strong>Secret Manager</strong>the Gemini key and the session key; never sent to a browser</div>
+      </div>
+    </div>
+    <div class="zone ops-zone" id="ops">
+      <h2>Build, check and deploy</h2>
+      <div class="row">
+        <div class="box ops" id="o1"><strong>GitHub Actions</strong>98 API tests · evaluation · TypeScript · 22 browser flows · accessibility of 64 screens</div>
+        <div class="box ops" id="o2"><strong>Cloud Build</strong>one image: the web app and the API</div>
+        <div class="box ops" id="o3"><strong>Artifact Registry → Cloud Run</strong>asia-south1 · 1 vCPU · 1 GiB · one instance, always on</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:var(--teal-soft);border-color:var(--teal)"></i>in the browser</span>
+    <span><i style="background:var(--indigo-soft);border-color:var(--indigo)"></i>AI workflow</span>
+    <span><i style="background:var(--indigo);border-color:#33338f"></i>Google model</span>
+    <span><i style="background:var(--amber-soft);border-color:var(--amber)"></i>router and storage</span>
+    <span><i style="background:var(--red-soft);border-color:var(--red)"></i>guard</span>
+    <span><i style="background:var(--green-soft);border-color:var(--green)"></i>deterministic code</span>
+    <span><svg width="34" height="10"><line x1="0" y1="5" x2="34" y2="5" stroke="#4f4fc8" stroke-width="2" stroke-dasharray="5 4"/></svg>Gemini Live WebSocket</span>
+  </div>
+  <div class="rule">The rule: <b>the AI reads; code decides.</b> Models turn sources into quoted facts, review findings and mark explanations. They never set a state, a date, a count, a plan or a grade.</div>
+
+
+</div>
+<script src="wires.js"></script>
+<script>
+  const poster = document.getElementById("poster");
+  setupWires(poster, () => {
+    const rect = (id) => document.getElementById(id).getBoundingClientRect();
+    const P = poster.getBoundingClientRect();
+    const run = rect("run");
+    const below = run.bottom - P.top + 30;
+    return [
+      { from: "p1", to: "w1", out: "r", in: "l" },
+      { from: "p2", to: "w1", out: "r", in: "l" },
+      { from: "p3", to: "w1", out: "r", in: "l" },
+      { from: "w1", to: "lane-api", out: "r", in: "l", inAt: "level", label: "HTTPS JSON\n/pulse every 6 s\nuploads", at: 0.5, dy: -40 },
+      { from: "r3", to: "a1", out: "b", in: "t", inAt: "level" },
+      { from: "a1", to: "a2", out: "r", in: "l", inAt: "level" },
+      { from: "a1", to: "a3", out: "l", in: "r", inAt: "level" },
+      { from: "a3", to: "lane-eng", out: "b", in: "t", inAt: "level" },
+      { from: "a2", to: "gai", out: "r", in: "l", inAt: "level", label: "every\nmodel call", dy: -30, at: 0.5 },
+      { from: "w4", to: "g5", out: "b", in: "b", inAt: 0.25, via: { y: below }, color: "#4f4fc8", dashed: true, width: "2.2", label: "Gemini Live WebSocket with a single-use token, never the key", at: 0.62 },
+      { from: "lane-eng", to: "data", out: "b", outAt: 0.5 - 190 / rect("lane-eng").width, in: "t", inAt: "level", label: "transactions · private files · secrets at deploy", at: 0.86, dx: -190 },
+      { from: "o2", to: "run", out: "t", outAt: 0.5 + 62 / rect("o2").width, in: "b", inAt: "level", label: "build and deploy", at: 0.55, dx: 62 },
+    ];
+  });
+</script>
+</body>
+</html>

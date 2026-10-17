@@ -1,0 +1,35 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "14px", "actorBkg": "#e6e6fa", "actorBorder": "#4f4fc8", "actorTextColor": "#0e2a33", "actorLineColor": "#9fb3b8", "signalColor": "#3c565e", "signalTextColor": "#0e2a33", "noteBkgColor": "#fff7e6", "noteBorderColor": "#d98f00", "noteTextColor": "#3a2600", "sequenceNumberColor": "#ffffff", "sequenceNumberBkg": "#0f6c7a"}, "sequence": {"mirrorActors": false, "showSequenceNumbers": true}}}%%
+sequenceDiagram
+  autonumber
+  box rgb(219, 239, 242) Sunil's own phone
+    actor S as Sunil
+    participant H as Handover page
+  end
+  box rgb(220, 243, 232) Cloud Run
+    participant A as API
+    participant R as Router and grader
+  end
+  box rgb(230, 230, 250) Google AI
+    participant L as Gemini 3.8 Live
+    participant G as Gemini Flash-Lite
+  end
+  S->>H: Opens his private link (the token is in the URL fragment)
+  H->>A: POST /handover/open (token in the body, never in logs)
+  A-->>H: Only his part of the card, and the tasks he can practise
+  S->>H: Opens a task, presses "Start talking"
+  H->>A: POST /handover/voice
+  A->>L: Create a single-use token: one session, opened within 2 minutes, instructions locked in
+  L-->>A: ephemeral token
+  A-->>H: the token (the API key never leaves the server)
+  H->>L: WebSocket with the token, then 16 kHz microphone audio streams in
+  L-->>H: The partner sets the scene, listens, hints but never gives the answer
+  Note over H,L: Both sides are transcribed as they speak
+  S->>H: "Finish and check"
+  H->>A: POST /handover/practice (his words, the partner's words, hints)
+  A->>R: grader: which approved steps did he say? Quote his own words
+  R->>G: generateContent (schema: PracticeGrade)
+  G-->>R: steps covered, with quotes
+  R->>A: Code checks each quote is his, not the partner's or the steps'
+  A->>A: Code decides: every key step covered and no hint, so "Explained without help"
+  A->>A: The engine recomputes readiness
+  A-->>H: The result, step by step

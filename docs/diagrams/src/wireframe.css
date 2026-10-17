@@ -1,0 +1,85 @@
+/* Shared styles for the wireframe sheets (docs/diagrams/src/15-*.html). Low fidelity on
+   purpose: grey blocks for content, the app's state colours only where they carry meaning,
+   numbered marigold pins that point to the notes. */
+:root {
+  --ink: #0e2a33; --ink2: #3c565e; --ink3: #5a7178; --line: #cfdadd; --bg: #eef2f3;
+  --block: #dfe7e9; --block2: #e9eff1; --teal: #0f6c7a; --teal-soft: #dbeff2;
+  --red: #b5283e; --red-soft: #fbe2e6; --amber: #8f5600; --amber-soft: #fdefd3;
+  --indigo: #4f4fc8; --indigo-soft: #e6e6fa; --green: #0a7347; --green-soft: #dcf3e8;
+  --pin: #f3a712;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #ffffff; font-family: Figtree, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); }
+.sheet { padding: 34px 38px 30px; background: #fbfdfd; display: inline-block; }
+.sheet h1 { margin: 0; font-family: "Bricolage Grotesque", Figtree, sans-serif; font-size: 30px; letter-spacing: -0.02em; }
+.sheet .sub { margin: 6px 0 40px; color: var(--ink2); font-size: 16px; max-width: 1200px; }
+.layout { display: flex; gap: 34px; align-items: flex-start; }
+.frames { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; }
+.frame { position: relative; background: #fff; border: 1.5px solid #b7c5c9; border-radius: 14px; overflow: visible; box-shadow: 0 10px 28px rgba(14, 42, 51, 0.08); }
+.frame > .cap { position: absolute; top: -26px; left: 2px; font-size: 13px; font-weight: 700; color: var(--ink3); }
+.chrome { height: 30px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 6px; padding: 0 12px; background: #f6f9fa; border-radius: 14px 14px 0 0; }
+.chrome i { width: 9px; height: 9px; border-radius: 50%; background: #c9d4d7; display: inline-block; }
+.chrome span { margin-left: 10px; font-size: 11px; color: var(--ink3); background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 2px 10px; }
+.app { display: flex; }
+.sb { width: 150px; border-right: 1px solid var(--line); padding: 12px 10px; background: #f8fbfb; }
+.sb .brand { height: 18px; width: 100px; border-radius: 5px; background: var(--teal); margin-bottom: 14px; }
+.sb .nav { height: 14px; border-radius: 6px; background: var(--block); margin: 9px 0; }
+.sb .nav.on { background: var(--teal); height: 20px; }
+.sb .grp { height: 8px; width: 60px; background: #c9d4d7; border-radius: 4px; margin: 16px 0 8px; }
+.main { flex: 1; padding: 14px 16px; }
+.topbar { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 12px; }
+.pill { height: 22px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-size: 10.5px; padding: 0 9px; display: inline-flex; align-items: center; color: var(--ink2); }
+.pill.ai { border-color: #9fd8b8; color: var(--green); }
+h2.t { margin: 2px 0 4px; font-family: "Bricolage Grotesque", Figtree, sans-serif; font-size: 20px; letter-spacing: -0.01em; }
+.lede { height: 8px; border-radius: 4px; background: var(--block2); margin: 5px 0; }
+.card { border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: #fff; }
+.card .h { font-size: 11.5px; font-weight: 700; margin-bottom: 6px; }
+.bar { height: 7px; border-radius: 4px; background: var(--block); margin: 5px 0; }
+.row { display: flex; gap: 10px; }
+.col { display: flex; flex-direction: column; gap: 10px; }
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.badge { display: inline-block; font-size: 10px; font-weight: 700; border-radius: 999px; padding: 2px 7px; }
+.b-red { background: var(--red-soft); color: var(--red); }
+.b-amber { background: var(--amber-soft); color: var(--amber); }
+.b-indigo { background: var(--indigo-soft); color: var(--indigo); }
+.b-green { background: var(--green-soft); color: var(--green); }
+.b-grey { background: var(--block2); color: var(--ink3); }
+.btn { display: inline-block; font-size: 10.5px; font-weight: 700; border-radius: 999px; padding: 4px 10px; background: var(--teal); color: #fff; }
+.btn.q { background: #fff; color: var(--teal); border: 1px solid var(--teal); }
+.kpi .n { font-family: "Bricolage Grotesque", Figtree, sans-serif; font-size: 20px; font-weight: 700; }
+.kpi .s { height: 16px; margin-top: 4px; background: linear-gradient(90deg, var(--block) 0 100%); border-radius: 4px; clip-path: polygon(0 80%, 15% 70%, 30% 75%, 45% 50%, 60% 55%, 75% 30%, 90% 35%, 100% 10%, 100% 100%, 0 100%); }
+.chart { display: flex; align-items: flex-end; gap: 6px; height: 90px; padding: 6px 4px 0; border-bottom: 1px solid var(--line); }
+.chart b { flex: 1; border-radius: 4px 4px 0 0; display: flex; flex-direction: column-reverse; overflow: hidden; }
+.chart b i { display: block; }
+.pass { border-radius: 10px; background: linear-gradient(90deg, #fff6e2, #fdeccb); border: 1px dashed #e0b45c; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; }
+.pass .code { font-family: "Bricolage Grotesque", Figtree, sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 0.04em; }
+.small { font-size: 10.5px; color: var(--ink2); }
+.tiny { font-size: 9.5px; color: var(--ink3); }
+.quote { border-left: 3px solid #f3a712; background: #fffaf0; padding: 6px 8px; font-size: 10px; color: #3a2600; border-radius: 0 6px 6px 0; margin: 6px 0; font-style: italic; }
+.reeded { background: repeating-linear-gradient(90deg, rgba(79,79,200,0.08) 0 3px, rgba(255,255,255,0.6) 3px 7px); border: 1px solid #c3c3ef; border-radius: 8px; padding: 6px 8px; font-size: 10px; color: #1d1d5c; }
+.ring { width: 64px; height: 64px; border-radius: 50%; background: conic-gradient(var(--green) 0 86%, var(--block) 86% 100%); display: grid; place-items: center; }
+.ring::after { content: "6/7"; width: 46px; height: 46px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-weight: 800; font-size: 13px; }
+.donut { width: 70px; height: 70px; border-radius: 50%; background: conic-gradient(var(--green) 0 14%, var(--indigo) 14% 28%, var(--amber) 28% 43%, var(--red) 43% 86%, #a9b8bd 86% 100%); display: grid; place-items: center; }
+.donut::after { content: ""; width: 44px; height: 44px; border-radius: 50%; background: #fff; }
+.orb { width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #4fa7b3, var(--teal)); margin: 6px auto; }
+.bubble { border-radius: 10px; padding: 6px 8px; font-size: 10px; background: var(--block2); margin: 5px 0; }
+.bubble.me { background: var(--teal-soft); margin-left: 24px; }
+.cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.cal i { height: 16px; border-radius: 3px; background: var(--block2); display: block; }
+.cal i.r { background: var(--red-soft); border: 1px solid #ecbcc4; }
+.cal i.a { background: var(--amber-soft); }
+.cal i.g { background: var(--green-soft); }
+.phone { width: 255px; border-radius: 30px; border: 2px solid #9fb3b8; background: #fff; padding: 14px 12px 12px; position: relative; box-shadow: 0 10px 28px rgba(14, 42, 51, 0.08); }
+.phone .notch { width: 80px; height: 14px; border-radius: 999px; background: #dfe7e9; margin: 0 auto 10px; }
+.phone .bottom { display: flex; justify-content: space-around; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 10px; }
+.phone .bottom i { width: 22px; height: 22px; border-radius: 7px; background: var(--block); display: block; }
+.phone .bottom i.on { background: var(--teal); }
+.pin { position: absolute; z-index: 5; width: 26px; height: 26px; border-radius: 50%; background: var(--pin); color: #1d1400; font-weight: 800; font-size: 13px; display: grid; place-items: center; box-shadow: 0 0 0 3px #fff, 0 3px 8px rgba(0,0,0,0.18); }
+.notes { width: 330px; flex: none; }
+.notes h3 { margin: 0 0 10px; font-size: 15px; }
+.notes ol { margin: 0; padding: 0; list-style: none; counter-reset: n; display: grid; gap: 9px; }
+.notes li { counter-increment: n; display: grid; grid-template-columns: 26px 1fr; gap: 9px; font-size: 13.5px; line-height: 1.38; color: var(--ink2); }
+.notes li::before { content: counter(n); width: 24px; height: 24px; border-radius: 50%; background: var(--pin); color: #1d1400; font-weight: 800; font-size: 12px; display: grid; place-items: center; }
+.notes li b { color: var(--ink); }

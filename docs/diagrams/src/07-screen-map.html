@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Screen map</title>
+<link rel="stylesheet" href="poster.css">
+<style>
+  .map { display: grid; grid-template-columns: 250px 250px 300px 300px 250px; grid-template-rows: auto repeat(4, auto); gap: 34px 74px; position: relative; }
+  .colbg { grid-row: 1 / span 5; border-radius: 18px; border: 1.5px solid var(--line); background: #ffffff; margin: -14px -16px; z-index: 0; }
+  .col-title { z-index: 1; margin: 0; font-size: 15px; font-weight: 750; padding-top: 2px; }
+  .col-title small { display: block; font-weight: 500; color: var(--ink3); font-size: 13px; margin-top: 2px; }
+  .everywhere { margin-top: 44px; border: 2px solid var(--teal); background: #f1f8f9; }
+  .everywhere > h2 { color: var(--teal); }
+  .row5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+</style>
+</head>
+<body>
+<div class="poster" id="poster" data-shot style="width: 1730px">
+  <h1>If I Disappear: the screens, and how people move between them</h1>
+  <p class="sub">16 screens. A visitor sees a working family before signing up for anything. Inside a household, every page is one or two steps from the overview. The person staying gets one page, on their own phone, through a private link and with no account.</p>
+
+  <div class="map">
+    <div class="colbg" style="grid-column: 1; border-color: #9fc9cf; background: #f4fafb"></div>
+    <div class="colbg" style="grid-column: 2; border-color: #efcf8f; background: #fffbf3"></div>
+    <div class="colbg" style="grid-column: 3; border-color: #9fc9cf; background: #f4fafb"></div>
+    <div class="colbg" style="grid-column: 4; border-color: #a9dcc2; background: #f4fbf7"></div>
+    <div class="colbg" style="grid-column: 5; border-color: #c3c3ef; background: #f7f7fe"></div>
+
+    <p class="col-title" style="grid-column: 1; grid-row: 1; color: var(--teal)">Front door<small>public, no account needed</small></p>
+    <p class="col-title" style="grid-column: 2; grid-row: 1; color: #8a5a00">Add what you know<small>Gemini reads; you check</small></p>
+    <p class="col-title" style="grid-column: 3; grid-row: 1; color: var(--teal)">See<small>every number from the engine</small></p>
+    <p class="col-title" style="grid-column: 4; grid-row: 1; color: var(--green)">Act<small>close the gaps before leaving</small></p>
+    <p class="col-title" style="grid-column: 5; grid-row: 1; color: var(--indigo)">The person staying<small>their own phone</small></p>
+
+    <div class="box solid-teal" id="landing" style="grid-column: 1; grid-row: 2"><strong>Landing</strong>a live board for a sample family: what's ready, what breaks, the facts behind it with their sources<span class="path">/</span></div>
+    <div class="box solid-teal" id="evals" style="grid-column: 1; grid-row: 3"><strong>Evaluation</strong>how we know it works: the generated report, nothing typed by hand<span class="path">/evals</span></div>
+    <div class="box solid-teal" id="start" style="grid-column: 1; grid-row: 4"><strong>Start your own</strong>who is leaving, when, and for how long; three questions<span class="path">/start</span></div>
+
+    <div class="box soft-amber" id="capture" style="grid-column: 2; grid-row: 4"><strong>Capture</strong>talk, a photo or PDF, type, or a short form that needs no AI; each step shows the model that answered<span class="path">…/capture</span></div>
+    <div class="box soft-amber" id="review" style="grid-column: 2; grid-row: 5"><strong>Review facts</strong>accept, edit or dispute each fact, next to the exact words it came from<span class="path">…/review</span></div>
+
+    <div class="box soft-teal" id="overview" style="grid-column: 3; grid-row: 2"><strong>Overview</strong>"1 of 7 things are ready": KPI tiles, the week-by-week chart, the readiness donut, the trend; refreshes by itself<span class="path">/h/:id</span></div>
+    <div class="box soft-teal" id="found" style="grid-column: 3; grid-row: 3"><strong>What we found</strong>what nobody said, with the proof; answer the open questions in place<span class="path">…/found</span></div>
+    <div class="box soft-teal" id="explore" style="grid-column: 3; grid-row: 4"><strong>Explore</strong>what if Sunil can't drive, or the bill comes early? On a copy, no AI<span class="path">…/explore</span></div>
+    <div class="box soft-teal" id="calendar" style="grid-column: 3; grid-row: 5"><strong>Calendar</strong>what is due on which day while away, and whether anyone can do it<span class="path">…/calendar</span></div>
+
+    <div class="box soft-green" id="plan" style="grid-column: 4; grid-row: 2"><strong>Plan</strong>the time you have (30 minutes to 2 hours) → the steps that get the most ready; mark each done with how you know<span class="path">…/plan</span></div>
+    <div class="box soft-green" id="practise" style="grid-column: 4; grid-row: 3"><strong>Practise</strong>the person staying explains a task back, by voice or typing; marked step by step<span class="path">…/practise</span></div>
+    <div class="box soft-green" id="card" style="grid-column: 4; grid-row: 4"><strong>Continuity Card</strong>one printable page for the fridge: who, when, how, where; no secrets<span class="path">…/card</span></div>
+    <div class="box soft-green" id="share" style="grid-column: 4; grid-row: 5"><strong>Share</strong>a private link and QR code for each person staying; switch it off any time<span class="path">…/share</span></div>
+
+    <div class="box solid-indigo" id="handover" style="grid-column: 5; grid-row: 4 / span 2; align-self: end"><strong>Handover page</strong>"Hi Sunil." Only what was shared with him: his part of the card and the tasks he can practise, talking with Gemini Live or typing. No account; the link's token never reaches a server log.<span class="path">/handover#token</span></div>
+  </div>
+
+  <div class="zone everywhere">
+    <h2>On every household page<small>sidebar on desktop; bottom bar and drawer on phones</small></h2>
+    <div class="row5">
+      <div class="box soft-indigo"><strong>How it was worked out</strong>every number opens its trace: the steps, the model that answered each one, how long it took<span class="path">…/trace</span></div>
+      <div class="box soft-teal"><strong>AI allowance</strong>free Gemini requests left today, per model, with cooling-down timers; updates live</div>
+      <div class="box soft-teal"><strong>Household settings</strong>dates, people, what's in scope, the theme<span class="path">…/settings</span></div>
+      <div class="box soft-amber"><strong>Quick tour</strong>12 steps, offered on the first visit; start it again any time from the top bar</div>
+      <div class="box soft-slate"><strong>Light or dark</strong>follows the device, or choose; both checked for WCAG 2.2 AA contrast</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:var(--teal);border-color:#0a5260"></i>public pages</span>
+    <span><i style="background:var(--amber-soft);border-color:var(--amber)"></i>adding information</span>
+    <span><i style="background:var(--teal-soft);border-color:var(--teal)"></i>seeing where it breaks</span>
+    <span><i style="background:var(--green-soft);border-color:var(--green)"></i>acting on it</span>
+    <span><i style="background:var(--indigo);border-color:#33338f"></i>the person staying</span>
+  </div>
+  <div class="rule">Phone first: no sideways scrolling at 360 px wide, large touch targets, and every chart readable by keyboard and screen reader. <b>The same answer comes first on every screen size.</b></div>
+</div>
+<script src="wires.js"></script>
+<script>
+  const poster = document.getElementById("poster");
+  setupWires(poster, () => {
+    const r = (id) => document.getElementById(id).getBoundingClientRect();
+    const P = poster.getBoundingClientRect();
+    const gapBC = (r("capture").right + r("overview").left) / 2 - P.left;
+    const leftOfA = r("landing").left - P.left - 26;
+    const gapDE = (r("plan").right + r("handover").left) / 2 - P.left;
+    return [
+      { from: "landing", to: "overview", out: "r", in: "l", outAt: 0.42, inAt: 0.3, label: "open the sample family", at: 0.5, dy: -14 },
+      { from: "landing", to: "evals", out: "b", in: "t" },
+      { from: "landing", to: "start", out: "l", in: "l", outAt: 0.7, via: { x: leftOfA } },
+      { from: "start", to: "capture", out: "r", in: "l", label: "first\nsource", dy: -26 },
+      { from: "capture", to: "review", out: "b", in: "t" },
+      { from: "review", to: "overview", out: "r", in: "l", inAt: 0.78, via: { x: gapBC }, label: "accepted\nfacts only", at: 0.42 },
+      { from: "overview", to: "found", out: "b", in: "t" },
+      { from: "found", to: "explore", out: "b", in: "t", label: "try a fix", dx: 44 },
+      { from: "overview", to: "plan", out: "r", in: "l", label: "make\nthe plan", dy: -26 },
+      { from: "plan", to: "practise", out: "b", in: "t" },
+      { from: "plan", to: "card", out: "r", in: "r", outAt: 0.75, via: { x: gapDE }, label: "print", at: 0.5 },
+      { from: "share", to: "handover", out: "r", in: "l", inAt: 0.72, label: "private\nlink", at: 0.5, dy: -26 },
+    ];
+  });
+</script>
+</body>
+</html>

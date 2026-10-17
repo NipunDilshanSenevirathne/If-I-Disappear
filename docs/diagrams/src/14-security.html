@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Security and privacy</title>
+<link rel="stylesheet" href="poster.css">
+<style>
+  .bands { display: grid; gap: 46px; position: relative; padding-left: 34px; }
+  .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .g5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .g6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 34px; }
+  .b-out { border: 2px solid #efcf8f; background: #fffaf0; }
+  .b-out > h2 { color: #8a5a00; }
+  .b-edge { border: 2px solid #ecbcc4; background: #fdf4f5; }
+  .b-edge > h2 { color: var(--red); }
+  .b-core { border: 2.5px solid var(--green); background: #f3faf6; }
+  .b-core > h2 { color: var(--green); }
+  .b-store { border: 2px solid var(--slate); background: #f5f8f9; }
+  .b-store > h2 { color: var(--slate); }
+  .step { position: absolute; top: -11px; left: 12px; background: var(--ink); color: #fff; font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 1px 8px; }
+  .box.soft-red, .box.soft-green, .box.soft-indigo { padding-top: 14px; }
+</style>
+</head>
+<body>
+<div class="poster" id="poster" data-shot style="width: 1640px">
+  <h1>If I Disappear: security and privacy, layer by layer</h1>
+  <p class="sub">Everything from the internet is untrusted, and so is everything a model says. Secrets are removed before anything is stored or sent, every model answer is checked by code, and only facts a person accepted can change what the family sees.</p>
+
+  <div class="bands">
+    <div class="zone b-out" id="z-out">
+      <h2>Untrusted: the internet</h2>
+      <div class="g3">
+        <div class="box soft-amber" id="send"><strong>What people send</strong>voice notes, photos, PDFs, typed notes. Any of them may contain text written to steer a model.</div>
+        <div class="box soft-teal" id="link"><strong>A handover link</strong>the token sits in the URL fragment (#), so browsers never send it to the server's logs or to other sites</div>
+        <div class="box soft-teal" id="browser"><strong>Browsers</strong>the person leaving, the person staying, visitors</div>
+      </div>
+    </div>
+
+    <div class="zone b-edge" id="z-edge">
+      <h2>The edge of the service<small>every request</small></h2>
+      <div class="g3">
+        <div class="box soft-red" id="upload"><strong>Upload checks</strong>file type and size (15 MB) · at most 40 sources per household · consent ticked before anything goes to Gemini</div>
+        <div class="box soft-red" id="session"><strong>Who is calling</strong>signed visitor session (HMAC-SHA256, 30 days) · the owner checked on every request · rate limits per visitor and per address</div>
+        <div class="box soft-red" id="https"><strong>HTTPS only</strong>strict Content-Security-Policy: scripts from the app itself only · no framing by other sites · no third-party trackers</div>
+      </div>
+    </div>
+
+    <div class="zone b-core" id="z-core">
+      <h2 style="text-align: right">Trusted core: the AI reads, code decides</h2>
+      <div class="g6">
+        <div class="box soft-red" id="c1"><span class="step">1</span><strong>Remove secrets</strong>PINs, passwords, card and account numbers, before storing or sending; phone numbers cut to the last 4 digits</div>
+        <div class="box soft-red" id="c2"><span class="step">2</span><strong>Fence the source</strong>source text is wrapped as data, &lt;&lt;&lt;SOURCE … SOURCE&gt;&gt;&gt;, never as instructions</div>
+        <div class="box soft-indigo" id="c3"><span class="step">3</span><strong>Gemini or Gemma</strong>reads and returns typed JSON. Its answer is treated as untrusted too.</div>
+        <div class="box soft-red" id="c4"><span class="step">4</span><strong>Check every answer</strong>schema validation · each quote found word for word in its source · citations must belong to the finding</div>
+        <div class="box soft-red" id="c5"><span class="step">5</span><strong>Review gate</strong>a model can only propose; a fact counts once a person accepts it</div>
+        <div class="box soft-green" id="c6"><span class="step">6</span><strong>Deterministic engine</strong>every state, date, count, plan and grade a person sees</div>
+      </div>
+    </div>
+
+    <div class="zone b-store" id="z-store">
+      <h2>Private storage<small>only the service's own account can read or write it</small></h2>
+      <div class="g5">
+        <div class="box soft-slate" id="bucket"><strong>Cloud Storage</strong>the uploaded files · no public access · deleted after 30 days</div>
+        <div class="box soft-slate" id="secrets"><strong>Secret Manager</strong>the Gemini key and the session key · never sent to a browser</div>
+        <div class="box soft-slate" id="logs"><strong>Cloud Logging</strong>no keys, no tokens, no note text in the logs</div>
+        <div class="box soft-slate" id="links"><strong>Share links</strong>only a SHA-256 fingerprint of each token is kept · switch a link off any time</div>
+        <div class="box soft-slate" id="fs"><strong>Firestore</strong>one document per household · security rules deny every browser</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:var(--red-soft);border-color:var(--red)"></i>a guard</span>
+    <span><i style="background:var(--indigo-soft);border-color:var(--indigo)"></i>a model (untrusted output)</span>
+    <span><i style="background:var(--green-soft);border-color:var(--green)"></i>deterministic code</span>
+    <span><i style="background:var(--slate-soft);border-color:var(--slate)"></i>private storage</span>
+    <span><svg width="34" height="10"><line x1="0" y1="5" x2="34" y2="5" stroke="#4f4fc8" stroke-width="2" stroke-dasharray="5 4"/></svg>the key, used on the server only</span>
+  </div>
+  <div class="rule">Tested as if the model were hijacked: the evaluation feeds hostile model output straight into this code, and <b>19 of 19 containment checks hold</b>; 16 of 16 test secrets are removed. Live, a note with hidden instructions produced 0 facts and changed nothing.</div>
+</div>
+<script src="wires.js"></script>
+<script>
+  const poster = document.getElementById("poster");
+  setupWires(poster, () => {
+    const r = (id) => document.getElementById(id).getBoundingClientRect();
+    const P = poster.getBoundingClientRect();
+    const left = r("z-core").left - P.left - 18;
+    return [
+      { from: "send", to: "upload", out: "b", in: "t", outAt: 0.8, inAt: "level" },
+      { from: "link", to: "session", out: "b", in: "t" },
+      { from: "browser", to: "https", out: "b", in: "t" },
+      { from: "upload", to: "c1", out: "b", in: "t", outAt: 0.3, inAt: "level" },
+      { from: "c1", to: "c2", out: "r", in: "l", inAt: "level" },
+      { from: "c2", to: "c3", out: "r", in: "l", inAt: "level" },
+      { from: "c3", to: "c4", out: "r", in: "l", inAt: "level" },
+      { from: "c4", to: "c5", out: "r", in: "l", inAt: "level" },
+      { from: "c5", to: "c6", out: "r", in: "l", inAt: "level" },
+      { from: "c6", to: "fs", out: "b", in: "t", inAt: "level", label: "saved in a transaction", at: 0.5, dx: -92 },
+      { from: "upload", to: "bucket", out: "l", in: "l", outAt: 0.5, via: { x: left }, label: "files", at: 0.7, dx: 0 },
+      { from: "secrets", to: "c3", out: "t", in: "b", outAt: 0.62, inAt: "level", dashed: true, color: "#4f4fc8", label: "the key, on the server only", at: 0.5, dx: 4 },
+    ];
+  });
+</script>
+</body>
+</html>

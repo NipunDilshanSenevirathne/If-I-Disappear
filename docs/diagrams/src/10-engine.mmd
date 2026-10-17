@@ -1,0 +1,30 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#ffffff", "primaryBorderColor": "#9fb3b8", "primaryTextColor": "#0e2a33", "lineColor": "#6f8489", "clusterBkg": "#f7fafb", "clusterBorder": "#b9c9cd", "edgeLabelBackground": "#ffffff"}, "flowchart": {"wrappingWidth": 300, "curve": "basis", "nodeSpacing": 26, "rankSpacing": 50, "padding": 14}}}%%
+flowchart TB
+  IN[("Accepted facts only<br/>each with its quote and who accepted it")]:::data
+  C["compile<br/>canonical order · people · tasks · routes ·<br/>things · permits · commitments · conditions"]:::code
+  EV["evaluate<br/>every due date × every route × every person who could do it<br/>access (holder, shares, containers, prerequisites) · valid permits ·<br/>conditions · free time windows · willingness<br/>three-valued: true / false / unknown"]:::code
+  ST["Five states with a date and a reason<br/>ready · handover not finished · needs a check ·<br/>blocked · nothing due while away"]:::output
+  DI["discover<br/>still needed while away · held by the person leaving ·<br/>clash · deadline · not asked · sources disagree"]:::code
+  K{"knockout: re-run the absence as if<br/>this thing were still available.<br/>Does the outcome change?"}:::decision
+  KEEP["Finding kept, with the dates<br/>and the facts behind it"]:::output
+  ASIDE["Set aside, and shown,<br/>with the reason"]:::quiet
+  CH["Gemini reviewer: uphold, narrow<br/>(citing the finding's own facts) or ask"]:::ai
+  GUARD["Code checks the citations;<br/>the reviewer can't add findings or change numbers"]:::guard
+  RP["repair<br/>typed steps with effects (ASK, ASK_SWAP, SHARE_CONTACT,<br/>LEAVE_WITH, SETUP_ACCESS, RENEW_EARLY, PRACTICE…)<br/>grouped into bundles per task and person"]:::code
+  OPT["Exhaustive search of bundle combinations within the time budget<br/>most dates covered → most weight ready → lightest busiest person →<br/>fewest minutes; ties broken the same way every time"]:::code
+  PL["The plan: N minutes gets X of Y ready,<br/>minutes per person, and what stays open"]:::output
+  EVD["Evidence recorded by a person<br/>applies the same typed effects"]:::person
+  IN --> C --> EV --> ST
+  EV --> DI --> K
+  K -- "yes" --> KEEP --> CH --> GUARD
+  K -- "no" --> ASIDE
+  EV --> RP --> OPT --> PL
+  PL -. "do the steps" .-> EVD -. "new accepted facts" .-> IN
+  classDef data fill:#eef2f3,stroke:#52666c,stroke-width:1.5px,color:#0e2a33
+  classDef code fill:#dcf3e8,stroke:#0a7347,stroke-width:1.5px,color:#0b3d27
+  classDef output fill:#fff0d2,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  classDef decision fill:#fff7e6,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  classDef quiet fill:#e9eff1,stroke:#9fb3b8,color:#3c565e
+  classDef ai fill:#e6e6fa,stroke:#4f4fc8,stroke-width:1.5px,color:#1d1d5c
+  classDef guard fill:#fbe2e6,stroke:#b5283e,stroke-width:1.5px,color:#5d1824
+  classDef person fill:#dbeff2,stroke:#0f6c7a,stroke-width:1.5px,color:#0e2a33

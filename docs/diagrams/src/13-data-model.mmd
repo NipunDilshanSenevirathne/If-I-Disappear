@@ -1,0 +1,117 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "14px", "primaryColor": "#dbeff2", "primaryBorderColor": "#0f6c7a", "primaryTextColor": "#0e2a33", "secondaryColor": "#f5f8f9", "tertiaryColor": "#ffffff", "lineColor": "#6f8489", "attributeBackgroundColorOdd": "#ffffff", "attributeBackgroundColorEven": "#f3f7f8"}}}%%
+erDiagram
+  direction LR
+  HOUSEHOLD_RECORD ||--|| SETTINGS : "has"
+  HOUSEHOLD_RECORD ||--o{ ENTITY : "people, tasks, routes, things, conditions"
+  HOUSEHOLD_RECORD ||--o{ SOURCE : "voice, photo, PDF, typed, evidence"
+  HOUSEHOLD_RECORD ||--o{ CLAIM : "facts"
+  SOURCE ||--o{ EVIDENCE_QUOTE : "quoted in"
+  CLAIM ||--|{ EVIDENCE_QUOTE : "proved by"
+  ENTITY ||--o{ CLAIM : "subject or object"
+  HOUSEHOLD_RECORD ||--o{ PROCEDURE : "approved steps per task"
+  PROCEDURE ||--|{ STEP : "contains"
+  HOUSEHOLD_RECORD ||--o{ PRACTICE_ATTEMPT : "teach-backs"
+  HOUSEHOLD_RECORD ||--o{ HANDOVER_EVENT : "seen, practised, shown"
+  HOUSEHOLD_RECORD ||--o| ANALYSIS : "latest result"
+  HOUSEHOLD_RECORD ||--o{ HISTORY_POINT : "readiness over time"
+  HOUSEHOLD_RECORD ||--o{ SHARE_LINK : "private links"
+  HOUSEHOLD_RECORD ||--o{ LOG_ENTRY : "activity"
+  HOUSEHOLD_RECORD ||--o{ JOB : "background work"
+
+  HOUSEHOLD_RECORD {
+    string id PK
+    string owner "visitor id"
+    int rev "optimistic concurrency"
+    bool demo
+    datetime updated
+  }
+  SETTINGS {
+    string leaver
+    date departure
+    int horizon_days
+    string absence "travel, hospital, other"
+    string destination
+    int budget_minutes
+  }
+  ENTITY {
+    string id PK
+    string kind "person, responsibility, resource, route, fact"
+    string name
+    string resource_kind "phone_number, contact, document..."
+    bool minor
+    bool proposed "until a fact using it is accepted"
+  }
+  CLAIM {
+    string id PK
+    string predicate "DOES, ROUTE_NEEDS, HOLDS, BUSY, VALID_UNTIL..."
+    string subject FK
+    string object FK
+    string value
+    date date
+    string review "unreviewed, accepted, disputed, superseded, withdrawn"
+    bool verified "quotes found word for word"
+    string derivation
+  }
+  SOURCE {
+    string id PK
+    string kind
+    string text "already redacted"
+    string file "private bucket key"
+    int redactions
+    bool synthetic
+  }
+  EVIDENCE_QUOTE {
+    string source_id FK
+    string quote "exact words"
+    string locator
+  }
+  PROCEDURE {
+    string responsibility FK
+    int version
+    bool approved
+  }
+  STEP {
+    string id
+    string text
+    bool critical "key step"
+    string hint
+  }
+  PRACTICE_ATTEMPT {
+    string person FK
+    string responsibility FK
+    string result "unassisted, practiced_with_help, not_yet"
+    string grader "model name or keyword"
+  }
+  HANDOVER_EVENT {
+    string person FK
+    string kind "viewed, practice, demonstration"
+    string level
+  }
+  ANALYSIS {
+    json result "states, dates, reasons"
+    json findings
+    json plan
+    json trace "steps and models"
+  }
+  HISTORY_POINT {
+    datetime at
+    int ready
+    int total
+  }
+  SHARE_LINK {
+    string id PK
+    string token_hash "SHA-256 only"
+    string person FK
+    bool revoked
+  }
+  LOG_ENTRY {
+    datetime at
+    string actor
+    string action
+  }
+  JOB {
+    string id PK
+    string kind "ingest, analyze"
+    string status
+    json progress
+  }

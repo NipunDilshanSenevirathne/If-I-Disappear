@@ -1,0 +1,45 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#ffffff", "primaryBorderColor": "#9fb3b8", "primaryTextColor": "#0e2a33", "lineColor": "#6f8489", "transitionColor": "#6f8489", "transitionLabelColor": "#0e2a33", "stateLabelColor": "#0e2a33", "compositeBackground": "#f7fafb", "compositeBorder": "#b9c9cd", "compositeTitleBackground": "#eef2f3"}}}%%
+stateDiagram-v2
+  direction TB
+  state "A fact (claim)" as FACT {
+    direction LR
+    unreviewed: Waiting for review
+    accepted: Accepted (used by the engine)
+    disputed: Disputed (becomes a question)
+    withdrawn: Rejected
+    superseded: Replaced by a newer fact
+    [*] --> unreviewed: Gemini extracts it, quote checked
+    unreviewed --> accepted: a person accepts or edits
+    unreviewed --> withdrawn: a person rejects
+    unreviewed --> disputed: "It's wrong"
+    accepted --> superseded: a newer source says otherwise
+    accepted --> unreviewed: undo
+  }
+  state "A responsibility during the absence" as RESP {
+    direction LR
+    blocked: Blocked (no way works on a date)
+    confirm: Needs a check (something unknown)
+    handover: Handover not finished
+    ready: Ready
+    notdue: Nothing due while away
+    [*] --> blocked
+    [*] --> confirm
+    [*] --> handover
+    [*] --> notdue
+    blocked --> handover: a plan step fixes the route
+    confirm --> handover: the unknown is answered
+    handover --> ready: seen, explained back, key step shown
+    blocked --> ready: fixed and handed over
+  }
+  FACT --> RESP: accepted facts only
+
+  classDef good fill:#dcf3e8,stroke:#0a7347,color:#0b3d27
+  classDef bad fill:#fbe2e6,stroke:#b5283e,color:#5d1824
+  classDef warn fill:#fdefd3,stroke:#8f5600,color:#3a2600
+  classDef hand fill:#e6e6fa,stroke:#4f4fc8,color:#1d1d5c
+  classDef quiet fill:#e9eff1,stroke:#52666c,color:#0e2a33
+  class accepted,ready good
+  class withdrawn,blocked bad
+  class disputed,confirm,unreviewed warn
+  class handover hand
+  class superseded,notdue quiet

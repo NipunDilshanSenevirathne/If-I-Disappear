@@ -1,0 +1,79 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#ffffff", "primaryBorderColor": "#9fb3b8", "primaryTextColor": "#0e2a33", "lineColor": "#7b9095", "clusterBkg": "#f7fafb", "clusterBorder": "#b9c9cd", "edgeLabelBackground": "#ffffff"}, "flowchart": {"curve": "basis", "nodeSpacing": 22, "rankSpacing": 90, "padding": 14}}}%%
+flowchart LR
+  LEAVER["«actor»<br/><b>Person leaving</b><br/>Nirmala, going to work abroad<br/>(or into hospital)"]:::actor
+  STAYING["«actor»<br/><b>Person staying</b><br/>Sunil, and other adults<br/>who take tasks over"]:::actor2
+  VISITOR["«actor»<br/><b>Visitor or judge</b><br/>tries a sample family"]:::actor3
+
+  subgraph SYS["If I Disappear"]
+    direction TB
+    subgraph CAP["Capture and check"]
+      direction TB
+      UC1(["Start a household: who leaves, when, for how long"]):::person
+      UC2(["Add what you know: talk, photograph, upload, type, or a short form"]):::person
+      UC3(["Review facts: accept, edit, reject or dispute"]):::person
+      INC1(["Remove secrets before anything is stored"]):::guard
+      INC2(["Check every quote word for word"]):::code
+    end
+    subgraph SEE["See and decide"]
+      direction TB
+      UC4(["See what stops, on which date, and why"]):::output
+      UC5(["Read what nobody said; answer questions in place"]):::output
+      UC6(["Ask what if: someone else away, a phone missing, a longer absence"]):::code
+      UC7(["Get the smallest plan for the time left"]):::code
+      UC8(["Mark a step done, saying how you know"]):::person
+    end
+    subgraph HAND["Hand over"]
+      direction TB
+      UC9(["Print the Continuity Card"]):::output
+      UC10(["Send a private, revocable link per person"]):::person
+      UC11(["Open my part of the card on my own phone"]):::person
+      UC12(["Practise a task out loud or by typing"]):::ai
+    end
+    subgraph TRY["Try and verify"]
+      direction TB
+      UC13(["Open a private copy of a sample family"]):::person
+      UC14(["See how it was worked out, and the evaluation"]):::code
+      UC15(["Watch the free AI allowance, live"]):::ai
+    end
+  end
+
+  GEM["«system actor»<br/><b>Gemini 3.8 Flash<br/>Gemini 3.5 and 3.1 Flash-Lite<br/>Gemma 4 31B</b><br/>listen, read, extract, review, grade"]:::gem
+  LIVE["«system actor»<br/><b>Gemini 3.8 Live</b><br/>spoken practice partner"]:::gem
+
+  LEAVER --- UC1
+  LEAVER --- UC2
+  LEAVER --- UC3
+  LEAVER --- UC4
+  LEAVER --- UC5
+  LEAVER --- UC6
+  LEAVER --- UC7
+  LEAVER --- UC8
+  LEAVER --- UC9
+  LEAVER --- UC10
+  STAYING --- UC11
+  STAYING --- UC12
+  STAYING --- UC9
+  VISITOR --- UC13
+  VISITOR --- UC14
+  VISITOR --- UC15
+  UC2 -. "«include»" .-> INC1
+  UC3 -. "«include»" .-> INC2
+  UC2 --- GEM
+  UC5 --- GEM
+  UC12 --- GEM
+  UC12 --- LIVE
+
+  classDef actor fill:#0f6c7a,stroke:#0a5260,stroke-width:2px,color:#ffffff
+  classDef actor2 fill:#127c8b,stroke:#0a5260,stroke-width:2px,color:#ffffff
+  classDef actor3 fill:#3c565e,stroke:#0e2a33,stroke-width:2px,color:#ffffff
+  classDef person fill:#dbeff2,stroke:#0f6c7a,stroke-width:1.5px,color:#0e2a33
+  classDef code fill:#dcf3e8,stroke:#0a7347,stroke-width:1.5px,color:#0b3d27
+  classDef ai fill:#e6e6fa,stroke:#4f4fc8,stroke-width:1.5px,color:#1d1d5c
+  classDef output fill:#fff0d2,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  classDef guard fill:#fbe2e6,stroke:#b5283e,stroke-width:1.5px,color:#5d1824
+  classDef gem fill:#4f4fc8,stroke:#33338f,stroke-width:2px,color:#ffffff
+  style SYS fill:#fbfdfd,stroke:#0f6c7a,stroke-width:2px,color:#0e2a33
+  style CAP fill:#f1f8f9,stroke:#9fc9cf,color:#0e2a33
+  style SEE fill:#fffaf0,stroke:#efcf8f,color:#3a2600
+  style HAND fill:#f5f5fd,stroke:#c3c3ef,color:#1d1d5c
+  style TRY fill:#f3faf6,stroke:#a9dcc2,color:#0b3d27

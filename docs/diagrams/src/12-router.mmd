@@ -1,0 +1,28 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#ffffff", "primaryBorderColor": "#9fb3b8", "primaryTextColor": "#0e2a33", "lineColor": "#6f8489", "edgeLabelBackground": "#ffffff"}, "flowchart": {"curve": "basis", "nodeSpacing": 26, "rankSpacing": 40, "padding": 12}}}%%
+flowchart TD
+  A["A request from an agent<br/>(its role, the text, maybe a file)"]:::start --> C{"The same request<br/>answered before?"}:::q
+  C -- "yes" --> R1["Reuse that answer<br/>(no allowance used)"]:::ok
+  C -- "no" --> V{"The visitor's daily<br/>share left?"}:::q
+  V -- "no" --> X1["Say so: the AI share is used up today;<br/>everything else still works"]:::stop
+  V -- "yes" --> N["Next model in this role's line"]:::step
+  N --> K{"Can it read this?<br/>audio and PDF: Gemini only"}:::q
+  K -- "no" --> N
+  K -- "yes" --> CD{"Cooling down?<br/>(busy, slow, used up)"}:::q
+  CD -- "yes" --> N
+  CD -- "no" --> F{"Above its floor today?<br/>(keep=N for other roles)"}:::q
+  F -- "no" --> N
+  F -- "yes" --> M{"A slot free this minute?<br/>(requests and tokens; wait up to 20 s)"}:::q
+  M -- "no" --> N
+  M -- "yes" --> G["Call it, with a time limit<br/>45 s if another model could still take it, else 90 s<br/>Gemini: JSON mode · Gemma: schema in the prompt"]:::gem
+  G --> S{"Answer fits<br/>the schema?"}:::q
+  S -- "yes" --> R2["Record the use, cache it, return it<br/>with the model's name"]:::ok
+  S -- "429: wait or skip for the day" --> N
+  S -- "5xx or too slow: cool down" --> N
+  S -- "400 or bad JSON: next model" --> N
+  N -- "line used up" --> X2["Say which models were tried and why;<br/>the rest of the app keeps working"]:::stop
+  classDef start fill:#dbeff2,stroke:#0f6c7a,color:#0e2a33
+  classDef q fill:#fff0d2,stroke:#d98f00,color:#3a2600
+  classDef step fill:#f5f8f9,stroke:#5a7178,color:#0e2a33
+  classDef gem fill:#4f4fc8,stroke:#33338f,color:#ffffff
+  classDef ok fill:#dcf3e8,stroke:#0a7347,color:#0b3d27
+  classDef stop fill:#fbe2e6,stroke:#b5283e,color:#5d1824

@@ -1,0 +1,30 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#ffffff", "primaryBorderColor": "#9fb3b8", "primaryTextColor": "#0e2a33", "lineColor": "#6f8489", "clusterBkg": "#f7fafb", "clusterBorder": "#b9c9cd", "edgeLabelBackground": "#ffffff"}, "flowchart": {"wrappingWidth": 640, "curve": "basis", "nodeSpacing": 22, "rankSpacing": 40, "padding": 12}}}%%
+flowchart TB
+  subgraph ING["ingest: reading a source"]
+    direction LR
+    i0((start)):::start --> i1["route_source"]:::code
+    i1 -- "voice note" --> i2["listener<br/>agent · Transcript"]:::ai --> i3["after_listen<br/>remove secrets"]:::guard --> i6
+    i1 -- "photo or PDF" --> i4["reader<br/>agent · Reading"]:::ai --> i5["after_read<br/>remove secrets, spot samples"]:::guard --> i6
+    i1 -- "typed note" --> i7["text_ready"]:::code --> i6
+    i6["extractor<br/>agent · Extraction"]:::ai --> i8["verify_and_resolve<br/>exact quotes · match people and things ·<br/>secrets · required fields · review gate"]:::guard
+  end
+  subgraph ANA["analysis: the full check"]
+    direction LR
+    a0((start)):::start --> a1["compile_claims"]:::code --> a2["evaluate_scenario"]:::code --> a3["discover_findings"]:::code
+    a3 -- "findings" --> a4["build_challenge"]:::code --> a5["challenger<br/>agent · ChallengeReport"]:::ai --> a6["apply_challenge<br/>citations checked"]:::guard --> a7["plan_preparation"]:::code
+    a3 -- "none" --> a7
+  end
+  subgraph GRD["grade: a teach-back"]
+    direction LR
+    g0((start)):::start --> g1["build_prompt"]:::code --> g2["grader<br/>agent · PracticeGrade"]:::ai --> g3["decide_result<br/>the learner's own quotes; code decides"]:::guard
+  end
+  NOTE["Every agent is a RoutedGemini: its requests go through the free-tier router.<br/>Offline, a replay model answers from reviewed sample data, through the same graphs.<br/>If a model fails mid-check, the same code steps run as a plain state machine, and the trace says so."]:::note
+  ING ~~~ ANA ~~~ GRD ~~~ NOTE
+  classDef start fill:#0f6c7a,stroke:#0a5260,color:#ffffff
+  classDef code fill:#dcf3e8,stroke:#0a7347,stroke-width:1.5px,color:#0b3d27
+  classDef ai fill:#e6e6fa,stroke:#4f4fc8,stroke-width:1.5px,color:#1d1d5c
+  classDef guard fill:#fbe2e6,stroke:#b5283e,stroke-width:1.5px,color:#5d1824
+  classDef note fill:#fff7e6,stroke:#d98f00,color:#3a2600
+  style ING fill:#f5f5fd,stroke:#c3c3ef
+  style ANA fill:#f3faf6,stroke:#a9dcc2
+  style GRD fill:#f1f8f9,stroke:#9fc9cf

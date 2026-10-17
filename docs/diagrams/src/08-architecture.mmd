@@ -1,0 +1,84 @@
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Figtree, Segoe UI, Roboto, Helvetica, Arial, sans-serif", "fontSize": "15px", "primaryColor": "#ffffff", "primaryBorderColor": "#9fb3b8", "primaryTextColor": "#0e2a33", "lineColor": "#6f8489", "clusterBkg": "#f7fafb", "clusterBorder": "#b9c9cd", "edgeLabelBackground": "#ffffff"}, "flowchart": {"curve": "basis", "nodeSpacing": 24, "rankSpacing": 56, "padding": 14}}}%%
+flowchart TB
+  subgraph PEOPLE["People"]
+    direction LR
+    U1["Person leaving<br/>phone or laptop"]:::person
+    U2["Person staying<br/>own phone, private link"]:::person
+    U3["Visitor or judge<br/>a private sample copy"]:::person
+  end
+
+  subgraph WEB["Browser: React 19 single-page app (TypeScript, Vite), light and dark, phone first"]
+    direction LR
+    W1["Screens: overview, what we found,<br/>explore, calendar, plan, practise, card,<br/>capture, review, share, trace, evaluation"]:::web
+    W2["Live SVG charts<br/>12-step quick tour"]:::web
+    W3["Recorder: MediaRecorder,<br/>level meter, 16 kHz WAV"]:::web
+    W4["Gemini Live client<br/>audio worklet, 16 kHz PCM"]:::web
+  end
+
+  subgraph RUN["Google Cloud Run: one container, one URL"]
+    direction LR
+    subgraph API["FastAPI service"]
+      direction TB
+      R1["REST API and the built web app<br/>strict CSP, rate limits"]:::run
+      R2["Signed visitor sessions<br/>share tokens kept as SHA-256 only"]:::run
+      R3["Background jobs<br/>(the browser polls them)"]:::run
+      R1 --> R2 --> R3
+    end
+    subgraph AIL["AI layer: Google Agent Development Kit"]
+      direction TB
+      A1["ADK workflows: ingest, analysis, grade<br/>code nodes and agent nodes with schemas"]:::adk
+      A2{{"Free-tier model router<br/>ledger per model · floors per role<br/>capability match · fallback · cache"}}:::router
+      A3["Guards: redaction, exact-quote check,<br/>schema validation, review gate"]:::guard
+      A1 --> A2
+      A1 --> A3
+    end
+    subgraph ENG["Deterministic engine (Python)"]
+      direction TB
+      E1["compile → evaluate (true / false / unknown)<br/>→ discover + knockout → plan (exhaustive)"]:::code
+      E2["Explore: what-ifs on a copy<br/>no AI, nothing saved"]:::code
+    end
+    R3 --> A1
+    A3 --> E1
+    R1 --> E2
+  end
+
+  subgraph GAI["Google AI: the Gemini API, free tier, one key"]
+    direction LR
+    G1["Gemini 3.8 Flash<br/>hardest steps, sparingly"]:::gem
+    G2["Gemini 3.5 Flash-Lite<br/>the everyday workhorse"]:::gem
+    G3["Gemini 3.1 Flash-Lite<br/>a second workhorse"]:::gem
+    G4["Gemma 4<br/>text and image fallback"]:::gemma
+    G5["Gemini 3.8 Live<br/>spoken practice"]:::gem
+  end
+
+  subgraph DATA["Google Cloud: data and secrets"]
+    direction LR
+    D1[("Firestore<br/>households · jobs · quota ledger")]:::data
+    D2[("Cloud Storage<br/>private uploads, deleted after 30 days")]:::data
+    D3["Secret Manager<br/>Gemini key · session key"]:::data
+  end
+
+  PEOPLE --> WEB
+  WEB -- "HTTPS JSON API · /pulse every 6 s · uploads" --> RUN
+  RUN -- "every model call goes through the router" --> GAI
+  RUN -- "transactions · private files · secrets at deploy" --> DATA
+  WEB -. "Gemini Live WebSocket with a single-use token (never the key)" .-> GAI
+
+  classDef person fill:#0f6c7a,stroke:#0a5260,color:#ffffff
+  classDef web fill:#dbeff2,stroke:#0f6c7a,stroke-width:1.5px,color:#0e2a33
+  classDef run fill:#ffffff,stroke:#0f6c7a,stroke-width:1.5px,color:#0e2a33
+  classDef adk fill:#e6e6fa,stroke:#4f4fc8,stroke-width:1.5px,color:#1d1d5c
+  classDef router fill:#fff0d2,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  classDef guard fill:#fbe2e6,stroke:#b5283e,stroke-width:1.5px,color:#5d1824
+  classDef code fill:#dcf3e8,stroke:#0a7347,stroke-width:1.5px,color:#0b3d27
+  classDef gem fill:#4f4fc8,stroke:#33338f,color:#ffffff
+  classDef gemma fill:#8484f2,stroke:#4f4fc8,color:#ffffff
+  classDef data fill:#fff7e6,stroke:#d98f00,stroke-width:1.5px,color:#3a2600
+  style PEOPLE fill:#ffffff,stroke:#d5dfe1
+  style WEB fill:#f1f8f9,stroke:#0f6c7a,stroke-width:2px
+  style RUN fill:#f3faf6,stroke:#0a7347,stroke-width:2px
+  style API fill:#ffffff,stroke:#9fc9cf
+  style AIL fill:#f5f5fd,stroke:#c3c3ef
+  style ENG fill:#ecf8f1,stroke:#a9dcc2
+  style GAI fill:#f5f5fd,stroke:#4f4fc8,stroke-width:2px
+  style DATA fill:#fffaf0,stroke:#d98f00,stroke-width:2px
