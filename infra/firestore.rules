@@ -1,0 +1,11 @@
+rules_version = '2';
+// Browsers never read or write Firestore directly. The API on Cloud Run uses its
+// service account (which security rules don't apply to) and checks who owns each
+// household on every request. So: deny everything to clients.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

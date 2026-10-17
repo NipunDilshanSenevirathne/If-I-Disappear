@@ -1,0 +1,9 @@
+rules_version = '2';
+// Uploaded voice notes, photos and documents are only read and written by the API.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

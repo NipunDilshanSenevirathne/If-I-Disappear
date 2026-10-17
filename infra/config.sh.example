@@ -1,0 +1,41 @@
+# Copy to infra/config.sh and edit. setup.sh and deploy.sh read it if it exists.
+# (config.sh is ignored by git; it can hold your key while you set things up.)
+
+export PROJECT_ID="your-gcp-project-id"
+export REGION="asia-south1"          # Mumbai, close to Sri Lanka. asia-southeast1 (Singapore) also works.
+export SERVICE="if-i-disappear"      # Cloud Run service name
+
+# Optional: only needed once, to store it in Secret Manager. Leave empty to run the
+# deployed app in offline demo mode (AI steps replay the reviewed sample data).
+export GEMINI_API_KEY=""
+
+# session (default): every visitor gets a private, signed session, no sign-in screen.
+# firebase: Firebase Auth anonymous sign-in (also set the VITE_FIREBASE_* values below).
+export AUTH_MODE="session"
+export VITE_FIREBASE_API_KEY=""
+export VITE_FIREBASE_AUTH_DOMAIN=""
+export VITE_FIREBASE_PROJECT_ID=""
+export VITE_FIREBASE_APP_ID=""
+
+# The AI runs on the FREE Gemini tier by default: a model router spreads the work over
+# several Google models, each within its own free limits, and falls back when one is busy.
+# (See docs/FREE_TIER.md.) If your key is on a paid plan, set QUOTA_TIER="paid".
+export QUOTA_TIER="free"
+# A fair share per visitor per day (AI calls). 0 = no per-visitor limit.
+export AI_CALLS_PER_VISITOR="40"
+# Optional: your own line of models for one job, best first, e.g.
+#   export AI_CHAIN_EXTRACTOR="gemini-3.5-flash-lite, gemini-3.1-flash-lite, gemma-4-31b-it"
+# Jobs: LISTENER (voice notes), READER (photos, PDFs), EXTRACTOR (facts), CHALLENGER (AI review),
+# GRADER (practice). Leave empty to use the defaults.
+export AI_CHAIN_LISTENER=""
+export AI_CHAIN_READER=""
+export AI_CHAIN_EXTRACTOR=""
+export AI_CHAIN_CHALLENGER=""
+export AI_CHAIN_GRADER=""
+export MODEL_LIVE=""                 # spoken practice; default gemini-3.8-live
+
+# Keep one instance warm while judges are looking (about the cost of a small VM); set to 0
+# afterwards. Keep MAX_INSTANCES at 1 on the free tier: one instance keeps one accurate count
+# of the free allowance (it handles many visitors at once: --concurrency 40).
+export MIN_INSTANCES="1"
+export MAX_INSTANCES="1"
