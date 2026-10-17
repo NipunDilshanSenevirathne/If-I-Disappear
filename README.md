@@ -120,7 +120,7 @@ source of truth. So in this app they never are.
 | **Cloud Storage** | Private uploads, deleted after 30 days |
 | **Secret Manager, Cloud Build, Artifact Registry** | Keys, builds and images (`infra/`) |
 
-![Architecture of If I Disappear](docs/diagrams/08-architecture-poster.png)
+![Architecture of If IDisappear](docs/diagrams/08-architecture-poster.png)
 
 ```mermaid
 flowchart LR
