@@ -15,4 +15,4 @@ Generated 2026-10-13T12:29:48+00:00 by `python -m evals.lighthouse_report` with 
 
 A deployed Cloud Run service adds the network between the phone and Google's edge, and a cold start adds a few seconds to the first visit (none with `MIN_INSTANCES=1`).
 
-This file is generated. Run `make lighthouse` (with the app running) to refresh it.
+This fileis generated. Run `make lighthouse` (with the app running) to refresh it.
