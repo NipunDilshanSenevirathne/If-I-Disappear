@@ -1,0 +1,203 @@
+# The Perera household — synthetic demo data. Every name, number, provider and
+# document here is fictional and marked SAMPLE. Phone numbers are masked.
+#
+# Story: Nirmala (37) leaves Kurunegala on Sunday 1 November 2026 for a
+# three-year caregiving job in Japan. Sunil (41), a three-wheeler driver, stays
+# with their two children and Nirmala's mother, Achchi (68), who is diabetic.
+
+settings:
+  id: perera
+  name: The Perera household
+  timezone: Asia/Colombo
+  leaver: nirmala
+  departure: 2026-11-01
+  destination: Japan
+  airport_from: CMB
+  airport_to: NRT
+  horizon_days: 90
+  assessment_date: 2026-10-25
+  languages: [en]
+  synthetic: true
+  card_entries: []
+  budget_minutes: 90
+
+entities:
+  # ------------------------------------------------------------------ people
+  - {id: nirmala, kind: person, name: Nirmala, role: leaver, aliases: [Nirmala Perera, N. Perera]}
+  - {id: sunil, kind: person, name: Sunil, role: backup, aliases: [Sunil Perera]}
+  - {id: kamala, kind: person, name: Achchi, role: household, aliases: [Kamala, Kamala Perera, Amma (when Sunil speaks)]}
+  - {id: tharushi, kind: person, name: Tharushi, role: household, minor: true}
+  - {id: nimesh, kind: person, name: Nimesh, role: household, minor: true}
+
+  # ------------------------------------------------------------------ responsibilities
+  - id: r_electricity
+    kind: responsibility
+    name: pay the electricity bill
+    category: bills
+  - id: r_school_sms
+    kind: responsibility
+    name: get messages from the school
+    category: school
+  - id: r_van_fee
+    kind: responsibility
+    name: pay the school van fee
+    category: school
+  - id: r_clinic
+    kind: responsibility
+    name: take Achchi to her clinic
+    category: health
+  - id: r_insurance
+    kind: responsibility
+    name: renew the three-wheeler insurance
+    category: vehicle
+  - id: r_hire
+    kind: responsibility
+    name: keep the three-wheeler hire work going
+    category: income
+  - id: r_gas
+    kind: responsibility
+    name: refill the gas cylinder
+    category: home
+
+  # ------------------------------------------------------------------ routes (complete ways of doing something)
+  - {id: rt_elec_app, kind: route, name: pay on the Lanka Savings app}
+  - {id: rt_elec_post, kind: route, name: pay cash at the post office}
+  - {id: rt_school_main, kind: route, name: SMS to the registered parent number}
+  - {id: rt_school_second, kind: route, name: SMS to a second parent number}
+  - {id: rt_van_pickup, kind: route, name: hand Mr Silva the cash at the 6:30 pickup}
+  - {id: rt_van_evening, kind: route, name: call Mr Silva to collect it in the evening}
+  - {id: rt_clinic, kind: route, name: go to the district hospital and back}
+  - {id: rt_insurance_agent, kind: route, name: renew through the insurance agent}
+  - {id: rt_hire, kind: route, name: drive hires}
+  - {id: rt_gas, kind: route, name: order from the gas shop}
+
+  # ------------------------------------------------------------------ resources
+  - {id: nirmala_number, kind: resource, resource_kind: phone_number, name: Nirmala's phone number, identifier: 077-XXX-0101}
+  - {id: nirmala_phone, kind: resource, resource_kind: handset, name: Nirmala's phone}
+  - {id: sunil_phone, kind: resource, resource_kind: handset, name: Sunil's phone}
+  - {id: silva_contact, kind: resource, resource_kind: contact, name: Mr Silva's number}
+  - {id: agent_contact, kind: resource, resource_kind: contact, name: the insurance agent's number}
+  - {id: gas_contact, kind: resource, resource_kind: contact, name: the gas shop's number}
+  - {id: bank_app, kind: resource, resource_kind: account, name: the Lanka Savings app}
+  - {id: electricity_bill, kind: resource, resource_kind: document, name: the paper electricity bill, generic: true}
+  - {id: electricity_sms, kind: resource, resource_kind: service, name: the electricity SMS alerts}
+  - {id: clinic_book, kind: resource, resource_kind: document, name: Achchi's clinic book}
+  - {id: medicine_list, kind: resource, resource_kind: document, name: Achchi's medicine list}
+  - {id: clinic_sms, kind: resource, resource_kind: service, name: the clinic's SMS reminders}
+  - {id: drawer, kind: resource, resource_kind: location, name: the top drawer of the steel cupboard}
+  - {id: policy_schedule, kind: resource, resource_kind: document, name: the insurance policy schedule}
+  - {id: blue_folder, kind: resource, resource_kind: location, name: the blue folder in the wardrobe}
+  - {id: insurance, kind: resource, resource_kind: permit, name: the three-wheeler insurance}
+  - {id: insurance_sms, kind: resource, resource_kind: service, name: the insurance renewal SMS}
+
+  # ------------------------------------------------------------------ conditions
+  - {id: f_school_second, kind: fact, name: Sunil's number is registered with the school}
+
+# Approved handover steps (the person leaving checked these before practice).
+procedures:
+  - responsibility: r_clinic
+    scenario_prompt: "It's Wednesday night. Achchi's clinic is tomorrow. Tell me what you'll do, from checking the date to coming home."
+    steps:
+      - id: c1
+        text: Check the next clinic date in the clinic book (every second Thursday).
+        hint: "How will you know which Thursday it is?"
+        keywords: [date, book, thursday]
+      - id: c2
+        text: Take the clinic book and the medicine list from the top drawer of the steel cupboard.
+        hint: "Before you leave, what do you have to take with you, and where is it kept?"
+        critical: true
+        keywords: [drawer, cupboard, medicine list, list]
+      - id: c3
+        text: Leave by 7 a.m. to get a number at the clinic.
+        hint: "What time do you need to leave to get a number?"
+        keywords: ["7", seven, early, number]
+      - id: c4
+        text: Collect the tablets at the hospital pharmacy.
+        hint: "Where do you collect the tablets?"
+        keywords: [pharmacy, tablets, medicine]
+      - id: c5
+        text: Note the next date written in the book and put it on the calendar.
+        hint: "How will you remember the next visit?"
+        keywords: [next date, calendar, write, note]
+  - responsibility: r_insurance
+    scenario_prompt: "It's the 12th of November. The three-wheeler insurance runs out on the 20th. Tell me how you'll renew it."
+    steps:
+      - id: i1
+        text: Renew at least 7 days before the cover ends on 20 November, so by 13 November.
+        hint: "By which date does it have to be done?"
+        critical: true
+        keywords: ["13", "20", november, before, seven days, "7 days"]
+      - id: i2
+        text: Take the policy schedule from the blue folder in the wardrobe.
+        hint: "What paper do you need, and where is it?"
+        keywords: [blue folder, folder, schedule, wardrobe]
+      - id: i3
+        text: Call Mr Fernando, the agent, and give him the policy number from the schedule.
+        hint: "Who do you call, and what do you give them?"
+        critical: true
+        keywords: [fernando, agent, policy number, call]
+      - id: i4
+        text: Pay the premium the agent tells you and get the new certificate.
+        hint: "What do you get back after paying?"
+        keywords: [pay, premium, certificate]
+      - id: i5
+        text: Keep the new certificate in the three-wheeler.
+        hint: "Where does the new certificate go?"
+        keywords: [keep, three-wheeler, vehicle]
+  - responsibility: r_electricity
+    scenario_prompt: "The electricity bill has come. Tell me how you'll pay it."
+    steps:
+      - id: e1
+        text: The paper bill comes every month; pay it by the 10th.
+        hint: "By which day of the month?"
+        critical: true
+        keywords: ["10", 10th, tenth, month]
+      - id: e2
+        text: Take the bill and the cash to the post office.
+        hint: "Where do you pay, and what do you take?"
+        keywords: [post office, post, cash, bill]
+      - id: e3
+        text: Keep the receipt with the bill.
+        hint: "What do you keep afterwards?"
+        keywords: [receipt]
+  - responsibility: r_van_fee
+    scenario_prompt: "It's the 4th of the month. Tell me how the van fee gets paid."
+    steps:
+      - id: v1
+        text: Pay Mr Silva Rs 6,500 on the 5th of each month.
+        hint: "How much, to whom, and on which day?"
+        critical: true
+        keywords: ["5th", "5", fifth, "6, 500", "6500", silva]
+      - id: v2
+        text: Hand him the cash at the 6:30 morning pickup.
+        hint: "When is the easiest time to hand it over?"
+        keywords: ["6:30", morning, pickup, cash]
+      - id: v3
+        text: If you miss him, call him and he comes by in the evening.
+        hint: "What if you miss him in the morning?"
+        keywords: [call, evening]
+  - responsibility: r_school_sms
+    scenario_prompt: "How will you know what the school is telling parents?"
+    steps:
+      - id: s1
+        text: School notices now come by SMS to Sunil's phone.
+        hint: "Where will the school messages arrive now?"
+        keywords: [sms, phone, message]
+      - id: s2
+        text: Read them the same day and reply to the class teacher if needed.
+        hint: "What do you do when a message comes?"
+        keywords: [read, teacher, reply]
+  - responsibility: r_gas
+    scenario_prompt: "The gas has run out. What do you do?"
+    steps:
+      - id: g1
+        text: Call the gas shop from Sunil's phone and ask for a refill.
+        hint: "Who do you call when the gas runs out?"
+        keywords: [call, gas shop, refill]
+  - responsibility: r_hire
+    scenario_prompt: "What do you need to keep taking hires?"
+    steps:
+      - id: h1
+        text: Keep valid insurance in the three-wheeler; the police check it.
+        hint: "What do you need to keep in the three-wheeler?"
+        keywords: [insurance, valid, police]

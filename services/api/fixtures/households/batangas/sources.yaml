@@ -1,0 +1,56 @@
+sources:
+  - id: B01
+    kind: voice
+    title: Money and the e-wallet
+    language: en
+    speaker: liza
+    observed: 2026-10-25
+    text: >-
+      I will send money every month, around the 28th, to my e-wallet. Ramon can cash it out, but
+      the e-wallet is in my name and the code goes to my number, and I'm taking my SIM with me to
+      Hong Kong. The other way is the pawnshop counter. He can pick it up there with his postal ID.
+      The e-wallet sends alerts to my email when the money arrives.
+
+  - id: B02
+    kind: voice
+    title: Paolo, bills and Lola
+    language: en
+    speaker: liza
+    observed: 2026-10-25
+    text: >-
+      Paolo always forgets his school portal password. The reset link goes to my email. Maybe the
+      class adviser can reset it, I'm not sure. The electricity bill comes to my email, I pay it
+      with the e-wallet by the 15th. Ramon can also pay cash at the payment centre with the account
+      number slip. Lola Edna has her check-up every four weeks on a Monday morning, the next one is
+      on the 16th of November. Ramon will take her, but he drives the tricycle in the mornings.
+
+  - id: B03
+    kind: voice
+    title: Ramon's week
+    language: en
+    speaker: ramon
+    observed: 2026-10-26
+    text: >-
+      I drive the tricycle from six in the morning to two in the afternoon, Monday to Friday. I can
+      take care of the money, the bills and Paolo's portal. My postal ID expires in January. To
+      renew it I need my birth certificate. Liza keeps it in the brown documents envelope, I don't
+      know where she put it.
+
+  - id: B04
+    kind: image
+    title: Postal ID (photo)
+    observed: 2026-10-26
+    text: |-
+      POSTAL IDENTITY CARD (SAMPLE)
+      Name: Ramon Dela Cruz
+      Valid until: 05 Jan 2027
+      Renew at any post office with your birth certificate.
+
+  - id: B05
+    kind: text
+    title: What matters most (typed)
+    speaker: liza
+    observed: 2026-10-27
+    text: >-
+      The money and Lola's check-ups matter most. Ramon's ID matters because of the money. The bill
+      and the portal matter but they can wait a day.

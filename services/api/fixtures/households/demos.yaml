@@ -1,0 +1,16 @@
+# The households a visitor can open as a demo. All synthetic. The first is the
+# main demo (it has a "week later" stage and what-if variants); the others are
+# the benchmark households used by the evaluation, open for anyone to explore.
+demos:
+  - id: perera
+    story: Nirmala leaves Kurunegala for a caregiving job in Japan. Sunil, their two children and her diabetic mother stay.
+    kind: migration
+  - id: jaffna
+    story: Selvam leaves Jaffna for a construction job in Qatar. Malar stays with their two children and works factory shifts.
+    kind: migration
+  - id: batangas
+    story: Liza leaves Batangas to work in Hong Kong. Ramon, a tricycle driver, stays with their son and her mother.
+    kind: migration
+  - id: colombo_care
+    story: Dilini goes into hospital for surgery and can't drive for two weeks. Her brother Kasun looks after their father, who is on dialysis.
+    kind: hospital stay

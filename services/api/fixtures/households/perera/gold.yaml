@@ -1,0 +1,89 @@
+# What the engine must conclude for the Perera household. Written by hand from
+# the story before the engine was run; tests and the eval harness check it.
+
+stages:
+  capture:
+    summary: {total: 7, ready: 1, prepared: 1, needs_confirmation: 1, blocked: 5, weight_total: 16, weight_ready: 1}
+    states:
+      r_gas: prepared
+      r_electricity: needs_confirmation
+      r_school_sms: blocked
+      r_van_fee: blocked
+      r_clinic: blocked
+      r_insurance: blocked
+      r_hire: blocked
+    first_problem:
+      r_school_sms: 2026-11-01
+      r_van_fee: 2026-11-05
+      r_electricity: 2026-11-10
+      r_clinic: 2026-11-12
+      r_insurance: 2026-11-20
+      r_hire: 2026-11-21
+    occurrences:
+      r_clinic: [2026-11-12, 2026-11-26, 2026-12-10, 2026-12-24, 2027-01-07, 2027-01-21]
+      r_van_fee: [2026-11-05, 2026-12-05, 2027-01-05]
+      r_electricity: [2026-11-10, 2026-12-10, 2027-01-10]
+      r_hire: [2026-11-01, 2026-11-21]
+  after_handover:
+    summary: {total: 7, ready: 6, prepared: 6, needs_confirmation: 0, blocked: 1, weight_total: 16, weight_ready: 13}
+    states:
+      r_gas: prepared
+      r_electricity: prepared
+      r_school_sms: prepared
+      r_van_fee: prepared
+      r_clinic: blocked
+      r_insurance: prepared
+      r_hire: prepared
+    blocked_dates:
+      r_clinic: [2026-12-24]
+
+findings:
+  # The phone number: association links it to 4 responsibilities; the knockout keeps 2.
+  - id: shared:nirmala_number
+    kind: SHARED_DEPENDENCY
+    retained: {r_school_sms: ONLY_ROUTE, r_insurance: ONLY_REMINDER}
+    set_aside: {r_electricity: OTHER_ROUTE_WORKS, r_clinic: OTHER_REMINDER}
+  - id: held:contact
+    kind: HELD_BY_LEAVER
+    responsibilities: [r_insurance, r_van_fee]
+  - id: held:location
+    kind: HELD_BY_LEAVER
+    responsibilities: [r_clinic, r_insurance]
+  - id: clash:sunil:busy:C49
+    kind: SCHEDULE_CLASH
+    responsibilities: [r_clinic, r_van_fee]
+  - id: clash:sunil:busy:C50
+    kind: SCHEDULE_CLASH
+    responsibilities: [r_clinic]
+  - id: deadline:insurance
+    kind: DEADLINE_IN_ABSENCE
+    responsibilities: [r_insurance, r_hire]
+  - id: ask:willingness
+    kind: NOT_ASKED
+    responsibilities: [r_electricity]
+  - id: conflict:amount:r_van_fee
+    kind: CONTRADICTION
+    responsibilities: [r_van_fee]
+
+must_not_flag: [r_gas]
+
+plan:
+  budget_minutes: 90
+  minutes: 67
+  after: {ready: 6, weight_ready: 13}
+  bundles: [r_clinic, r_electricity, r_insurance, r_school_sms, r_van_fee]
+  leaves:
+    r_clinic: [2026-12-24]
+
+variants:
+  keep_number:
+    no_finding: [shared:nirmala_number]
+  no_airport_runs:
+    no_finding: [clash:sunil:busy:C49]
+    states: {r_van_fee: needs_handover}
+  renewed_early:
+    no_finding: [deadline:insurance]
+    states: {r_insurance: not_due, r_hire: prepared}
+  leave_later:
+    finding_kinds: {deadline:insurance: DEADLINE_BEFORE_DEPARTURE}
+    states: {r_insurance: not_due, r_hire: blocked}

@@ -1,0 +1,33 @@
+defaults: {review: accepted, created_by: fixture}
+claims:
+  # dialysis
+  - {id: K-C01, predicate: DOES, subject: dilini, object: r_dialysis, evidence: [{source_id: K01, quote: "I drive him in my car."}]}
+  - {id: K-C02, predicate: SCHEDULE, subject: r_dialysis, schedule: {freq: weekly, weekdays: [MO, WE, FR]}, evidence: [{source_id: K01, quote: "Thaththa has dialysis on Mondays, Wednesdays and Fridays."}, {source_id: K04, quote: "Sessions: Mon, Wed, Fri 06:30"}]}
+  - {id: K-C03, predicate: ROUTE, subject: r_dialysis, object: rt_drive, evidence: [{source_id: K01, quote: "I drive him in my car."}]}
+  - {id: K-C04, predicate: ROUTE_WINDOW, subject: rt_drive, window: {start: "06:15", end: "11:30"}, derivation: model_inference, note: "Arrive 15 minutes before the 06:30 start; he's done by 11:30.", evidence: [{source_id: K01, quote: "The session starts at half past six and he's done by half past eleven."}, {source_id: K04, quote: "Arrive 15 minutes early."}]}
+  - {id: K-C05, predicate: ROUTE_NEEDS, subject: rt_drive, object: car_key, evidence: [{source_id: K01, quote: "The car key is on my key ring"}]}
+  - {id: K-C06, predicate: HOLDS, subject: dilini, object: car_key, evidence: [{source_id: K01, quote: "the spare key is lost, so only I have a key."}]}
+  - {id: K-C07, predicate: ROUTE, subject: r_dialysis, object: rt_transport, evidence: [{source_id: K01, quote: "If nobody can drive, the hospital has a transport service"}]}
+  - {id: K-C08, predicate: ROUTE_NEEDS, subject: rt_transport, object: transport_contact, evidence: [{source_id: K01, quote: "The number for the transport desk is saved in my phone."}]}
+  - {id: K-C09, predicate: STORED_ON, subject: transport_contact, object: dilini_phone, evidence: [{source_id: K01, quote: "The number for the transport desk is saved in my phone."}]}
+  - {id: K-C10, predicate: HOLDS, subject: dilini, object: dilini_phone, evidence: [{source_id: K01, quote: "saved in my phone"}]}
+  - {id: K-C11, predicate: ROUTE_NEEDS_FACT, subject: rt_transport, object: f_transport, evidence: [{source_id: K01, quote: "I'm not sure they take dialysis patients."}]}
+  - {id: K-C12, predicate: FACT, subject: f_transport, value: unsure, evidence: [{source_id: K01, quote: "I'm not sure they take dialysis patients."}]}
+  - {id: K-C13, predicate: CAN_DO, subject: kasun, object: r_dialysis, value: "yes", evidence: [{source_id: K03, quote: "I can drive Thaththa if I have a car key."}]}
+  - {id: K-C14, predicate: BUSY, subject: kasun, value: work, schedule: {freq: weekly, weekdays: [MO, TU, WE, TH, FR]}, window: {start: "08:00", end: "17:00"}, evidence: [{source_id: K03, quote: "I work from eight to five on weekdays, so I'd have to take leave for the dialysis days."}]}
+  - {id: K-C15, predicate: IMPORTANCE, subject: r_dialysis, value: "3", evidence: [{source_id: K05, quote: "Dialysis can never be missed."}]}
+  - {id: K-C16, predicate: KEY_STEP, subject: r_dialysis, value: "arrive 15 minutes early with the dialysis book", evidence: [{source_id: K04, quote: "Arrive 15 minutes early. Bring the dialysis book."}]}
+  # medicines
+  - {id: K-C17, predicate: DOES, subject: dilini, object: r_meds, evidence: [{source_id: K02, quote: "I collect his medicines from the hospital pharmacy every month on the 16th"}]}
+  - {id: K-C18, predicate: SCHEDULE, subject: r_meds, schedule: {freq: monthly, monthday: 16}, evidence: [{source_id: K02, quote: "every month on the 16th, when the prescription is renewed"}]}
+  - {id: K-C19, predicate: ROUTE, subject: r_meds, object: rt_pharmacy, evidence: [{source_id: K02, quote: "I collect his medicines from the hospital pharmacy"}]}
+  - {id: K-C20, predicate: ROUTE_NEEDS, subject: rt_pharmacy, object: prescription, evidence: [{source_id: K02, quote: "the pharmacy needs it printed."}]}
+  - {id: K-C21, predicate: STORED_ON, subject: prescription, object: dilini_email, evidence: [{source_id: K02, quote: "The doctor emails the prescription to me"}]}
+  - {id: K-C22, predicate: HOLDS, subject: dilini, object: dilini_email, derivation: model_inference, note: "It's Dilini's own email account.", evidence: [{source_id: K02, quote: "The doctor emails the prescription to me"}]}
+  - {id: K-C23, predicate: CAN_DO, subject: kasun, object: r_meds, value: "yes", evidence: [{source_id: K03, quote: "I can pick up the medicines from the pharmacy."}]}
+  - {id: K-C24, predicate: IMPORTANCE, subject: r_meds, value: "3", evidence: [{source_id: K05, quote: "The medicines matter a lot too."}]}
+  # blood pressure
+  - {id: K-C25, predicate: DOES, subject: upali, object: r_bp, evidence: [{source_id: K02, quote: "Thaththa checks his blood pressure every morning and writes it in his book, he does that himself."}]}
+  - {id: K-C26, predicate: SCHEDULE, subject: r_bp, schedule: {freq: daily}, evidence: [{source_id: K02, quote: "checks his blood pressure every morning"}]}
+  - {id: K-C27, predicate: ROUTE, subject: r_bp, object: rt_bp, evidence: [{source_id: K02, quote: "checks his blood pressure every morning and writes it in his book"}]}
+  - {id: K-C28, predicate: IMPORTANCE, subject: r_bp, value: "1", evidence: [{source_id: K05, quote: "The blood pressure book is routine."}]}

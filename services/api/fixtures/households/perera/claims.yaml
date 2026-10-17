@@ -1,0 +1,198 @@
+# Reviewed claims for the Perera household (the "gold" knowledge base).
+# Every quote is copied exactly from its source; the verifier checks this and
+# fills in the locator. `model_inference` claims say what was inferred in `note`.
+# In live mode Gemini proposes claims like these and the household reviews them.
+
+defaults:
+  review: accepted
+  created_by: fixture
+
+claims:
+  # ------------------------------------------------------------------ electricity
+  - {id: C01, predicate: DOES, subject: nirmala, object: r_electricity, stated_by: nirmala,
+     evidence: [{source_id: S01, quote: "I pay it by the 10th on the Lanka Savings app."}]}
+  - {id: C02, predicate: SCHEDULE, subject: r_electricity, schedule: {freq: monthly, monthday: 10},
+     evidence: [{source_id: S01, quote: "I pay it by the 10th"}, {source_id: S04, quote: "Due date: 10 Nov 2026"}]}
+  - {id: C03, predicate: ROUTE, subject: r_electricity, object: rt_elec_app,
+     evidence: [{source_id: S01, quote: "I pay it by the 10th on the Lanka Savings app."}]}
+  - {id: C04, predicate: ROUTE_NEEDS, subject: rt_elec_app, object: bank_app,
+     evidence: [{source_id: S01, quote: "on the Lanka Savings app"}]}
+  - {id: C05, predicate: REQUIRES_RESOURCE, subject: bank_app, object: nirmala_number,
+     evidence: [{source_id: S01, quote: "The app sends a code to my number every time."}, {source_id: S12, quote: "One-time codes are sent to your registered mobile."}]}
+  - {id: C06, predicate: HOLDS, subject: nirmala, object: bank_app, derivation: document,
+     evidence: [{source_id: S12, quote: "Account holder: N. Perera"}]}
+  - {id: C07, predicate: KNOWS_SECRET, subject: nirmala, object: bank_app,
+     note: "A password exists. Its value was removed from the transcript and is never stored.",
+     evidence: [{source_id: S01, quote: "My app password is [secret removed]."}]}
+  - {id: C08, predicate: ROUTE, subject: r_electricity, object: rt_elec_post,
+     evidence: [{source_id: S01, quote: "If the app isn't working, I pay cash at the post office."}, {source_id: S04, quote: "Pay at any post office or through your bank app."}]}
+  - {id: C09, predicate: ROUTE_NEEDS, subject: rt_elec_post, object: electricity_bill,
+     evidence: [{source_id: S01, quote: "You just take the bill."}]}
+  - {id: C10, predicate: CAN_DO, subject: sunil, object: r_electricity, value: unsure, stated_by: nirmala,
+     evidence: [{source_id: S01, quote: "Sunil could do that too, but I haven't asked him."}]}
+  - {id: C11, predicate: NOTIFIES, subject: electricity_bill, object: r_electricity,
+     evidence: [{source_id: S01, quote: "The electricity bill comes on paper"}, {source_id: S04, quote: "Due date: 10 Nov 2026"}]}
+  - {id: C12, predicate: NOTIFIES, subject: electricity_sms, object: r_electricity, derivation: document,
+     evidence: [{source_id: S04, quote: "SMS alerts are sent to the registered mobile: 077-XXX-0101"}]}
+  - {id: C13, predicate: REQUIRES_RESOURCE, subject: electricity_sms, object: nirmala_number, derivation: document,
+     evidence: [{source_id: S04, quote: "SMS alerts are sent to the registered mobile: 077-XXX-0101"}]}
+
+  # ------------------------------------------------------------------ Nirmala's number and phone
+  - {id: C14, predicate: HOLDS, subject: nirmala, object: nirmala_number,
+     evidence: [{source_id: S12, quote: "Registered mobile number: 077-XXX-0101"}, {source_id: S01, quote: "The app sends a code to my number every time."}]}
+  - {id: C15, predicate: STOPS_DURING_ABSENCE, subject: nirmala_number, value: decided, stated_by: nirmala,
+     evidence: [{source_id: S01, quote: "I'm not keeping this number. I'll buy a Japanese SIM at the airport and this one will stop."}]}
+  - {id: C26, predicate: HOLDS, subject: nirmala, object: nirmala_phone,
+     evidence: [{source_id: S01, quote: "His number is only in my phone."}]}
+
+  # ------------------------------------------------------------------ school van fee
+  - {id: C16, predicate: SCHEDULE, subject: r_van_fee, schedule: {freq: monthly, monthday: 5},
+     evidence: [{source_id: S01, quote: "I give it to Mr Silva on the 5th"}, {source_id: S09, quote: "Please pay on the 5th."}]}
+  - {id: C17, predicate: DOES, subject: nirmala, object: r_van_fee, stated_by: nirmala,
+     evidence: [{source_id: S01, quote: "I give it to Mr Silva on the 5th"}]}
+  - {id: C18, predicate: AMOUNT, subject: r_van_fee, value: "Rs 6,000",
+     evidence: [{source_id: S01, quote: "The school van fee is six thousand rupees."}]}
+  - {id: C19, predicate: AMOUNT, subject: r_van_fee, value: "Rs 6,500", derivation: document,
+     evidence: [{source_id: S09, quote: "From November the fee is Rs 6,500 per month."}]}
+  - {id: C20, predicate: ROUTE, subject: r_van_fee, object: rt_van_pickup,
+     evidence: [{source_id: S01, quote: "when he picks up the children at half past six"}]}
+  - {id: C21, predicate: ROUTE_WINDOW, subject: rt_van_pickup, window: {start: "06:30", end: "07:00"}, derivation: model_inference,
+     note: "The pickup is at 6:30; we allow half an hour.",
+     evidence: [{source_id: S01, quote: "when he picks up the children at half past six"}]}
+  - {id: C22, predicate: ROUTE, subject: r_van_fee, object: rt_van_evening,
+     evidence: [{source_id: S01, quote: "If I miss him, I call him and he comes by in the evening."}]}
+  - {id: C23, predicate: ROUTE_NEEDS, subject: rt_van_evening, object: silva_contact,
+     evidence: [{source_id: S01, quote: "I call him"}, {source_id: S01, quote: "His number is only in my phone."}]}
+  - {id: C24, predicate: ROUTE_WINDOW, subject: rt_van_evening, window: {start: "17:00", end: "19:00"}, derivation: model_inference,
+     note: "'In the evening' read as 5 to 7 pm.",
+     evidence: [{source_id: S01, quote: "he comes by in the evening"}]}
+  - {id: C25, predicate: STORED_ON, subject: silva_contact, object: nirmala_phone,
+     evidence: [{source_id: S01, quote: "His number is only in my phone."}, {source_id: S11, quote: "Numbers that are only in my phone: Mr Silva (school van) and Mr Fernando (insurance agent)."}]}
+
+  # ------------------------------------------------------------------ school messages
+  - {id: C27, predicate: DOES, subject: nirmala, object: r_school_sms, stated_by: nirmala,
+     evidence: [{source_id: S01, quote: "the school sends everything to my number, so I see all the school messages."}]}
+  - {id: C28, predicate: ROUTE, subject: r_school_sms, object: rt_school_main, derivation: document,
+     evidence: [{source_id: S05, quote: "All school notices are sent by SMS to the registered parent mobile."}]}
+  - {id: C29, predicate: ROUTE_NEEDS, subject: rt_school_main, object: nirmala_number,
+     evidence: [{source_id: S05, quote: "Registered parent mobile: 077-XXX-0101"}, {source_id: S01, quote: "the school sends everything to my number"}]}
+  - {id: C30, predicate: ROUTE, subject: r_school_sms, object: rt_school_second, derivation: document,
+     evidence: [{source_id: S05, quote: "To add a second parent mobile number, send a signed note to the class teacher."}]}
+  - {id: C31, predicate: ROUTE_NEEDS, subject: rt_school_second, object: sunil_phone, derivation: model_inference,
+     note: "The second parent number would be Sunil's.",
+     evidence: [{source_id: S05, quote: "To add a second parent mobile number"}]}
+  - {id: C32, predicate: ROUTE_NEEDS_FACT, subject: rt_school_second, object: f_school_second, derivation: document,
+     evidence: [{source_id: S05, quote: "To add a second parent mobile number, send a signed note to the class teacher."}]}
+  - {id: C33, predicate: FACT, subject: f_school_second, value: "no", derivation: model_inference,
+     note: "The notice shows only one registered parent number.",
+     evidence: [{source_id: S05, quote: "Registered parent mobile: 077-XXX-0101"}]}
+  - {id: C34, predicate: ENABLES, subject: f_school_second, value: "Send a signed note to the class teacher to add Sunil's number",
+     minutes: 10, note: leaver, derivation: document,
+     evidence: [{source_id: S05, quote: "To add a second parent mobile number, send a signed note to the class teacher."}]}
+
+  # ------------------------------------------------------------------ Achchi's clinic
+  - {id: C35, predicate: SCHEDULE, subject: r_clinic, schedule: {freq: weekly, interval: 2, weekdays: [TH], anchor: 2026-11-12},
+     evidence: [{source_id: S02, quote: "Achchi's clinic is every second Thursday at the district hospital."},
+                {source_id: S02, quote: "The next one is on the 12th of November."},
+                {source_id: S08, quote: "Next visit: Thursday 12 Nov 2026"}]}
+  - {id: C36, predicate: DOES, subject: nirmala, object: r_clinic, stated_by: nirmala,
+     evidence: [{source_id: S02, quote: "I always take her."}]}
+  - {id: C37, predicate: ROUTE, subject: r_clinic, object: rt_clinic,
+     evidence: [{source_id: S02, quote: "Achchi's clinic is every second Thursday at the district hospital."}]}
+  - {id: C38, predicate: ROUTE_WINDOW, subject: rt_clinic, window: {start: "07:00", end: "11:30"},
+     evidence: [{source_id: S02, quote: "We leave at seven to get a number and we're usually back by half past eleven."}]}
+  - {id: C39, predicate: ROUTE_NEEDS, subject: rt_clinic, object: clinic_book,
+     evidence: [{source_id: S02, quote: "You have to take her clinic book and her medicine list."}, {source_id: S08, quote: "Bring this book and your medicine list to every visit."}]}
+  - {id: C40, predicate: ROUTE_NEEDS, subject: rt_clinic, object: medicine_list,
+     evidence: [{source_id: S02, quote: "You have to take her clinic book and her medicine list."}, {source_id: S08, quote: "Bring this book and your medicine list to every visit."}]}
+  - {id: C41, predicate: STORED_ON, subject: clinic_book, object: drawer,
+     evidence: [{source_id: S02, quote: "They're in the top drawer of the steel cupboard."}, {source_id: S10, quote: "Visible: a green book labelled Diabetic clinic."}]}
+  - {id: C42, predicate: STORED_ON, subject: medicine_list, object: drawer,
+     evidence: [{source_id: S02, quote: "They're in the top drawer of the steel cupboard."}, {source_id: S10, quote: "Visible: a folded sheet headed Medicine list - Kamala."}]}
+  - {id: C43, predicate: HOLDS, subject: nirmala, object: drawer, stated_by: nirmala,
+     evidence: [{source_id: S02, quote: "Only I know where they are."}]}
+  - {id: C44, predicate: NOTIFIES, subject: clinic_book, object: r_clinic,
+     evidence: [{source_id: S02, quote: "The next date is always written in the clinic book."}]}
+  - {id: C45, predicate: NOTIFIES, subject: clinic_sms, object: r_clinic,
+     evidence: [{source_id: S02, quote: "The clinic also sends an SMS reminder to my phone."}, {source_id: S08, quote: "SMS reminders to: 077-XXX-0101"}]}
+  - {id: C46, predicate: REQUIRES_RESOURCE, subject: clinic_sms, object: nirmala_number, derivation: document,
+     evidence: [{source_id: S08, quote: "SMS reminders to: 077-XXX-0101"}]}
+  - {id: C47, predicate: KEY_STEP, subject: r_clinic, value: "pack the clinic book and the medicine list",
+     evidence: [{source_id: S02, quote: "The most important thing is to take the book and the list, otherwise they can't give the tablets."}]}
+  - {id: C48, predicate: CAN_DO, subject: sunil, object: r_clinic, value: "yes", stated_by: sunil,
+     evidence: [{source_id: S03, quote: "I'll take Amma to the clinic, no problem"}]}
+
+  # ------------------------------------------------------------------ Sunil's time
+  - {id: C49, predicate: BUSY, subject: sunil, value: airport runs, stated_by: sunil,
+     schedule: {freq: weekly, weekdays: [TH]}, window: {start: "03:30", end: "10:00"},
+     evidence: [{source_id: S03, quote: "Thursdays are my airport days. I leave for Katunayake at half past three in the morning and I'm back around ten."}]}
+  - {id: C50, predicate: BUSY, subject: sunil, value: the Kataragama pilgrimage hire, stated_by: sunil, fixed: true,
+     schedule: {freq: once, anchor: 2026-12-24}, window: {start: "04:00", end: "21:00"}, derivation: model_inference,
+     note: "A Kataragama trip takes the whole day; Sunil says it can't be cancelled.",
+     evidence: [{source_id: S03, quote: "On the 24th of December I have a Kataragama pilgrimage hire, booked and paid, so I can't cancel that one."}]}
+  - {id: C51, predicate: CAN_DO, subject: sunil, object: r_van_fee, value: "yes", stated_by: sunil,
+     evidence: [{source_id: S03, quote: "I can give Mr Silva the van money if Nirmala leaves it ready."}]}
+
+  # ------------------------------------------------------------------ gas
+  - {id: C52, predicate: DOES, subject: sunil, object: r_gas, stated_by: sunil,
+     evidence: [{source_id: S03, quote: "The gas I always do myself."}]}
+  - {id: C53, predicate: ROUTE, subject: r_gas, object: rt_gas,
+     evidence: [{source_id: S03, quote: "The gas shop number is in my phone."}]}
+  - {id: C54, predicate: ROUTE_NEEDS, subject: rt_gas, object: gas_contact,
+     evidence: [{source_id: S03, quote: "The gas shop number is in my phone."}]}
+  - {id: C55, predicate: STORED_ON, subject: gas_contact, object: sunil_phone,
+     evidence: [{source_id: S03, quote: "The gas shop number is in my phone."}]}
+  - {id: C56, predicate: HOLDS, subject: sunil, object: sunil_phone,
+     evidence: [{source_id: S03, quote: "The gas shop number is in my phone."}]}
+
+  # ------------------------------------------------------------------ insurance and hire work
+  - {id: C57, predicate: DOES, subject: nirmala, object: r_insurance, stated_by: sunil,
+     evidence: [{source_id: S03, quote: "The insurance I have never done. Nirmala does all that."}]}
+  - {id: C58, predicate: DOES, subject: sunil, object: r_hire, stated_by: nirmala,
+     evidence: [{source_id: S13, quote: "keeping Sunil's hires going, that's our income"}]}
+  - {id: C59, predicate: ROUTE, subject: r_hire, object: rt_hire,
+     evidence: [{source_id: S13, quote: "keeping Sunil's hires going"}]}
+  - {id: C60, predicate: ROUTE_NEEDS_VALID, subject: rt_hire, object: insurance, stated_by: sunil,
+     evidence: [{source_id: S03, quote: "Without valid insurance I can't take hires. The police check it."}, {source_id: S06, quote: "Use: private and hiring"}]}
+  - {id: C61, predicate: VALID_UNTIL, subject: insurance, date: 2026-11-20, derivation: document,
+     evidence: [{source_id: S06, quote: "Period of cover: 21 Nov 2025 to 20 Nov 2026"}, {source_id: S07, quote: "Period of insurance: 21 Nov 2025 to 20 Nov 2026"}]}
+  - {id: C62, predicate: RENEWS, subject: r_insurance, object: insurance, derivation: document,
+     evidence: [{source_id: S07, quote: "To renew, contact your agent with your policy number."}]}
+  - {id: C63, predicate: NOTIFIES, subject: insurance_sms, object: r_insurance, derivation: document,
+     evidence: [{source_id: S06, quote: "Renewal reminders are sent by SMS to 077-XXX-0101"}]}
+  - {id: C64, predicate: REQUIRES_RESOURCE, subject: insurance_sms, object: nirmala_number, derivation: document,
+     evidence: [{source_id: S06, quote: "Renewal reminders are sent by SMS to 077-XXX-0101"}, {source_id: S07, quote: "Renewal reminders are sent by SMS to the policyholder's registered mobile."}]}
+  - {id: C65, predicate: ROUTE, subject: r_insurance, object: rt_insurance_agent, derivation: document,
+     evidence: [{source_id: S07, quote: "To renew, contact your agent with your policy number."}]}
+  - {id: C66, predicate: ROUTE_NEEDS, subject: rt_insurance_agent, object: agent_contact, derivation: document,
+     evidence: [{source_id: S06, quote: "Your agent: Mr Fernando"}, {source_id: S07, quote: "To renew, contact your agent with your policy number."}]}
+  - {id: C67, predicate: ROUTE_NEEDS, subject: rt_insurance_agent, object: policy_schedule, derivation: document,
+     evidence: [{source_id: S07, quote: "Keep this schedule; you will need the policy number to renew."}]}
+  - {id: C68, predicate: STORED_ON, subject: agent_contact, object: nirmala_phone,
+     evidence: [{source_id: S11, quote: "Numbers that are only in my phone: Mr Silva (school van) and Mr Fernando (insurance agent)."}]}
+  - {id: C69, predicate: STORED_ON, subject: policy_schedule, object: blue_folder,
+     evidence: [{source_id: S11, quote: "The insurance papers are in the blue folder in the wardrobe."}]}
+  - {id: C70, predicate: HOLDS, subject: nirmala, object: blue_folder,
+     evidence: [{source_id: S11, quote: "Sunil doesn't know about the blue folder."}]}
+  - {id: C71, predicate: LEAD_TIME, subject: r_insurance, value: "7", derivation: document,
+     evidence: [{source_id: S07, quote: "Renew at least 7 days before the expiry date to avoid a gap in cover."}]}
+  - {id: C72, predicate: KEY_STEP, subject: r_insurance, value: "give the agent the policy number from the schedule", derivation: document,
+     evidence: [{source_id: S07, quote: "Keep this schedule; you will need the policy number to renew."}]}
+
+  # ------------------------------------------------------------------ priorities (household-reviewed)
+  - {id: C73, predicate: IMPORTANCE, subject: r_clinic, value: "3",
+     evidence: [{source_id: S13, quote: "What matters most is Achchi's clinic and keeping Sunil's hires going, that's our income."}]}
+  - {id: C74, predicate: IMPORTANCE, subject: r_hire, value: "3",
+     evidence: [{source_id: S13, quote: "What matters most is Achchi's clinic and keeping Sunil's hires going, that's our income."}]}
+  - {id: C75, predicate: IMPORTANCE, subject: r_insurance, value: "3",
+     evidence: [{source_id: S13, quote: "The insurance too, of course."}]}
+  - {id: C76, predicate: IMPORTANCE, subject: r_electricity, value: "2",
+     evidence: [{source_id: S13, quote: "The bills and the school things matter, but they're not life and death."}]}
+  - {id: C77, predicate: IMPORTANCE, subject: r_school_sms, value: "2",
+     evidence: [{source_id: S13, quote: "The bills and the school things matter, but they're not life and death."}]}
+  - {id: C78, predicate: IMPORTANCE, subject: r_van_fee, value: "2",
+     evidence: [{source_id: S13, quote: "The bills and the school things matter, but they're not life and death."}]}
+  - {id: C79, predicate: IMPORTANCE, subject: r_gas, value: "1",
+     evidence: [{source_id: S13, quote: "The gas is easy, Sunil does it."}]}
+  - {id: C80, predicate: HANDOVER_LEVEL, subject: r_school_sms, value: light, derivation: household_review, created_by: household,
+     note: "Nirmala chose: seeing the steps is enough for this one."}

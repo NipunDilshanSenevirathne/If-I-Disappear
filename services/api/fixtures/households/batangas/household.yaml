@@ -1,0 +1,50 @@
+# Benchmark household H3 (synthetic). A family in Batangas, the Philippines:
+# Liza leaves to work in Hong Kong; Ramon (a tricycle driver) stays with their son
+# and Liza's mother. Used by the evaluation harness.
+
+settings:
+  id: batangas
+  name: The Dela Cruz household
+  timezone: Asia/Manila
+  leaver: liza
+  departure: 2026-11-08
+  destination: Hong Kong
+  airport_from: MNL
+  airport_to: HKG
+  horizon_days: 120
+  assessment_date: 2026-10-28
+  languages: [en]
+  synthetic: true
+  budget_minutes: 60
+
+entities:
+  - {id: liza, kind: person, name: Liza, role: leaver}
+  - {id: ramon, kind: person, name: Ramon, role: backup}
+  - {id: paolo, kind: person, name: Paolo, minor: true}
+  - {id: lola, kind: person, name: Lola Edna, role: household}
+
+  - {id: r_remit, kind: responsibility, name: receive the money Liza sends, category: money}
+  - {id: r_portal, kind: responsibility, name: get Paolo back into the school portal, category: school}
+  - {id: r_power, kind: responsibility, name: pay the electricity bill, category: bills}
+  - {id: r_checkup, kind: responsibility, name: take Lola Edna to her check-up, category: health}
+  - {id: r_id_renew, kind: responsibility, name: renew Ramon's postal ID, category: documents}
+
+  - {id: rt_wallet, kind: route, name: cash out from the e-wallet}
+  - {id: rt_pawnshop, kind: route, name: pick it up at the pawnshop counter}
+  - {id: rt_reset_email, kind: route, name: reset the password by email}
+  - {id: rt_adviser, kind: route, name: ask the class adviser to reset it}
+  - {id: rt_power_wallet, kind: route, name: pay with the e-wallet}
+  - {id: rt_power_cash, kind: route, name: pay cash at the payment centre}
+  - {id: rt_checkup, kind: route, name: go to the health centre}
+  - {id: rt_id, kind: route, name: apply at the post office}
+
+  - {id: liza_number, kind: resource, resource_kind: phone_number, name: Liza's number, identifier: 0917-XXX-0303}
+  - {id: liza_email, kind: resource, resource_kind: account, name: Liza's email}
+  - {id: ewallet, kind: resource, resource_kind: account, name: the e-wallet}
+  - {id: wallet_alerts, kind: resource, resource_kind: service, name: the e-wallet alerts}
+  - {id: power_ebill, kind: resource, resource_kind: service, name: the emailed electricity bill}
+  - {id: power_slip, kind: resource, resource_kind: document, name: the account number slip, generic: true}
+  - {id: ramon_id, kind: resource, resource_kind: permit, name: Ramon's postal ID}
+  - {id: birth_cert, kind: resource, resource_kind: document, name: Ramon's birth certificate}
+  - {id: envelope, kind: resource, resource_kind: location, name: the brown documents envelope}
+  - {id: f_adviser, kind: fact, name: the school resets portal passwords on request}

@@ -1,0 +1,15 @@
+# Written from the story before running the engine.
+stages:
+  capture:
+    states:
+      r_dialysis: blocked
+      r_meds: blocked
+      r_bp: prepared
+    first_problem:
+      r_dialysis: 2026-11-09
+      r_meds: 2026-11-16
+findings:
+  - {id: "held:contact", kind: HELD_BY_LEAVER, responsibilities: [r_dialysis]}
+  - {id: "held:other", kind: HELD_BY_LEAVER, responsibilities: [r_dialysis, r_meds]}
+  - {id: "clash:kasun:busy:K-C14", kind: SCHEDULE_CLASH, responsibilities: [r_dialysis]}
+must_not_flag: [r_bp]

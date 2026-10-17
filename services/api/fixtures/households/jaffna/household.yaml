@@ -1,0 +1,54 @@
+# Benchmark household H2 (synthetic). A family in Jaffna:
+# Selvam leaves for a construction job in Qatar; Malar stays with two children.
+# Used by the evaluation harness to check the engine on a household it wasn't built around.
+
+settings:
+  id: jaffna
+  name: The Selvarajah household
+  timezone: Asia/Colombo
+  leaver: selvam
+  departure: 2026-11-15
+  destination: Qatar
+  airport_from: JAF
+  airport_to: DOH
+  horizon_days: 120
+  assessment_date: 2026-11-01
+  languages: [en]
+  synthetic: true
+  budget_minutes: 60
+
+entities:
+  - {id: selvam, kind: person, name: Selvam, role: leaver}
+  - {id: malar, kind: person, name: Malar, role: backup}
+  - {id: kavin, kind: person, name: Kavin, minor: true}
+  - {id: nila, kind: person, name: Nila, minor: true}
+
+  - {id: r_loan, kind: responsibility, name: pay the motorbike loan instalment, category: money}
+  - {id: r_coop, kind: responsibility, name: collect the co-op share payment, category: income}
+  - {id: r_water, kind: responsibility, name: pay the water bill, category: bills}
+  - {id: r_tuition, kind: responsibility, name: take the children to tuition, category: school}
+  - {id: r_licence, kind: responsibility, name: renew the motorbike revenue licence, category: vehicle}
+  - {id: r_ride, kind: responsibility, name: ride the motorbike to the factory, category: work}
+
+  - {id: rt_loan, kind: route, name: pay at the finance company branch}
+  - {id: rt_coop, kind: route, name: collect at the co-op office}
+  - {id: rt_water, kind: route, name: pay cash at the water board office}
+  - {id: rt_tuition, kind: route, name: take them on the motorbike}
+  - {id: rt_licence, kind: route, name: renew at the divisional secretariat}
+  - {id: rt_ride, kind: route, name: ride to work}
+
+  - {id: selvam_phone, kind: resource, resource_kind: handset, name: Selvam's phone}
+  - {id: secretary_contact, kind: resource, resource_kind: contact, name: the co-op secretary's number}
+  - {id: loan_card, kind: resource, resource_kind: document, name: the loan card}
+  - {id: water_bill, kind: resource, resource_kind: document, name: the water bill, generic: true}
+  - {id: registration_book, kind: resource, resource_kind: document, name: the registration book}
+  - {id: almirah, kind: resource, resource_kind: location, name: the steel almirah drawer}
+  - {id: licence, kind: resource, resource_kind: permit, name: the motorbike revenue licence}
+
+procedures:
+  - responsibility: r_loan
+    scenario_prompt: "It's the 14th. Tell me how the loan gets paid."
+    steps:
+      - {id: l1, text: "Pay Rs 9,800 by the 15th of each month.", critical: true, keywords: ["15", "9,800"]}
+      - {id: l2, text: "Take the loan card to the finance company branch.", keywords: [card, branch]}
+      - {id: l3, text: "Get the receipt stamped on the card.", keywords: [receipt, stamp]}

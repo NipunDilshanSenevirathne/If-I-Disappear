@@ -1,0 +1,52 @@
+defaults: {review: accepted, created_by: fixture}
+claims:
+  # loan
+  - {id: J-C01, predicate: DOES, subject: selvam, object: r_loan, evidence: [{source_id: J01, quote: "I pay the motorbike loan on the 15th at the finance company branch in town."}]}
+  - {id: J-C02, predicate: SCHEDULE, subject: r_loan, schedule: {freq: monthly, monthday: 15}, evidence: [{source_id: J01, quote: "I pay the motorbike loan on the 15th"}, {source_id: J05, quote: "Due: 15th of each month"}]}
+  - {id: J-C03, predicate: ROUTE, subject: r_loan, object: rt_loan, evidence: [{source_id: J01, quote: "at the finance company branch in town"}]}
+  - {id: J-C04, predicate: ROUTE_NEEDS, subject: rt_loan, object: loan_card, evidence: [{source_id: J05, quote: "Bring this card when you pay at the branch."}]}
+  - {id: J-C05, predicate: HOLDS, subject: selvam, object: loan_card, evidence: [{source_id: J01, quote: "I keep the loan card in my wallet."}]}
+  - {id: J-C06, predicate: CAN_DO, subject: malar, object: r_loan, value: "yes", evidence: [{source_id: J01, quote: "Malar can go to the branch, it's near her factory."}, {source_id: J03, quote: "I can take over the loan and the water bill."}]}
+  - {id: J-C07, predicate: IMPORTANCE, subject: r_loan, value: "3", evidence: [{source_id: J06, quote: "The loan and the licence matter most. Missing the loan is serious."}]}
+  - {id: J-C08, predicate: KEY_STEP, subject: r_loan, value: "take the loan card and get the receipt stamped", derivation: model_inference, note: "The card has to be shown at the branch.", evidence: [{source_id: J05, quote: "Bring this card when you pay at the branch."}]}
+  - {id: J-C09, predicate: AMOUNT, subject: r_loan, value: "Rs 9,800", derivation: document, evidence: [{source_id: J05, quote: "Monthly instalment: Rs 9,800"}]}
+  # co-op
+  - {id: J-C10, predicate: DOES, subject: selvam, object: r_coop, evidence: [{source_id: J02, quote: "Every three months I collect the co-op share payment at the co-op office."}]}
+  - {id: J-C11, predicate: SCHEDULE, subject: r_coop, schedule: {freq: monthly, interval: 3, monthday: 10, anchor: 2027-01-10}, evidence: [{source_id: J02, quote: "Every three months I collect the co-op share payment"}, {source_id: J02, quote: "The next one is on the 10th of January."}]}
+  - {id: J-C12, predicate: ROUTE, subject: r_coop, object: rt_coop, evidence: [{source_id: J02, quote: "at the co-op office"}]}
+  - {id: J-C13, predicate: ROUTE_NEEDS, subject: rt_coop, object: secretary_contact, evidence: [{source_id: J02, quote: "I call the co-op secretary first to check the money is ready."}]}
+  - {id: J-C14, predicate: STORED_ON, subject: secretary_contact, object: selvam_phone, evidence: [{source_id: J02, quote: "His number is only in my phone."}]}
+  - {id: J-C15, predicate: HOLDS, subject: selvam, object: selvam_phone, evidence: [{source_id: J02, quote: "His number is only in my phone."}]}
+  - {id: J-C16, predicate: CAN_DO, subject: malar, object: r_coop, value: unsure, evidence: [{source_id: J02, quote: "Malar has never been to the co-op."}]}
+  - {id: J-C17, predicate: IMPORTANCE, subject: r_coop, value: "2", evidence: [{source_id: J06, quote: "The tuition and the co-op matter too."}]}
+  # water
+  - {id: J-C18, predicate: DOES, subject: selvam, object: r_water, evidence: [{source_id: J02, quote: "I pay the water bill on the 20th at the water board office, in cash."}]}
+  - {id: J-C19, predicate: SCHEDULE, subject: r_water, schedule: {freq: monthly, monthday: 20}, evidence: [{source_id: J02, quote: "I pay the water bill on the 20th"}]}
+  - {id: J-C20, predicate: ROUTE, subject: r_water, object: rt_water, evidence: [{source_id: J02, quote: "at the water board office, in cash"}]}
+  - {id: J-C21, predicate: ROUTE_NEEDS, subject: rt_water, object: water_bill, derivation: model_inference, note: "You take the bill when you pay.", evidence: [{source_id: J02, quote: "I pay the water bill on the 20th"}]}
+  - {id: J-C22, predicate: NOTIFIES, subject: water_bill, object: r_water, derivation: model_inference, note: "The bill shows when it is due.", evidence: [{source_id: J02, quote: "I pay the water bill on the 20th"}]}
+  - {id: J-C23, predicate: CAN_DO, subject: malar, object: r_water, value: "yes", evidence: [{source_id: J02, quote: "Malar can do that easily."}]}
+  - {id: J-C24, predicate: IMPORTANCE, subject: r_water, value: "1", evidence: [{source_id: J06, quote: "The water bill is simple."}]}
+  # tuition
+  - {id: J-C25, predicate: DOES, subject: selvam, object: r_tuition, evidence: [{source_id: J02, quote: "I take Kavin and Nila to tuition on Tuesdays and Thursdays from four to six."}]}
+  - {id: J-C26, predicate: SCHEDULE, subject: r_tuition, schedule: {freq: weekly, weekdays: [TU, TH]}, evidence: [{source_id: J02, quote: "on Tuesdays and Thursdays"}]}
+  - {id: J-C27, predicate: ROUTE, subject: r_tuition, object: rt_tuition, evidence: [{source_id: J02, quote: "I take Kavin and Nila to tuition"}]}
+  - {id: J-C28, predicate: ROUTE_WINDOW, subject: rt_tuition, window: {start: "16:00", end: "18:00"}, evidence: [{source_id: J02, quote: "from four to six"}]}
+  - {id: J-C29, predicate: CAN_DO, subject: malar, object: r_tuition, value: "yes", evidence: [{source_id: J02, quote: "Malar could take them, but she works at the factory."}]}
+  - {id: J-C30, predicate: BUSY, subject: malar, value: the factory shift, schedule: {freq: weekly, weekdays: [MO, TU, WE, TH, FR, SA]}, window: {start: "07:30", end: "17:00"}, evidence: [{source_id: J03, quote: "I work at the garment factory from half past seven to five, Monday to Saturday."}]}
+  - {id: J-C31, predicate: IMPORTANCE, subject: r_tuition, value: "2", evidence: [{source_id: J06, quote: "The tuition and the co-op matter too."}]}
+  # licence and riding
+  - {id: J-C32, predicate: VALID_UNTIL, subject: licence, date: 2026-12-31, derivation: document, evidence: [{source_id: J04, quote: "Valid until: 31 Dec 2026"}, {source_id: J01, quote: "The motorbike licence runs out at the end of December."}]}
+  - {id: J-C33, predicate: RENEWS, subject: r_licence, object: licence, evidence: [{source_id: J01, quote: "You renew it at the divisional secretariat with the registration book."}]}
+  - {id: J-C34, predicate: DOES, subject: selvam, object: r_licence, derivation: model_inference, note: "Selvam is the registered owner and renews it.", evidence: [{source_id: J04, quote: "Owner: S. Selvarajah"}]}
+  - {id: J-C35, predicate: ROUTE, subject: r_licence, object: rt_licence, evidence: [{source_id: J04, quote: "Renew at your divisional secretariat with the registration book."}]}
+  - {id: J-C36, predicate: ROUTE_NEEDS, subject: rt_licence, object: registration_book, evidence: [{source_id: J04, quote: "Renew at your divisional secretariat with the registration book."}]}
+  - {id: J-C37, predicate: STORED_ON, subject: registration_book, object: almirah, evidence: [{source_id: J01, quote: "The registration book is in the steel almirah, only I know which drawer."}]}
+  - {id: J-C38, predicate: HOLDS, subject: selvam, object: almirah, evidence: [{source_id: J01, quote: "only I know which drawer"}]}
+  - {id: J-C39, predicate: CAN_DO, subject: malar, object: r_licence, value: "yes", derivation: model_inference, note: "Malar rides it and can go to the secretariat.", evidence: [{source_id: J01, quote: "Malar rides the motorbike to the factory every day, so the licence matters."}]}
+  - {id: J-C40, predicate: IMPORTANCE, subject: r_licence, value: "3", evidence: [{source_id: J06, quote: "The loan and the licence matter most."}]}
+  - {id: J-C41, predicate: KEY_STEP, subject: r_licence, value: "take the registration book to the secretariat", evidence: [{source_id: J04, quote: "Renew at your divisional secretariat with the registration book."}]}
+  - {id: J-C42, predicate: DOES, subject: malar, object: r_ride, evidence: [{source_id: J01, quote: "Malar rides the motorbike to the factory every day"}]}
+  - {id: J-C43, predicate: ROUTE, subject: r_ride, object: rt_ride, evidence: [{source_id: J01, quote: "Malar rides the motorbike to the factory every day"}]}
+  - {id: J-C44, predicate: ROUTE_NEEDS_VALID, subject: rt_ride, object: licence, evidence: [{source_id: J01, quote: "so the licence matters"}]}
+  - {id: J-C45, predicate: IMPORTANCE, subject: r_ride, value: "2", derivation: model_inference, note: "Needed to get to work.", evidence: [{source_id: J01, quote: "Malar rides the motorbike to the factory every day"}]}

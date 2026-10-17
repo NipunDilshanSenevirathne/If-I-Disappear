@@ -1,0 +1,57 @@
+sources:
+  - id: K01
+    kind: voice
+    title: Dialysis days
+    language: en
+    speaker: dilini
+    observed: 2026-10-30
+    text: >-
+      My surgery is on the 9th of November and the doctors say it will be two weeks before I can
+      drive again. Thaththa has dialysis on Mondays, Wednesdays and Fridays. The session starts at
+      half past six and he's done by half past eleven. I drive him in my car. The car key is on my
+      key ring and the spare key is lost, so only I have a key. If nobody can drive, the hospital
+      has a transport service, but I'm not sure they take dialysis patients. The number for the
+      transport desk is saved in my phone.
+
+  - id: K02
+    kind: voice
+    title: Medicines and blood pressure
+    language: en
+    speaker: dilini
+    observed: 2026-10-30
+    text: >-
+      I collect his medicines from the hospital pharmacy every month on the 16th, when the
+      prescription is renewed. The doctor emails the prescription to me, and the pharmacy needs it
+      printed. Thaththa checks his blood pressure every morning and writes it in his book, he does
+      that himself.
+
+  - id: K03
+    kind: voice
+    title: Kasun's plan
+    language: en
+    speaker: kasun
+    observed: 2026-10-31
+    text: >-
+      I'll come down from Kandy and stay with Thaththa while Akka is in hospital. I work from eight
+      to five on weekdays, so I'd have to take leave for the dialysis days. I can pick up the
+      medicines from the pharmacy. I can drive Thaththa if I have a car key.
+
+  - id: K04
+    kind: image
+    title: Dialysis appointment card (photo)
+    observed: 2026-10-31
+    text: |-
+      NATIONAL HOSPITAL (SAMPLE)
+      Haemodialysis unit, ward 9
+      Patient: U. Jayasinghe
+      Sessions: Mon, Wed, Fri 06:30
+      Arrive 15 minutes early. Bring the dialysis book.
+
+  - id: K05
+    kind: text
+    title: What matters most (typed)
+    speaker: dilini
+    observed: 2026-11-01
+    text: >-
+      Dialysis can never be missed. The medicines matter a lot too. The blood pressure book is
+      routine.

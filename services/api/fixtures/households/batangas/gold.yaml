@@ -1,0 +1,21 @@
+stages:
+  capture:
+    states:
+      r_remit: blocked
+      r_portal: needs_confirmation
+      r_power: needs_handover
+      r_checkup: blocked
+      r_id_renew: blocked
+    first_problem:
+      r_checkup: 2026-11-16
+      r_id_renew: 2027-01-05
+findings:
+  - id: "shared:liza_email"
+    kind: SHARED_DEPENDENCY
+    retained: {r_remit: ONLY_REMINDER, r_power: ONLY_REMINDER}
+    set_aside: {r_portal: OTHER_ROUTE_WORKS}
+  - {id: "held:location", kind: HELD_BY_LEAVER, responsibilities: [r_id_renew]}
+  - {id: "held:other", kind: HELD_BY_LEAVER, responsibilities: [r_remit]}
+  - {id: "clash:ramon:busy:B-C47", kind: SCHEDULE_CLASH, responsibilities: [r_checkup]}
+  - {id: "deadline:ramon_id", kind: DEADLINE_IN_ABSENCE, responsibilities: [r_id_renew, r_remit]}
+must_not_flag: [r_portal]

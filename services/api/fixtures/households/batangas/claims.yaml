@@ -1,0 +1,55 @@
+defaults: {review: accepted, created_by: fixture}
+claims:
+  # remittance
+  - {id: B-C01, predicate: DOES, subject: liza, object: r_remit, derivation: model_inference, note: "Liza handles the e-wallet today.", evidence: [{source_id: B01, quote: "I will send money every month, around the 28th, to my e-wallet."}]}
+  - {id: B-C02, predicate: SCHEDULE, subject: r_remit, schedule: {freq: monthly, monthday: 28}, evidence: [{source_id: B01, quote: "I will send money every month, around the 28th"}]}
+  - {id: B-C03, predicate: ROUTE, subject: r_remit, object: rt_wallet, evidence: [{source_id: B01, quote: "Ramon can cash it out"}]}
+  - {id: B-C04, predicate: ROUTE_NEEDS, subject: rt_wallet, object: ewallet, evidence: [{source_id: B01, quote: "the e-wallet is in my name"}]}
+  - {id: B-C05, predicate: HOLDS, subject: liza, object: ewallet, evidence: [{source_id: B01, quote: "the e-wallet is in my name"}]}
+  - {id: B-C06, predicate: REQUIRES_RESOURCE, subject: ewallet, object: liza_number, evidence: [{source_id: B01, quote: "the code goes to my number"}]}
+  - {id: B-C07, predicate: HOLDS, subject: liza, object: liza_number, evidence: [{source_id: B01, quote: "I'm taking my SIM with me to Hong Kong."}]}
+  - {id: B-C08, predicate: ROUTE, subject: r_remit, object: rt_pawnshop, evidence: [{source_id: B01, quote: "The other way is the pawnshop counter."}]}
+  - {id: B-C09, predicate: ROUTE_NEEDS_VALID, subject: rt_pawnshop, object: ramon_id, evidence: [{source_id: B01, quote: "He can pick it up there with his postal ID."}]}
+  - {id: B-C10, predicate: CAN_DO, subject: ramon, object: r_remit, value: "yes", evidence: [{source_id: B03, quote: "I can take care of the money, the bills and Paolo's portal."}]}
+  - {id: B-C11, predicate: NOTIFIES, subject: wallet_alerts, object: r_remit, evidence: [{source_id: B01, quote: "The e-wallet sends alerts to my email when the money arrives."}]}
+  - {id: B-C12, predicate: REQUIRES_RESOURCE, subject: wallet_alerts, object: liza_email, evidence: [{source_id: B01, quote: "The e-wallet sends alerts to my email"}]}
+  - {id: B-C13, predicate: IMPORTANCE, subject: r_remit, value: "3", evidence: [{source_id: B05, quote: "The money and Lola's check-ups matter most."}]}
+  - {id: B-C14, predicate: KEY_STEP, subject: r_remit, value: "show a valid ID and sign for the money", derivation: model_inference, note: "A valid ID is needed at the counter.", evidence: [{source_id: B01, quote: "He can pick it up there with his postal ID."}]}
+  # Ramon's ID
+  - {id: B-C15, predicate: VALID_UNTIL, subject: ramon_id, date: 2027-01-05, derivation: document, evidence: [{source_id: B04, quote: "Valid until: 05 Jan 2027"}, {source_id: B03, quote: "My postal ID expires in January."}]}
+  - {id: B-C16, predicate: RENEWS, subject: r_id_renew, object: ramon_id, evidence: [{source_id: B04, quote: "Renew at any post office with your birth certificate."}]}
+  - {id: B-C17, predicate: DOES, subject: ramon, object: r_id_renew, derivation: model_inference, note: "It's Ramon's own ID.", evidence: [{source_id: B03, quote: "To renew it I need my birth certificate."}]}
+  - {id: B-C18, predicate: ROUTE, subject: r_id_renew, object: rt_id, evidence: [{source_id: B04, quote: "Renew at any post office with your birth certificate."}]}
+  - {id: B-C19, predicate: ROUTE_NEEDS, subject: rt_id, object: birth_cert, evidence: [{source_id: B03, quote: "To renew it I need my birth certificate."}]}
+  - {id: B-C20, predicate: STORED_ON, subject: birth_cert, object: envelope, evidence: [{source_id: B03, quote: "Liza keeps it in the brown documents envelope"}]}
+  - {id: B-C21, predicate: HOLDS, subject: liza, object: envelope, evidence: [{source_id: B03, quote: "I don't know where she put it."}]}
+  - {id: B-C22, predicate: IMPORTANCE, subject: r_id_renew, value: "2", evidence: [{source_id: B05, quote: "Ramon's ID matters because of the money."}]}
+  # portal
+  - {id: B-C23, predicate: DOES, subject: liza, object: r_portal, derivation: model_inference, note: "Liza resets it today.", evidence: [{source_id: B02, quote: "The reset link goes to my email."}]}
+  - {id: B-C24, predicate: ROUTE, subject: r_portal, object: rt_reset_email, evidence: [{source_id: B02, quote: "The reset link goes to my email."}]}
+  - {id: B-C25, predicate: ROUTE_NEEDS, subject: rt_reset_email, object: liza_email, evidence: [{source_id: B02, quote: "The reset link goes to my email."}]}
+  - {id: B-C26, predicate: HOLDS, subject: liza, object: liza_email, evidence: [{source_id: B02, quote: "The reset link goes to my email."}]}
+  - {id: B-C27, predicate: ROUTE, subject: r_portal, object: rt_adviser, evidence: [{source_id: B02, quote: "Maybe the class adviser can reset it, I'm not sure."}]}
+  - {id: B-C28, predicate: ROUTE_NEEDS_FACT, subject: rt_adviser, object: f_adviser, evidence: [{source_id: B02, quote: "Maybe the class adviser can reset it, I'm not sure."}]}
+  - {id: B-C29, predicate: FACT, subject: f_adviser, value: unsure, evidence: [{source_id: B02, quote: "I'm not sure."}]}
+  - {id: B-C30, predicate: CAN_DO, subject: ramon, object: r_portal, value: "yes", evidence: [{source_id: B03, quote: "I can take care of the money, the bills and Paolo's portal."}]}
+  - {id: B-C31, predicate: IMPORTANCE, subject: r_portal, value: "1", evidence: [{source_id: B05, quote: "The bill and the portal matter but they can wait a day."}]}
+  # electricity
+  - {id: B-C32, predicate: DOES, subject: liza, object: r_power, evidence: [{source_id: B02, quote: "I pay it with the e-wallet by the 15th."}]}
+  - {id: B-C33, predicate: SCHEDULE, subject: r_power, schedule: {freq: monthly, monthday: 15}, evidence: [{source_id: B02, quote: "by the 15th"}]}
+  - {id: B-C34, predicate: ROUTE, subject: r_power, object: rt_power_wallet, evidence: [{source_id: B02, quote: "I pay it with the e-wallet"}]}
+  - {id: B-C35, predicate: ROUTE_NEEDS, subject: rt_power_wallet, object: ewallet, evidence: [{source_id: B02, quote: "I pay it with the e-wallet"}]}
+  - {id: B-C36, predicate: ROUTE, subject: r_power, object: rt_power_cash, evidence: [{source_id: B02, quote: "Ramon can also pay cash at the payment centre with the account number slip."}]}
+  - {id: B-C37, predicate: ROUTE_NEEDS, subject: rt_power_cash, object: power_slip, evidence: [{source_id: B02, quote: "with the account number slip"}]}
+  - {id: B-C38, predicate: NOTIFIES, subject: power_ebill, object: r_power, evidence: [{source_id: B02, quote: "The electricity bill comes to my email"}]}
+  - {id: B-C39, predicate: REQUIRES_RESOURCE, subject: power_ebill, object: liza_email, evidence: [{source_id: B02, quote: "The electricity bill comes to my email"}]}
+  - {id: B-C40, predicate: CAN_DO, subject: ramon, object: r_power, value: "yes", evidence: [{source_id: B03, quote: "I can take care of the money, the bills and Paolo's portal."}]}
+  - {id: B-C41, predicate: IMPORTANCE, subject: r_power, value: "2", evidence: [{source_id: B05, quote: "The bill and the portal matter but they can wait a day."}]}
+  # check-up
+  - {id: B-C42, predicate: DOES, subject: liza, object: r_checkup, derivation: model_inference, note: "Liza takes her today.", evidence: [{source_id: B02, quote: "Lola Edna has her check-up every four weeks on a Monday morning"}]}
+  - {id: B-C43, predicate: SCHEDULE, subject: r_checkup, schedule: {freq: weekly, interval: 4, weekdays: [MO], anchor: 2026-11-16}, evidence: [{source_id: B02, quote: "every four weeks on a Monday morning, the next one is on the 16th of November"}]}
+  - {id: B-C44, predicate: ROUTE, subject: r_checkup, object: rt_checkup, evidence: [{source_id: B02, quote: "Lola Edna has her check-up every four weeks on a Monday morning"}]}
+  - {id: B-C45, predicate: ROUTE_WINDOW, subject: rt_checkup, window: {start: "08:00", end: "12:00"}, derivation: model_inference, note: "'Monday morning' read as 8 to 12.", evidence: [{source_id: B02, quote: "on a Monday morning"}]}
+  - {id: B-C46, predicate: CAN_DO, subject: ramon, object: r_checkup, value: "yes", evidence: [{source_id: B02, quote: "Ramon will take her, but he drives the tricycle in the mornings."}]}
+  - {id: B-C47, predicate: BUSY, subject: ramon, value: tricycle driving, schedule: {freq: weekly, weekdays: [MO, TU, WE, TH, FR]}, window: {start: "06:00", end: "14:00"}, evidence: [{source_id: B03, quote: "I drive the tricycle from six in the morning to two in the afternoon, Monday to Friday."}]}
+  - {id: B-C48, predicate: IMPORTANCE, subject: r_checkup, value: "3", evidence: [{source_id: B05, quote: "The money and Lola's check-ups matter most."}]}

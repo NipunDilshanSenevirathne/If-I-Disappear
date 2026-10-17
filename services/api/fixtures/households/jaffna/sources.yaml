@@ -1,0 +1,68 @@
+sources:
+  - id: J01
+    kind: voice
+    title: The loan and the motorbike
+    language: en
+    speaker: selvam
+    observed: 2026-10-28
+    text: >-
+      I pay the motorbike loan on the 15th at the finance company branch in town. I keep the loan
+      card in my wallet. Malar can go to the branch, it's near her factory. The motorbike licence
+      runs out at the end of December. You renew it at the divisional secretariat with the
+      registration book. The registration book is in the steel almirah, only I know which drawer.
+      Malar rides the motorbike to the factory every day, so the licence matters.
+
+  - id: J02
+    kind: voice
+    title: Co-op, water and tuition
+    language: en
+    speaker: selvam
+    observed: 2026-10-28
+    text: >-
+      Every three months I collect the co-op share payment at the co-op office. The next one is on
+      the 10th of January. I call the co-op secretary first to check the money is ready. His number
+      is only in my phone. Malar has never been to the co-op. I pay the water bill on the 20th at
+      the water board office, in cash. Malar can do that easily. I take Kavin and Nila to tuition on
+      Tuesdays and Thursdays from four to six. Malar could take them, but she works at the factory.
+
+  - id: J03
+    kind: voice
+    title: Malar's week
+    language: en
+    speaker: malar
+    observed: 2026-10-29
+    text: >-
+      I work at the garment factory from half past seven to five, Monday to Saturday. I can take
+      over the loan and the water bill. The tuition times are a problem for me.
+
+  - id: J04
+    kind: image
+    title: Motorbike revenue licence (photo)
+    observed: 2026-10-29
+    text: |-
+      MOTOR VEHICLE REVENUE LICENCE (SAMPLE)
+      Vehicle: motorcycle NP BEX-XXXX (SAMPLE)
+      Owner: S. Selvarajah
+      Valid until: 31 Dec 2026
+      Renew at your divisional secretariat with the registration book.
+
+  - id: J05
+    kind: image
+    title: Loan card (photo)
+    observed: 2026-10-29
+    text: |-
+      NORTHERN FINANCE (SAMPLE)
+      Motorbike loan card
+      Borrower: S. Selvarajah
+      Monthly instalment: Rs 9,800
+      Due: 15th of each month
+      Bring this card when you pay at the branch.
+
+  - id: J06
+    kind: text
+    title: What matters most (typed)
+    speaker: selvam
+    observed: 2026-10-30
+    text: >-
+      The loan and the licence matter most. Missing the loan is serious. The tuition and the co-op
+      matter too. The water bill is simple.

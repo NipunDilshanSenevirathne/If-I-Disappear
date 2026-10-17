@@ -1,0 +1,51 @@
+# Benchmark household H4 (synthetic). A family in Colombo where nobody is
+# migrating: Dilini goes into hospital for surgery and can't drive or use her
+# phone for two weeks. Her father Upali is on dialysis; her brother Kasun comes
+# down from Kandy to stay with him. Used by the evaluation harness to check that
+# the engine works for a short, sudden absence, not only for migration.
+
+settings:
+  id: colombo_care
+  name: The Jayasinghe household
+  timezone: Asia/Colombo
+  leaver: dilini
+  departure: 2026-11-09
+  destination: National Hospital
+  absence: hospital
+  airport_from: HOME
+  airport_to: WARD
+  horizon_days: 14
+  assessment_date: 2026-11-02
+  languages: [en]
+  synthetic: true
+  budget_minutes: 45
+
+entities:
+  - {id: dilini, kind: person, name: Dilini, role: leaver}
+  - {id: kasun, kind: person, name: Kasun, role: backup}
+  - {id: upali, kind: person, name: Upali, role: household, aliases: [Thaththa]}
+
+  - {id: r_dialysis, kind: responsibility, name: get Upali to dialysis, category: health}
+  - {id: r_meds, kind: responsibility, name: collect Upali's monthly medicines, category: health}
+  - {id: r_bp, kind: responsibility, name: record Upali's blood pressure, category: health}
+
+  - {id: rt_drive, kind: route, name: drive him in Dilini's car}
+  - {id: rt_transport, kind: route, name: book the hospital transport}
+  - {id: rt_pharmacy, kind: route, name: collect at the hospital pharmacy}
+  - {id: rt_bp, kind: route, name: check it with the home monitor and write it in his book}
+
+  - {id: car_key, kind: resource, resource_kind: item, name: the car key}
+  - {id: dilini_phone, kind: resource, resource_kind: handset, name: Dilini's phone}
+  - {id: transport_contact, kind: resource, resource_kind: contact, name: the transport desk number}
+  - {id: dilini_email, kind: resource, resource_kind: account, name: Dilini's email}
+  - {id: prescription, kind: resource, resource_kind: document, name: the monthly prescription}
+  - {id: f_transport, kind: fact, name: the hospital transport takes dialysis patients}
+
+procedures:
+  - responsibility: r_dialysis
+    scenario_prompt: "It's Monday, 5:45 in the morning. Tell me how Upali gets to dialysis."
+    steps:
+      - {id: d1, text: "Leave by six so he arrives 15 minutes before the 6:30 session.", critical: true, keywords: ["6", "six", "15", early]}
+      - {id: d2, text: "Bring the dialysis book.", critical: true, keywords: [book]}
+      - {id: d3, text: "Go to the haemodialysis unit in ward 9.", keywords: [ward 9, unit]}
+      - {id: d4, text: "Collect him by half past eleven.", keywords: ["11", eleven]}

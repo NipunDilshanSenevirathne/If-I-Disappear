@@ -1,0 +1,164 @@
+# Evidence recorded during the week before departure (26-31 Oct 2026).
+# Applying this stage is exactly what happens in the app when the household
+# records evidence for plan steps: new sources, new accepted claims, handover
+# events from practice and witnessed steps, and Continuity Card entries.
+
+stage: after_handover
+title: After a week of handover
+date: 2026-10-31
+
+sources:
+  - id: S14
+    kind: evidence
+    title: Sunil's agreement (recorded in the app)
+    observed: 2026-10-27
+    text: >-
+      Agreement recorded in the app on 27 Oct 2026. Sunil said yes to: pay the electricity bill;
+      get messages from the school; renew the three-wheeler insurance.
+  - id: S15
+    kind: evidence
+    title: Contacts on Sunil's phone (screenshot)
+    file: files/S15.png
+    mime_type: image/png
+    observed: 2026-10-27
+    text: |-
+      Contacts on Sunil's phone (screenshot, 27 Oct 2026)
+      Mr Silva (School van) 07X-XXX-0202
+      Mr Fernando (Insurance agent) 07X-XXX-0303
+      Gas shop 07X-XXX-0505
+  - id: S16
+    kind: evidence
+    title: Photos sent to Sunil
+    observed: 2026-10-27
+    text: >-
+      Photos sent to Sunil on 27 Oct 2026: a photo of the top drawer of the steel cupboard, and a
+      photo of the blue folder in the wardrobe.
+  - id: S17
+    kind: evidence
+    title: SMS from the school on Sunil's phone (screenshot)
+    file: files/S17.png
+    mime_type: image/png
+    observed: 2026-10-29
+    text: |-
+      LAKEVIEW COLLEGE (SAMPLE): Mobile 07X-XXX-0404 has been added as a second parent contact for T. Perera.
+  - id: S18
+    kind: evidence
+    title: Sunil's agreement about clinic Thursdays (recorded in the app)
+    observed: 2026-10-28
+    text: >-
+      Agreement recorded in the app on 28 Oct 2026. Sunil will keep these Thursdays free of
+      airport runs for Achchi's clinic: 12 Nov, 26 Nov, 10 Dec, 7 Jan and 21 Jan.
+
+claims:
+  - {id: E01, predicate: CAN_DO, subject: sunil, object: r_electricity, value: "yes", derivation: observation,
+     evidence: [{source_id: S14, quote: "Sunil said yes to: pay the electricity bill"}]}
+  - {id: E02, predicate: CAN_DO, subject: sunil, object: r_school_sms, value: "yes", derivation: observation,
+     evidence: [{source_id: S14, quote: "get messages from the school"}]}
+  - {id: E03, predicate: CAN_DO, subject: sunil, object: r_insurance, value: "yes", derivation: observation,
+     evidence: [{source_id: S14, quote: "renew the three-wheeler insurance"}]}
+  - {id: E04, predicate: FACT, subject: f_school_second, value: "yes", derivation: external_confirmation,
+     evidence: [{source_id: S17, quote: "has been added as a second parent contact for T. Perera."}]}
+  - {id: E05, predicate: STORED_ON, subject: silva_contact, object: sunil_phone, derivation: observation,
+     evidence: [{source_id: S15, quote: "Mr Silva (School van) 07X-XXX-0202"}]}
+  - {id: E06, predicate: STORED_ON, subject: agent_contact, object: sunil_phone, derivation: observation,
+     evidence: [{source_id: S15, quote: "Mr Fernando (Insurance agent) 07X-XXX-0303"}]}
+  - {id: E07, predicate: SHARED_WITH, subject: drawer, object: sunil, derivation: observation,
+     evidence: [{source_id: S16, quote: "a photo of the top drawer of the steel cupboard"}]}
+  - {id: E08, predicate: SHARED_WITH, subject: blue_folder, object: sunil, derivation: observation,
+     evidence: [{source_id: S16, quote: "photo of the blue folder in the wardrobe"}]}
+  - {id: E09, predicate: FREE_ON, subject: sunil, value: C49, date: 2026-11-12, derivation: observation,
+     evidence: [{source_id: S18, quote: "Sunil will keep these Thursdays free of airport runs for Achchi's clinic: 12 Nov, 26 Nov, 10 Dec, 7 Jan and 21 Jan."}]}
+  - {id: E10, predicate: FREE_ON, subject: sunil, value: C49, date: 2026-11-26, derivation: observation,
+     evidence: [{source_id: S18, quote: "Sunil will keep these Thursdays free of airport runs for Achchi's clinic: 12 Nov, 26 Nov, 10 Dec, 7 Jan and 21 Jan."}]}
+  - {id: E11, predicate: FREE_ON, subject: sunil, value: C49, date: 2026-12-10, derivation: observation,
+     evidence: [{source_id: S18, quote: "Sunil will keep these Thursdays free of airport runs for Achchi's clinic: 12 Nov, 26 Nov, 10 Dec, 7 Jan and 21 Jan."}]}
+  - {id: E12, predicate: FREE_ON, subject: sunil, value: C49, date: 2027-01-07, derivation: observation,
+     evidence: [{source_id: S18, quote: "Sunil will keep these Thursdays free of airport runs for Achchi's clinic: 12 Nov, 26 Nov, 10 Dec, 7 Jan and 21 Jan."}]}
+  - {id: E13, predicate: FREE_ON, subject: sunil, value: C49, date: 2027-01-21, derivation: observation,
+     evidence: [{source_id: S18, quote: "Sunil will keep these Thursdays free of airport runs for Achchi's clinic: 12 Nov, 26 Nov, 10 Dec, 7 Jan and 21 Jan."}]}
+
+# The household answered the contradiction: the note from Mr Silva is newer.
+supersede: [C18]
+
+card_entries: [r_van_fee, r_insurance]
+
+handover_events:
+  - {id: H01, person: sunil, responsibility: r_school_sms, kind: viewed, level: viewed, created: 2026-10-27}
+  - {id: H02, person: sunil, responsibility: r_electricity, kind: practice, level: unassisted, attempt_id: A01, created: 2026-10-28}
+  - {id: H03, person: sunil, responsibility: r_van_fee, kind: practice, level: unassisted, attempt_id: A02, created: 2026-10-28}
+  - {id: H04, person: sunil, responsibility: r_clinic, kind: practice, level: practiced_with_help, attempt_id: A03, created: 2026-10-29}
+  - {id: H05, person: sunil, responsibility: r_clinic, kind: practice, level: unassisted, attempt_id: A04, created: 2026-10-30}
+  - {id: H06, person: sunil, responsibility: r_clinic, kind: demonstration, level: witnessed, witness: nirmala, created: 2026-10-30,
+     note: "Sunil found the clinic book and the medicine list in the drawer and packed them in the bag."}
+  - {id: H07, person: sunil, responsibility: r_insurance, kind: practice, level: unassisted, attempt_id: A05, created: 2026-10-30}
+  - {id: H08, person: sunil, responsibility: r_insurance, kind: demonstration, level: witnessed, witness: nirmala, created: 2026-10-30,
+     note: "Sunil read the policy number from the schedule to Nirmala, as he would to the agent."}
+
+# Practice attempts behind the handover events (graded against the approved steps).
+practice_attempts:
+  - id: A01
+    person: sunil
+    responsibility: r_electricity
+    language: en
+    created: 2026-10-28
+    transcript: >-
+      The bill comes on paper every month. I have to pay before the 10th. I take the bill and
+      the money to the post office and pay there. Then I keep the receipt with the bill.
+    hints: []
+    covered: [e1, e2, e3]
+    missed: []
+    result: unassisted
+  - id: A02
+    person: sunil
+    responsibility: r_van_fee
+    language: en
+    created: 2026-10-28
+    transcript: >-
+      On the 5th I give Mr Silva six thousand five hundred when he comes at half past six for
+      the children. If I miss him I call him and he comes in the evening.
+    hints: []
+    covered: [v1, v2, v3]
+    missed: []
+    result: unassisted
+  - id: A03
+    person: sunil
+    responsibility: r_clinic
+    language: en
+    created: 2026-10-29
+    transcript: >-
+      I check the date in the clinic book, it's every second Thursday. We leave at seven to get
+      a number. We get the tablets from the hospital pharmacy and I write the next date down.
+      Oh, yes, before that I take the clinic book and the medicine list from the top drawer of
+      the steel cupboard.
+    hints: ["Before you leave, what do you have to take with you, and where is it kept?"]
+    covered: [c1, c2, c3, c4, c5]
+    missed: []
+    result: practiced_with_help
+    feedback: "Good. Next time, remember the clinic book and the medicine list before you leave, without a reminder."
+  - id: A04
+    person: sunil
+    responsibility: r_clinic
+    language: en
+    created: 2026-10-30
+    transcript: >-
+      First I look at the clinic book for the date. I take the book and Amma's medicine list
+      from the top drawer of the steel cupboard. We leave before seven to get a number. After
+      the doctor we collect the tablets at the pharmacy, and I put the next date on the calendar.
+    hints: []
+    covered: [c1, c2, c3, c4, c5]
+    missed: []
+    result: unassisted
+  - id: A05
+    person: sunil
+    responsibility: r_insurance
+    language: en
+    created: 2026-10-30
+    transcript: >-
+      The insurance ends on the 20th of November, so I renew it by the 13th, a week before. I
+      take the schedule from the blue folder in the wardrobe, call Mr Fernando and give him the
+      policy number. I pay what he says, get the new certificate and keep it in the
+      three-wheeler.
+    hints: []
+    covered: [i1, i2, i3, i4, i5]
+    missed: []
+    result: unassisted

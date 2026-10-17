@@ -1,0 +1,23 @@
+stages:
+  capture:
+    states:
+      r_loan: blocked
+      r_coop: blocked
+      r_water: needs_handover
+      r_tuition: blocked
+      r_licence: blocked
+      r_ride: blocked
+    first_problem:
+      r_loan: 2026-11-15
+      r_tuition: 2026-11-17
+      r_licence: 2026-12-31
+      r_ride: 2027-01-01
+      r_coop: 2027-01-10
+findings:
+  - {id: "held:other", kind: HELD_BY_LEAVER, responsibilities: [r_loan]}
+  - {id: "held:contact", kind: HELD_BY_LEAVER, responsibilities: [r_coop]}
+  - {id: "held:location", kind: HELD_BY_LEAVER, responsibilities: [r_licence]}
+  - {id: "clash:malar:busy:J-C30", kind: SCHEDULE_CLASH, responsibilities: [r_tuition]}
+  - {id: "deadline:licence", kind: DEADLINE_IN_ABSENCE, responsibilities: [r_licence, r_ride]}
+  - {id: "ask:willingness", kind: NOT_ASKED, responsibilities: [r_coop]}
+must_not_flag: [r_water]

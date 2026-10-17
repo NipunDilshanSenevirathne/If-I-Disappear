@@ -1,0 +1,33 @@
+# "What if" variants a judge can switch on to see the engine recompute.
+# Each one changes a few claims or settings; nothing else is special-cased.
+
+variants:
+  - id: keep_number
+    title: Keep the old number at home
+    summary: Nirmala leaves her Sri Lankan SIM in a spare phone with Sunil instead of letting it stop.
+    remove_claims: [C15]
+    add_claims:
+      - {id: VA1, predicate: SHARED_WITH, subject: nirmala_number, object: sunil, derivation: household_review,
+         created_by: household, review: accepted, note: "Variant: the SIM stays at home in a spare phone with Sunil."}
+
+  - id: no_airport_runs
+    title: Sunil stops the Thursday airport runs
+    summary: Sunil gives up airport runs for the whole absence.
+    remove_claims: [C49]
+    add_claims: []
+
+  - id: renewed_early
+    title: Insurance renewed before leaving
+    summary: Nirmala renews the three-wheeler insurance before she leaves; the new cover runs to 20 Nov 2027.
+    remove_claims: [C61]
+    add_claims:
+      - {id: VC1, predicate: VALID_UNTIL, subject: insurance, date: 2027-11-20, derivation: household_review,
+         created_by: household, review: accepted, note: "Variant: renewed early; new certificate valid to 20 Nov 2027."}
+
+  - id: leave_later
+    title: Leave a month later
+    summary: The departure moves to Tuesday 1 December 2026.
+    remove_claims: []
+    add_claims: []
+    settings:
+      departure: 2026-12-01
