@@ -1,6 +1,6 @@
 # A five-minute tour for judges
 
-Open the deployed link and press **See a family's plan**. You get your own private copy of the
+Open the deployed link and press ** See a family's plan**. You get your own private copy of the
 Perera household; nothing you do affects anyone else, and **Reset** in the sample bar puts it
 back. Everything in it is made up. A 12-step quick tour starts by itself; you can skip it and
 take it again from the top bar.
@@ -63,7 +63,7 @@ step must be covered, and a hint means "practised with help".
 make a private link for Sunil and open it (QR code or "See what they'll see"): only his part of
 the card, with practice, on his own phone. Switch it off again.
 
-## 6. Under the hood (1 minute)
+## 6. Under the hood (2 minute)
 
 - **Capture** → **Photo or PDF** → pick a sample document (an electricity bill photo). Watch
   each workflow step and the model that answered it; then **Review facts** shows every fact with
