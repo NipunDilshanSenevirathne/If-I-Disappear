@@ -1,0 +1,134 @@
+{
+  "base": "http://localhost:8080",
+  "lighthouse": "12.8.2",
+  "runs": [
+    {
+      "page": "landing",
+      "label": "Landing",
+      "form": "mobile",
+      "scores": {
+        "performance": 93,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "fcp_s": 1.8,
+      "lcp_s": 2.4,
+      "tbt_ms": 213,
+      "cls": 0.012,
+      "kib": 231
+    },
+    {
+      "page": "landing",
+      "label": "Landing",
+      "form": "desktop",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "fcp_s": 0.4,
+      "lcp_s": 0.5,
+      "tbt_ms": 0,
+      "cls": 0.02,
+      "kib": 231
+    },
+    {
+      "page": "overview",
+      "label": "Household overview (sample family)",
+      "form": "mobile",
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "fcp_s": 1.8,
+      "lcp_s": 3.0,
+      "tbt_ms": 187,
+      "cls": 0.042,
+      "kib": 275
+    },
+    {
+      "page": "overview",
+      "label": "Household overview (sample family)",
+      "form": "desktop",
+      "scores": {
+        "performance": 97,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "fcp_s": 0.4,
+      "lcp_s": 0.7,
+      "tbt_ms": 17,
+      "cls": 0.079,
+      "kib": 275
+    },
+    {
+      "page": "evals",
+      "label": "Evaluation report",
+      "form": "mobile",
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "fcp_s": 1.9,
+      "lcp_s": 2.7,
+      "tbt_ms": 120,
+      "cls": 0.035,
+      "kib": 236
+    },
+    {
+      "page": "evals",
+      "label": "Evaluation report",
+      "form": "desktop",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "fcp_s": 0.5,
+      "lcp_s": 0.6,
+      "tbt_ms": 0,
+      "cls": 0.018,
+      "kib": 236
+    },
+    {
+      "page": "start",
+      "label": "Start your own household",
+      "form": "mobile",
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "fcp_s": 1.9,
+      "lcp_s": 2.7,
+      "tbt_ms": 109,
+      "cls": 0.01,
+      "kib": 230
+    },
+    {
+      "page": "start",
+      "label": "Start your own household",
+      "form": "desktop",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "fcp_s": 0.5,
+      "lcp_s": 0.6,
+      "tbt_ms": 0,
+      "cls": 0.009,
+      "kib": 230
+    }
+  ]
+}

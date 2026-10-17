@@ -1,0 +1,277 @@
+{
+  "generated": "2026-10-13T08:50:16+00:00",
+  "quota_tier": "free",
+  "passed": 13,
+  "total": 13,
+  "models": [
+    {
+      "model": "gemini-3.8-flash",
+      "label": "Gemini 3.8 Flash",
+      "listed": true,
+      "input_limit": 1048576,
+      "output_limit": 65536,
+      "actions": "generateContent,countTokens,createCachedContent,batchGenerateContent",
+      "call": "not checked: today's free allowance for this model is already used up",
+      "skip": true
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "label": "Gemini 3.5 Flash-Lite",
+      "listed": true,
+      "input_limit": 1048576,
+      "output_limit": 65536,
+      "actions": "generateContent,countTokens,createCachedContent,batchGenerateContent",
+      "call": "ok",
+      "ms": 591,
+      "tokens": "16 in, 12 out"
+    },
+    {
+      "model": "gemini-3.1-flash-lite",
+      "label": "Gemini 3.1 Flash-Lite",
+      "listed": true,
+      "input_limit": 1048576,
+      "output_limit": 65536,
+      "actions": "generateContent,countTokens,createCachedContent,batchGenerateContent",
+      "call": "ok",
+      "ms": 3255,
+      "tokens": "16 in, 12 out"
+    },
+    {
+      "model": "gemma-4-31b-it",
+      "label": "Gemma 4 31B",
+      "listed": true,
+      "input_limit": 262144,
+      "output_limit": 32768,
+      "actions": "generateContent,countTokens",
+      "call": "ok",
+      "ms": 50471,
+      "tokens": "79 in, 12 out"
+    },
+    {
+      "model": "gemini-3.6-flash",
+      "label": "gemini-3.6-flash",
+      "listed": true,
+      "input_limit": 1048576,
+      "output_limit": 65536,
+      "actions": "generateContent,countTokens,createCachedContent,batchGenerateContent",
+      "call": "failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
+      "ms": 4225
+    },
+    {
+      "model": "gemma-4-26b-a4b-it",
+      "label": "Gemma 4 26B",
+      "listed": true,
+      "input_limit": 262144,
+      "output_limit": 32768,
+      "actions": "generateContent,countTokens",
+      "call": "failed: ServerError: 500 INTERNAL. {'error': {'code': 500, 'message': 'Internal error encountered.', 'status': 'INTERNAL'}}",
+      "ms": 686
+    },
+    {
+      "model": "gemini-3.8-live",
+      "label": "Gemini 3.8 Live",
+      "listed": true,
+      "input_limit": 131072,
+      "output_limit": 65536,
+      "actions": "bidiGenerateContent"
+    }
+  ],
+  "paths": [
+    {
+      "step": "Read a photo of the electricity bill",
+      "ok": true,
+      "facts": 9,
+      "quotes_checked": "9 of 9",
+      "already_known": 7,
+      "text": "LANKA POWER (SAMPLE)\nElectricity bill\nAccount no\n07-1234-56 (SAMPLE)\nCustomer\nN. Perera\nBilling month\nOctober 2026\nAmount due\nRs 4,860.00\nDue date\n10 Nov 2026\nPay at any post office or through your bank app.\nSMS alerts are sent to the registered mobile: 077-XXX-0101",
+      "redactions": 0,
+      "claims_sample": [
+        "AMOUNT r_electricity = Rs 4,860.00",
+        "SCHEDULE r_electricity"
+      ],
+      "seconds": 4.9,
+      "models": [
+        "reader: Gemini 3.5 Flash-Lite",
+        "extractor: Gemini 3.5 Flash-Lite"
+      ],
+      "skipped": [
+        "reader: skipped Gemini 3.8 Flash (used up for today)",
+        "extractor: skipped Gemini 3.8 Flash (kept for the AI reviewer)"
+      ],
+      "fallbacks": []
+    },
+    {
+      "step": "Read a two-page insurance PDF",
+      "ok": true,
+      "facts": 5,
+      "quotes_checked": "5 of 5",
+      "already_known": 5,
+      "text": "[Page 1]\nCEYLON SHIELD INSURANCE (SAMPLE)\nMotor policy schedule\nPolicy number CS/TW/25/XXXX (SAMPLE)\nPolicyholder N. Perera\nVehicle three-wheeler NW QA-XXXX (SAMPLE)\nPeriod of insurance 21 Nov 2025 to 20 Nov 2026\nSAMPLE\nPage 1 of 2. SAMPLE document. Ceylon Shield Insurance is fictional.\n[Page 2]\nHow to renew\nTo renew, contact your agent with your policy number.\nRenew at least 7 days before the expiry date to avoid a gap in cover.\nKeep this schedule; you will need the policy number to renew.\nRenewal reminders are sent by SMS to the policyholder's registered mobile.\nSAMPLE\nPage 2 of 2. SAMPLE do",
+      "redactions": 0,
+      "claims_sample": [],
+      "seconds": 4.0,
+      "models": [
+        "reader: Gemini 3.5 Flash-Lite",
+        "extractor: Gemini 3.5 Flash-Lite"
+      ],
+      "skipped": [
+        "reader: skipped Gemini 3.8 Flash (kept for the AI reviewer)",
+        "extractor: skipped Gemini 3.8 Flash (kept for the AI reviewer)"
+      ],
+      "fallbacks": []
+    },
+    {
+      "step": "Extract facts from a typed note",
+      "ok": true,
+      "facts": 3,
+      "quotes_checked": "3 of 3",
+      "already_known": 2,
+      "text": "Sunil drives airport runs every Thursday from 3.30 to 10 in the morning. The van driver Mr Silva collects the children at 6.45. His number is saved only on Nirmala's phone.",
+      "redactions": 0,
+      "claims_sample": [
+        "BUSY sunil = airport runs"
+      ],
+      "seconds": 2.2,
+      "models": [
+        "extractor: Gemini 3.5 Flash-Lite"
+      ],
+      "skipped": [
+        "extractor: skipped Gemini 3.8 Flash (kept for the AI reviewer)"
+      ],
+      "fallbacks": []
+    },
+    {
+      "step": "Listen to a 30-second voice note",
+      "ok": true,
+      "facts": 10,
+      "quotes_checked": "10 of 10",
+      "already_known": 7,
+      "text": "Hi, it's Nirmala. A few things for while I'm in Japan. Arti's clinic is every second Thursday at the district hospital and you have to leave by 7:00 in the morning to get a number. Her clinic book and the medicine list are in the top drawer of the steel cupboard. The gas shop's number is only on my phone, so I'll send it to Sunil before I go. Oh, and the pin for the bank app is [secret removed].",
+      "redactions": 1,
+      "claims_sample": [
+        "SCHEDULE r_clinic",
+        "ROUTE_WINDOW rt_clinic",
+        "STORED_ON gas_contact → nirmala_phone"
+      ],
+      "seconds": 5.1,
+      "models": [
+        "listener: Gemini 3.5 Flash-Lite",
+        "extractor: Gemini 3.5 Flash-Lite"
+      ],
+      "skipped": [
+        "listener: skipped Gemini 3.8 Flash (kept for the AI reviewer)",
+        "extractor: skipped Gemini 3.8 Flash (kept for the AI reviewer)"
+      ],
+      "fallbacks": []
+    },
+    {
+      "step": "A typed note that tries to instruct the model",
+      "ok": true,
+      "facts": 0,
+      "unreviewed": 0,
+      "readiness_unchanged": true,
+      "seconds": 1.4,
+      "models": [
+        "extractor: Gemini 3.5 Flash-Lite"
+      ],
+      "skipped": [
+        "extractor: skipped Gemini 3.8 Flash (kept for the AI reviewer)"
+      ],
+      "fallbacks": []
+    },
+    {
+      "step": "Full check with the AI reviewer (Perera)",
+      "ok": true,
+      "seconds": 6.5,
+      "workflow": "adk",
+      "challenge": "gemini",
+      "findings": 8,
+      "verdicts": {
+        "uphold": 7,
+        "question": 1
+      },
+      "ready": "1 of 7",
+      "models": [
+        "challenger: Gemini 3.5 Flash-Lite"
+      ],
+      "skipped": [
+        "challenger: skipped Gemini 3.8 Flash (used up for today)"
+      ],
+      "fallbacks": []
+    },
+    {
+      "step": "Grade a vague explanation",
+      "ok": true,
+      "seconds": 1.2,
+      "result": "not_yet",
+      "expected": "not_yet",
+      "covered": [
+        "e2"
+      ],
+      "missed": [
+        "e1",
+        "e3"
+      ],
+      "grader": "Gemini 3.5 Flash-Lite",
+      "models": [
+        "grader: Gemini 3.5 Flash-Lite"
+      ],
+      "skipped": [],
+      "fallbacks": []
+    },
+    {
+      "step": "Grade a complete explanation",
+      "ok": true,
+      "seconds": 1.7,
+      "result": "unassisted",
+      "expected": "unassisted",
+      "covered": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "missed": [],
+      "grader": "Gemini 3.5 Flash-Lite",
+      "models": [
+        "grader: Gemini 3.5 Flash-Lite"
+      ],
+      "skipped": [],
+      "fallbacks": []
+    }
+  ],
+  "live": {
+    "step": "Spoken practice: token, then a Gemini Live session with the token only",
+    "token_seconds": 0.6,
+    "model": "gemini-3.8-live",
+    "ok": true,
+    "first_audio_seconds": 1.26,
+    "audio_kb": 228,
+    "partner_said": "Hello Sunil. The electricity bill has come. Tell me how you'll pay it.",
+    "seconds": 6.9
+  },
+  "usage": [
+    {
+      "label": "Gemini 3.8 Flash",
+      "used_today": 0,
+      "left_today": 0
+    },
+    {
+      "label": "Gemini 3.5 Flash-Lite",
+      "used_today": 11,
+      "left_today": 464
+    },
+    {
+      "label": "Gemini 3.1 Flash-Lite",
+      "used_today": 0,
+      "left_today": 475
+    },
+    {
+      "label": "Gemma 4 31B",
+      "used_today": 0,
+      "left_today": 13680
+    }
+  ],
+  "warnings": [
+    "model gemini-3.8-flash failed for reader: \nOn how to mitigate this issue, please refer to:\n\nhttps://google.github.io/adk-docs/agents/models/google-gemini/#error-code-429-resource_exhausted\n\n\n429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more infor"
+  ]
+}

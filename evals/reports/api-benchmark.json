@@ -1,0 +1,122 @@
+{
+  "generated": "2026-10-13T09:18:43+00:00",
+  "base": "http://localhost:8080",
+  "server": {
+    "version": "2.1.0",
+    "ai": "fixture",
+    "store": "memory"
+  },
+  "machine": {
+    "python": "3.13.16",
+    "cpus": 2,
+    "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+  },
+  "endpoints": [
+    {
+      "name": "GET /api/health",
+      "what": "liveness",
+      "n": 60,
+      "median_ms": 1.9,
+      "p95_ms": 2.1,
+      "max_ms": 3.4
+    },
+    {
+      "name": "POST /api/demo",
+      "what": "open the sample: copy the household and compute everything",
+      "n": 12,
+      "median_ms": 475.1,
+      "p95_ms": 559.8,
+      "max_ms": 564.3
+    },
+    {
+      "name": "GET /api/households/{id}",
+      "what": "the whole household view the dashboard renders",
+      "n": 40,
+      "median_ms": 42.4,
+      "p95_ms": 54.3,
+      "max_ms": 146.1
+    },
+    {
+      "name": "GET \u2026/pulse",
+      "what": "the live poll every open screen makes every 6 s",
+      "n": 80,
+      "median_ms": 6.3,
+      "p95_ms": 8.9,
+      "max_ms": 11.1
+    },
+    {
+      "name": "GET /api/ai/usage",
+      "what": "the live AI allowance meter",
+      "n": 40,
+      "median_ms": 2.3,
+      "p95_ms": 3.3,
+      "max_ms": 5.3
+    },
+    {
+      "name": "POST \u2026/explore",
+      "what": "a what-if: re-simulate a changed copy of the absence",
+      "n": 40,
+      "median_ms": 11.6,
+      "p95_ms": 14.7,
+      "max_ms": 15.5
+    },
+    {
+      "name": "POST \u2026/plan",
+      "what": "re-plan for another time budget (exhaustive search)",
+      "n": 30,
+      "median_ms": 140.9,
+      "p95_ms": 208.3,
+      "max_ms": 300.6
+    },
+    {
+      "name": "GET \u2026/card",
+      "what": "the Continuity Card",
+      "n": 30,
+      "median_ms": 10.3,
+      "p95_ms": 14.1,
+      "max_ms": 15.2
+    },
+    {
+      "name": "POST \u2026/analyze \u2192 job",
+      "what": "the full check with the AI reviewer, start to finished job",
+      "n": 8,
+      "median_ms": 228.9,
+      "p95_ms": 319.0,
+      "max_ms": 346.8
+    },
+    {
+      "name": "POST \u2026/sources \u2192 job",
+      "what": "read a sample photo (379 KB) into checked facts",
+      "n": 8,
+      "median_ms": 99.6,
+      "p95_ms": 153.8,
+      "max_ms": 179.1
+    },
+    {
+      "name": "POST \u2026/practice/\u2026/attempts",
+      "what": "grade a typed explanation and recompute readiness",
+      "n": 10,
+      "median_ms": 226.3,
+      "p95_ms": 347.0,
+      "max_ms": 419.7
+    }
+  ],
+  "bursts": {
+    "pulse": {
+      "requests": 600,
+      "concurrency": 50,
+      "throughput_per_s": 162.7,
+      "median_ms": 285.6,
+      "p95_ms": 443.8,
+      "errors": 0
+    },
+    "explore": {
+      "requests": 120,
+      "concurrency": 12,
+      "throughput_per_s": 82.0,
+      "median_ms": 144.9,
+      "p95_ms": 292.1,
+      "errors": 0
+    }
+  }
+}

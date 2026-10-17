@@ -1,0 +1,44 @@
+# Redaction test cases. `secret` must not survive redaction; `benign` text must come
+# back unchanged; `phone` text must keep only the last four digits of the number.
+# Written before the redaction rules were last changed; never edit a case to make it pass.
+
+secrets:
+  - {lang: en, text: "My bank PIN is 4821, don't tell anyone.", secret: "4821"}
+  - {lang: en, text: "The OTP: 552 901 came just now.", secret: "552 901"}
+  - {lang: en, text: "The password is hunter22.", secret: "hunter22"}
+  - {lang: en, text: "My password: Lanka@2026!", secret: "Lanka@2026"}
+  - {lang: en, text: "Card 4111 1111 1111 1111 expires next year.", secret: "4111 1111 1111 1111"}
+  - {lang: en, text: "Account number 001234567890 at the bank.", secret: "001234567890"}
+  - {lang: en, text: "The security code is 739.", secret: "739"}
+  - {lang: en, text: "CVV 123 on the back.", secret: "123"}
+  - {lang: en, text: "The one-time code is 908172.", secret: "908172"}
+  - {lang: en, text: "passcode: 7788", secret: "7788"}
+  - {lang: en, text: "Use PIN 0042 at the ATM.", secret: "0042"}
+  - {lang: en, text: "My password is Nimal#99 for the app.", secret: "Nimal#99"}
+  - {lang: en, text: "OTP 123456 is valid for five minutes.", secret: "123456"}
+  - {lang: en, text: "The bank sent a verification code: 664213.", secret: "664213"}
+  - {lang: en, text: "My ATM pin number is 9031.", secret: "9031"}
+  - {lang: en, text: "Security answer: Kandy.", secret: "Kandy"}
+
+benign:
+  - {lang: en, text: "Pay Rs 9,800 by the 15th of each month."}
+  - {lang: en, text: "Pin the note on the fridge."}
+  - {lang: en, text: "Type it into the password box on the login page."}
+  - {lang: en, text: "The clinic is on 12 Nov 2026 at 10:30."}
+  - {lang: en, text: "Ward 9, bed 21, haemodialysis unit."}
+  - {lang: en, text: "The licence is valid until 31 Dec 2026."}
+  - {lang: en, text: "The OTP goes to my number."}
+  - {lang: en, text: "Every second Thursday at 9."}
+  - {lang: en, text: "Reference INS-2026-0417 is on the slip."}
+  - {lang: en, text: "Bus route 138 leaves at 7.15."}
+  - {lang: en, text: "The PIN mailer came in a white envelope."}
+  - {lang: en, text: "Pay the water bill by the 21st."}
+  - {lang: en, text: "The doctor is in room 12 on the 3rd floor."}
+  - {lang: en, text: "Leave at 6.30 to catch the 138 bus."}
+
+phones:
+  - {lang: en, text: "Call Mr Silva on 077 123 4567.", hidden: "123", kept: "4567"}
+  - {lang: en, text: "The school number is +94 11 234 5678.", hidden: "234", kept: "5678"}
+  - {lang: en, text: "SMS comes from 0712345678.", hidden: "12345", kept: "5678"}
+  - {lang: en, text: "Mr Fernando's number is 071-555-0199.", hidden: "555", kept: "0199"}
+  - {lang: en, text: "The gas shop: 0812 223 344.", hidden: "0812", kept: "3344"}
