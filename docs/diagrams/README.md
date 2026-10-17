@@ -1,8 +1,6 @@
 # Diagrams and wireframes
 
-Every picture here is drawn from a text source in [`src/`](src/), so it can be reviewed in a pull
-request and drawn again when the product changes. Nothing is a screenshot of a drawing tool.
-[SUBMISSION_ANSWERS.md](../../SUBMISSION_ANSWERS.md) explains each one in context.
+
 
 | Picture | What it shows | Source |
 |---|---|---|
