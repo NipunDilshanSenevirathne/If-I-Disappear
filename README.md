@@ -6,7 +6,7 @@
 
 > ** Full project download.** If anything in this repository doesn't work or looks
 > incomplete,
-> download **[Full  Project.zip]Full Pr oject.zip)** from this
+> download **[Full  Project.zip]Full Project.zip)** from this
 > repository. It contains the complete project, every file including the hidden ones, the same
 > code that runs on the live app. Unzip it and follow [HOW_TO _RUN.md] to run it, or
 > [DEPLOY_SIMPLE.md] to deploy it.
