@@ -1,4 +1,4 @@
-# API response times
+# API response times of the project
 
 Generated 2026-10-13T09:18:43+00:00 by `python -m evals.bench_api` against http://localhost:8080 (server 2.1.0, AI: fixture, store: memory). Client and server on the same machine: 2 vCPUs, Python 3.13.16, one server process.
 
