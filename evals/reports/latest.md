@@ -6,7 +6,7 @@ Generated 2026-10-13T08:28:01+00:00 by `python -m evals.run`. Versions: engine-1
 
 This file is generated. Don't edit it by hand; run the harness again.
 
-## The engine against hand-written answers
+## The engine against handwritten answers
 
 4 synthetic households (batangas, colombo_care, jaffna, perera), 21 responsibilities and 201 claims. Each household was written as a story first: sources, then claims that quote them word for word, then what the engine should conclude (gold.yaml), before the engine was run on it. They were written by the people who built the engine, so they test its reasoning on varied situations (migration, a hospital stay; Sri Lanka and the Philippines), not the messiness of real households. Every number below is recomputed on each run.
 
