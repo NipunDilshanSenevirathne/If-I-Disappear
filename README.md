@@ -19,7 +19,7 @@ Development Kit and Google Cloud Run.
 
 ## The night before
 
-It's 11 at night in Kurunegala. The suitcase is packed and standing by the door.
+It's 11 at midnight in Kurunegala. The suitcase is packed and standing by the door.
 
 Tomorrow morning Nirmala leaves for a caregiving job in Japan. She'll be gone for ninety days.
 She has done the sensible things: the money is arranged, the relatives have been told, the
