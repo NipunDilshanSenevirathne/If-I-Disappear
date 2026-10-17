@@ -143,6 +143,14 @@ flowchart LR
   classDef data fill:#f5f8f9,stroke:#5a7178,color:#0e2a33
 ```
 
+### The system, end to end
+
+Twelve stages, from a voice note to a plan the family can practise: the hardened edge, the
+three ADK workflow graphs, the five-model free-tier router, the human review gate, and the
+deterministic engine that decides every number. *Click the image to open it full size.*
+
+[![If I Disappear: the system, end to end](docs/diagrams/19-system-deep-dive.png)](docs/diagrams/19-system-deep-dive.png)
+
 ### Built to run on one free Gemini key
 
 The families who need this most can't pay for an AI subscription. So a **model router** turns
@@ -369,7 +377,7 @@ docs/                   architecture, free tier, evaluation, privacy, judge guid
 | [DEPLOY_SIMPLE.md](DEPLOY_SIMPLE.md), [HOW_TO_RUN.md](HOW_TO_RUN.md) | Deploy from your browser; run locally, in Docker, or on Google Cloud |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/FREE_TIER.md](docs/FREE_TIER.md) | The engine, the AI layer, data and API; staying inside the free Gemini limits |
 | [docs/EVALUATION.md](docs/EVALUATION.md), [docs/LIVE_ACCEPTANCE.md](docs/LIVE_ACCEPTANCE.md) | What is measured and what it caught; the live run with a real key |
-| [docs/diagrams/](docs/diagrams/README.md) | 18 diagrams and wireframes, each drawn from a text source |
+| [docs/diagrams/](docs/diagrams/README.md) | 19 diagrams and wireframes, each drawn from a text source |
 | [docs/PRIVACY_AND_SAFETY.md](docs/PRIVACY_AND_SAFETY.md), [SECURITY.md](SECURITY.md) | Data, secrets, prompt injection and consent |
 | [docs/RESEARCH.md](docs/RESEARCH.md), [docs/ROADMAP.md](docs/ROADMAP.md) | The problem, with sources; what's next |
 | [docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md) | What is built, what is tested, and what isn't yet |
