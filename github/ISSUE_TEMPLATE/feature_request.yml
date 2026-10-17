@@ -1,0 +1,24 @@
+name: An idea
+description: Something that would help a family get ready for an absence.
+labels: [idea]
+body:
+  - type: textarea
+    id: who
+    attributes:
+      label: Who is it for, and what are they trying to do?
+      placeholder: "The person staying wants to…"
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help?
+    validations:
+      required: true
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Fits the project's rules
+      options:
+        - label: The AI reads and suggests; deterministic code still decides every state, date and number.
+        - label: It never needs a password, PIN or account number to be stored.

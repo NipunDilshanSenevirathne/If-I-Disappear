@@ -1,0 +1,55 @@
+name: Something doesn't work
+description: A wrong result, an error, or a screen that breaks.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Never paste real personal details, passwords, PINs or account numbers here.**
+        If it happens in a sample household, say which one; they are all made up.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what you saw instead.
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where?
+      options:
+        - Overview or charts
+        - What we found
+        - Explore (what if)
+        - Calendar
+        - Plan
+        - Practise (voice or typed)
+        - Continuity Card or handover link
+        - Capture (voice note, photo, PDF, typed, by hand)
+        - Review facts
+        - Household settings
+        - The quick tour
+        - AI allowance or model router
+        - Deployment or setup
+        - Something else
+    validations:
+      required: true
+  - type: dropdown
+    id: ai
+    attributes:
+      label: AI mode
+      options:
+        - Offline demo (no Gemini key)
+        - Free Gemini tier
+        - Paid Gemini key or Vertex AI
+        - Not sure
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: Chrome 140 on Android, Safari on iPhone 15, …
+  - type: textarea
+    id: logs
+    attributes:
+      label: Anything else (screenshots, the trace page, server log lines)
