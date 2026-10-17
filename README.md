@@ -54,7 +54,7 @@ find what will break, and fix it.
 If I Disappear is an AI app for the people who hold a household together, and the people who
 take over from them.
 
-Before someone leaves home for weeks or months, it **listens to how the house really runs**,
+Before smeone leaves home for weeks or months, it **listens to how the house really runs**,
 finds **what only that person knows or holds**, shows **what will stop, on which date, and
 why**, and turns it into the **smallest plan the family can actually do**. Then the person
 staying **practises the handover out loud** with a Gemini Live partner, until they can explain
